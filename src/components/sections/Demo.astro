@@ -1,11 +1,10 @@
 ---
 /*
   04 Live demo. Copy: docs/COPY.md > 04 Live demo.
-  The cut-down demo (Overview, Collections, Leases) is lazy loaded: when the frame comes within
-  about 800px of the viewport, /demo/embed/ is fetched, its styles are added to the page, its
-  [data-demo] element is moved into the frame and src/scripts/demo.ts is imported and run.
-  The frame keeps a fixed size before and after, so nothing shifts. It scrolls inside itself
-  (data-lenis-prevent lets the wheel scroll the frame, not the page, while the cursor is over it).
+  The cut-down demo (all five views, company name and theme controls, long tables capped at
+  8 rows) is lazy loaded: when the frame comes within about 800px of the viewport, /demo/embed/
+  is fetched, its styles are added to the page, its [data-demo] element is moved into the frame
+  and src/scripts/demo.ts is imported and run. The frame grows to fit; there is no inner scroll.
 */
 import SectionHead from './SectionHead.astro';
 import MeasureLine from '../MeasureLine.astro';
@@ -30,7 +29,7 @@ import MeasureLine from '../MeasureLine.astro';
         <span class="livedemo__corner livedemo__corner--tr" aria-hidden="true"></span>
         <span class="livedemo__corner livedemo__corner--bl" aria-hidden="true"></span>
         <span class="livedemo__corner livedemo__corner--br" aria-hidden="true"></span>
-        <div class="livedemo__slot" data-demo-slot data-src="/demo/embed/" data-lenis-prevent aria-busy="true">
+        <div class="livedemo__slot" data-demo-slot data-src="/demo/embed/" aria-busy="true">
           <p class="t-label livedemo__status" data-demo-status>Loading the demo</p>
         </div>
       </div>
@@ -65,19 +64,18 @@ import MeasureLine from '../MeasureLine.astro';
     gap: var(--space-4);
     margin: var(--space-8) 0 0;
   }
+  /* The frame grows to fit the demo: no inner scroll. While loading it holds a minimum height;
+     the demo loads about 800px before the frame is on screen, so the growth happens off-screen. */
   .livedemo__frame {
     position: relative;
-    height: min(80svh, 46rem);
     background-color: var(--ink);
     border: 1px solid var(--rule-strong);
   }
   .livedemo__slot {
-    height: 100%;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: var(--space-4) var(--space-4) var(--space-6);
-    scrollbar-width: thin;
-    scrollbar-color: var(--rule-strong) transparent;
+    padding: var(--space-2) var(--space-4) var(--space-5);
+  }
+  .livedemo__slot[aria-busy='true'] {
+    min-height: 90rem;
   }
   .livedemo__status {
     display: grid;
@@ -111,13 +109,11 @@ import MeasureLine from '../MeasureLine.astro';
   }
 
   @media (min-width: 900px) {
-    .livedemo__frame {
-      height: auto;
-      aspect-ratio: 16 / 9;
-      max-height: 85svh;
-    }
     .livedemo__slot {
-      padding: var(--space-6) var(--space-6) var(--space-7);
+      padding: var(--space-3) var(--space-6) var(--space-7);
+    }
+    .livedemo__slot[aria-busy='true'] {
+      min-height: 48rem;
     }
   }
   @media (min-width: 1024px) {
