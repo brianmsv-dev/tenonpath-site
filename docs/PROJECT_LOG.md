@@ -3,17 +3,17 @@
 The running record. Newest entries at the top of each section. Anyone (Brian, the orchestrator, Claude Code) updates this at the end of a work session.
 
 ## Current phase
-**Phase 1: Foundation** (not started)
+**Phase 1: Foundation**: built, waiting at the review gate (Brian picks a logo, approves colors and type).
 
 ## Phases
 ### Phase 1: Foundation
-- [ ] Astro project scaffold, static output, Railway-ready
-- [ ] `src/styles/tokens.css` from BRAND.md (colors, type scale, spacing, grid)
-- [ ] Self-hosted fonts: General Sans (400/500/600), IBM Plex Mono (400/500)
-- [ ] Base layout: header, footer, 12-column grid, blueprint grid background, section label component, measurement-line divider component
-- [ ] Lenis smooth scroll + GSAP ScrollTrigger wired up, with reduced-motion fallback
-- [ ] A `/styleguide` page (not linked, `noindex`) showing colors, type, buttons, rules, section labels, so Brian can judge the look
-- [ ] Three logo concepts (A, B, C from BRAND.md) as SVG on the styleguide page, each animated
+- [x] Astro project scaffold, static output, Railway-ready
+- [x] `src/styles/tokens.css` from BRAND.md (colors, type scale, spacing, grid)
+- [x] Self-hosted fonts: General Sans (400/500/600), IBM Plex Mono (400/500)
+- [x] Base layout: header, footer, 12-column grid, blueprint grid background, section label component, measurement-line divider component
+- [x] Lenis smooth scroll + GSAP ScrollTrigger wired up, with reduced-motion fallback
+- [x] A `/styleguide` page (not linked, `noindex`) showing colors, type, buttons, rules, section labels, so Brian can judge the look
+- [x] Three logo concepts (A, B, C from BRAND.md) as SVG on the styleguide page, each animated
 - **Review gate:** Brian picks a logo and approves or tweaks colors and type
 
 ### Phase 2: Hero
@@ -42,6 +42,13 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Claude Code, phase 1, for review): Added four tokens because parts of the brand palette fail WCAG AA. `--rule-strong` #5D6674 (borders that must be seen, 3.26:1 on ink), `--brass-press` #B5852F (primary button hover fill; ink on brass-soft is only 3.77:1), `--inv-text-dim` #5C5A55 and `--inv-accent` #7A5A24 (brass and bone-dim fail on the bone section). BRAND.md colors are otherwise unchanged.
+- 2026-11-26 (Claude Code): Logo marks drawn on a 32 unit grid with every edge on an even coordinate and a 2 unit gap at each joint, so the 16px favicon lands on whole pixels with a 1px joint line.
+- 2026-11-26 (Claude Code): Logo animation uses the Web Animations API, not GSAP, so the header logo will cost no extra JS. 620ms: expo.out slide stopping 1 screen pixel short, then a power3.out press home (the "1px settle").
+- 2026-11-26 (Claude Code): Railway serves the build with a zero-dependency `server.mjs` (Node built-ins: brotli/gzip, long cache for hashed assets, 404 page, security headers). Start command `npm start`, Node 24 via `engines`. No `serve` package needed.
+- 2026-11-26 (Claude Code): Fonts: General Sans from Fontshare (ITF Free Font License, allows web use), IBM Plex Mono latin subset (OFL). License files sit next to the fonts in `public/fonts`. Fallback fonts are metric-matched (size-adjust computed from the font files) to avoid layout shift.
+- 2026-11-26 (Claude Code): Reduced motion turns Lenis off and shows end states. The preference is watched live, so toggling it takes effect without a reload.
+- 2026-11-26 (Claude Code): The header shows only the wordmark until the mark is chosen. The homepage is a noindex holding page until phase 2.
 - 2026-11-26: Prices approved: dashboards from $2,500, automation sprints from $750, websites from $1,200, monthly support from $200.
 - 2026-11-26: No claim about years of experience on the site for now. About says "hands-on experience" only.
 - 2026-11-26: No statement on code ownership on the site for now (FAQ question removed). Decide per contract.
@@ -54,6 +61,10 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - 2026-11-26: Brian chose to start from our own design direction (drafting table at night) before gathering outside inspiration, to stay original.
 
 ## Open questions (for Brian)
+- [ ] **Logo pick:** A (slot and stem), B (offset blocks) or C (cut and return). See /styleguide. Tweaks welcome (bar weight, gap size, animation direction).
+- [ ] **Approve the four added color tokens** (see Decisions) and the type scale on /styleguide.
+- [ ] Concept B brief says "two offset blocks... form a square T". I read it as two halves split by a vertical seam, with a tongue on one and a notch on the other. If you meant something else, describe it and I will redraw it.
+- [ ] Header and footer link to routes and anchors that do not exist yet (/#demo, /#services, /demo, /real-estate, /privacy and so on). They come alive in phases 3 to 5. Fine while the site is not deployed.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 - [ ] Logo pick after phase 1.
 
@@ -71,4 +82,5 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Invoice template
 
 ## Session notes
+- 2026-11-26 (Claude Code): Phase 1 built. Astro 7.4 static, GSAP 3.15, Lenis 1.3 (all in the Stack list, no other dependencies). Homepage JS is about 51 KB gzipped (budget 120 KB). Checked in headless Chrome at 360, 768, 1440 and 2560px, with motion on and off: no horizontal scroll, no console errors, mobile menu traps focus, closes on Escape and returns focus. Lighthouse not run yet (full audit is phase 5). Run locally with `npm install`, `npm run dev`, then open http://localhost:4321/styleguide. Stopped at the phase 1 review gate.
 - 2026-11-26 (orchestrator): Created CLAUDE.md, BRAND.md, SITE_SPEC.md, COPY.md, this log and company docs v1. Next: Brian opens Claude Code in VS Code and starts Phase 1.
