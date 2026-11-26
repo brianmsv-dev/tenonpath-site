@@ -1,0 +1,57 @@
+---
+// Tasks: items synced from a task board, grouped by property, sorted by status.
+// Plain text statuses (no pills); "Stuck" is set in the alert colour, "Done" dimmed.
+import { tasksByProperty, taskCounts, keyFigures, fmt } from '../../lib/demo';
+---
+
+<p class="demo-status-line">
+  <span><b>{keyFigures.openTasks}</b> open</span>
+  {
+    taskCounts.map((s) => (
+      <span>
+        {s.status} <b>{s.count}</b>
+      </span>
+    ))
+  }
+</p>
+
+<div class="demo-tasks">
+  {
+    tasksByProperty.map(({ property, open, tasks }) => (
+      <section class="demo-block" aria-label={property.name}>
+        <div class="demo-block__head">
+          <h3 class="demo-block__title">{property.name}</h3>
+          <span class="demo-meta">{open} open</span>
+        </div>
+        <div class="dt-wrap">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Status</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((t) => (
+                <tr>
+                  <td class:list={[t.status === 'Done' && 'is-dim']}>{t.title}</td>
+                  <td class:list={[t.status === 'Stuck' && 'is-alert', t.status === 'Done' && 'is-dim']} data-label="Status">
+                    {t.status}
+                  </td>
+                  <td class="is-dim" data-label="Owner">
+                    {t.owner}
+                  </td>
+                  <td class="num" data-label="Due">
+                    {fmt.short(t.time)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))
+  }
+</div>

@@ -1,0 +1,141 @@
+---
+// Collections: aging buckets, tenants with a balance, who paid this month. Filter by property.
+// Rows carry their numbers as data-* so the filter can recompute totals in the browser.
+import { properties, receivables, agingTotals, paymentsThisMonth, keyFigures, fmt } from '../../lib/demo';
+
+interface Props {
+  idPrefix: string;
+}
+const { idPrefix } = Astro.props;
+const buckets = [
+  ['d0_30', '0 to 30'],
+  ['d31_60', '31 to 60'],
+  ['d61_90', '61 to 90'],
+  ['d90p', '90+'],
+] as const;
+const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
+---
+
+<div class="demo-block__head">
+  <div class="demo-control">
+    <label for={`${idPrefix}-property`}>Property</label>
+    <span class="demo-select">
+      <select id={`${idPrefix}-property`} data-filter-property>
+        <option value="">All properties</option>
+        {properties.map((p) => <option value={p.id}>{p.name}</option>)}
+      </select>
+    </span>
+  </div>
+</div>
+
+<section class="demo-block" aria-label="Past due by age">
+  <div class="demo-block__head">
+    <h3 class="demo-block__title">Past due by age</h3>
+    <span class="demo-meta">Days past due</span>
+  </div>
+  <dl class="demo-aging">
+    {
+      buckets.map(([k, label]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd class:list={[agingTotals[k] > 0 && 'is-alert']} data-sum={k}>
+            {fmt.usd(agingTotals[k])}
+          </dd>
+        </div>
+      ))
+    }
+    <div>
+      <dt>Total</dt>
+      <dd class="is-alert" data-sum="total">{fmt.usd(keyFigures.pastDue)}</dd>
+    </div>
+  </dl>
+</section>
+
+<div class="demo-two">
+  <section class="demo-block" aria-label="Tenants with a balance">
+    <div class="demo-block__head">
+      <h3 class="demo-block__title">Tenants with a balance</h3>
+      <span class="demo-meta" data-count="balances">{receivables.length} tenants</span>
+    </div>
+    <div class="dt-wrap">
+      <table class="dt" data-table="balances">
+        <thead>
+          <tr>
+            <th scope="col">Tenant</th>
+            {buckets.map(([, label]) => <th scope="col">{label}</th>)}
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            receivables.map((t) => (
+              <tr data-property={t.propertyId} data-d0_30={t.aging.d0_30} data-d31_60={t.aging.d31_60} data-d61_90={t.aging.d61_90} data-d90p={t.aging.d90p}>
+                <td>
+                  {t.name}
+                  <span class="sub">
+                    {t.propertyName}, {t.suite}
+                  </span>
+                  {t.collectionNote && <span class="sub">{t.collectionNote}</span>}
+                </td>
+                {buckets.map(([k, label]) => (
+                  <td class:list={['num', t.aging[k] > 0 && 'is-alert']} data-label={label}>
+                    {fmt.usdOrDash(t.aging[k])}
+                  </td>
+                ))}
+                <td class="num is-alert" data-label="Total">
+                  {fmt.usd(t.balance)}
+                </td>
+              </tr>
+            ))
+          }
+          <tr data-empty hidden>
+            <td colspan="6" class="demo-empty">No past due balances at this property.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="demo-block" aria-label="Paid this month">
+    <div class="demo-block__head">
+      <h3 class="demo-block__title">Paid this month</h3>
+      <span class="demo-meta" data-count="paid">
+        {paid.length} payments, {fmt.usd(keyFigures.collected)}
+      </span>
+    </div>
+    <div class="dt-wrap">
+      <table class="dt" data-table="paid">
+        <thead>
+          <tr>
+            <th scope="col">Tenant</th>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            paid.map((p) => (
+              <tr data-property={p.tenant.propertyId} data-amount={p.amount}>
+                <td>
+                  {p.tenant.name}
+                  <span class="sub">
+                    {p.tenant.propertyName}, {p.method}
+                  </span>
+                </td>
+                <td class="num" data-label="Date">
+                  {fmt.short(p.time)}
+                </td>
+                <td class="num" data-label="Amount">
+                  {fmt.usdCents(p.amount)}
+                </td>
+              </tr>
+            ))
+          }
+          <tr data-empty hidden>
+            <td colspan="3" class="demo-empty">No payments at this property yet this month.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

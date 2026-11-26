@@ -1,0 +1,55 @@
+---
+// Pipeline: acquisitions under review, at LOI, under contract and closed. Simple cards with key
+// metrics, one column per stage.
+import { pipeline, fmt } from '../../lib/demo';
+---
+
+<div class="demo-pipeline">
+  {
+    pipeline.map(({ stage, deals, volume, sf }) => (
+      <section class="demo-stage" aria-label={stage}>
+        <div class="demo-stage__head">
+          <h3 class="demo-stage__title">{stage}</h3>
+          <span class="demo-meta">
+            {deals.length} deals, {fmt.usd(volume)}, {fmt.sf(sf)}
+          </span>
+        </div>
+        {deals.map((d) => (
+          <article class="demo-deal">
+            <div>
+              <h4 class="demo-deal__name">{d.name}</h4>
+              <p class="demo-deal__where">
+                {d.city}, {d.state}. {d.type}
+              </p>
+            </div>
+            <dl>
+              <div>
+                <dt>Size</dt>
+                <dd>{fmt.sf(d.sf)}</dd>
+              </div>
+              <div>
+                <dt>Price</dt>
+                <dd>{fmt.usd(d.price)}</dd>
+              </div>
+              <div>
+                <dt>Price per SF</dt>
+                <dd>{fmt.usdCents(d.pricePerSf)}</dd>
+              </div>
+              <div>
+                <dt>Cap rate</dt>
+                <dd>{fmt.pct(d.capRate)}</dd>
+              </div>
+              <div>
+                <dt>Occupancy</dt>
+                <dd>{fmt.pct(d.occupancy, 0)}</dd>
+              </div>
+            </dl>
+            <p class="demo-deal__next">
+              {d.nextDate.label} <b>{fmt.date(d.nextTime)}</b>
+            </p>
+          </article>
+        ))}
+      </section>
+    ))
+  }
+</div>

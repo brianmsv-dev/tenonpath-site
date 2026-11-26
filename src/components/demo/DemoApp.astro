@@ -1,0 +1,79 @@
+---
+/*
+  The demo dashboard: tab bar + panels. Rendered at build time; src/scripts/demo.ts adds tabs,
+  the property filter and sorting. Without JS the first view (Overview) still shows in full.
+  variant "full" (/demo): Overview, Collections, Leases, Tasks, Pipeline.
+  variant "embed" (homepage section 04): Overview, Collections, Leases, sized for the frame.
+*/
+import '../../styles/demo.css';
+import Overview from './Overview.astro';
+import Collections from './Collections.astro';
+import Leases from './Leases.astro';
+import Tasks from './Tasks.astro';
+import Pipeline from './Pipeline.astro';
+import { AS_OF, fmt } from '../../lib/demo';
+
+interface Props {
+  variant?: 'full' | 'embed';
+}
+const { variant = 'full' } = Astro.props;
+const embed = variant === 'embed';
+const id = embed ? 'demo-embed' : 'demo';
+
+const views = [
+  { key: 'overview', label: 'Overview' },
+  { key: 'collections', label: 'Collections' },
+  { key: 'leases', label: 'Leases' },
+  ...(embed
+    ? []
+    : [
+        { key: 'tasks', label: 'Tasks' },
+        { key: 'pipeline', label: 'Pipeline' },
+      ]),
+];
+---
+
+<div class:list={['demo', `demo--${variant}`]} data-demo data-variant={variant}>
+  <div class="demo__bar">
+    <div class="demo__tabs" role="tablist" aria-label="Dashboard views">
+      {
+        views.map((v, i) => (
+          <button
+            class="demo__tab"
+            type="button"
+            role="tab"
+            id={`${id}-tab-${v.key}`}
+            aria-controls={`${id}-panel-${v.key}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-tab={v.key}
+          >
+            {v.label}
+          </button>
+        ))
+      }
+    </div>
+    <p class="demo__asof">As of {fmt.date(AS_OF)}</p>
+  </div>
+
+  {
+    views.map((v, i) => (
+      <section
+        class="demo__panel"
+        role="tabpanel"
+        id={`${id}-panel-${v.key}`}
+        aria-labelledby={`${id}-tab-${v.key}`}
+        tabindex="0"
+        data-panel={v.key}
+        hidden={i !== 0}
+      >
+        <h2 class="visually-hidden">{v.label}</h2>
+        {v.key === 'overview' && <Overview compact={embed} />}
+        {v.key === 'collections' && <Collections idPrefix={id} />}
+        {v.key === 'leases' && <Leases />}
+        {v.key === 'tasks' && <Tasks />}
+        {v.key === 'pipeline' && <Pipeline />}
+      </section>
+    ))
+  }
+</div>

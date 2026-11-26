@@ -1,0 +1,51 @@
+---
+// Leases: expirations and critical dates in the next 180 days. Sortable by date, type, tenant
+// and property (header buttons; rows carry their sort keys as data-*).
+import { criticalDates, fmt } from '../../lib/demo';
+
+const rows = [...criticalDates].sort((a, b) => a.time - b.time);
+const expiring = rows.filter((r) => r.type === 'Lease expiration').length;
+const soon = rows.filter((r) => r.days <= 30).length;
+---
+
+<section class="demo-block" aria-label="Critical dates">
+  <div class="demo-block__head">
+    <h3 class="demo-block__title">Critical dates, next 180 days</h3>
+    <span class="demo-meta">{rows.length} dates, {expiring} expirations, {soon} within 30 days</span>
+  </div>
+  <div class="dt-wrap">
+    <table class="dt" data-sortable>
+      <thead>
+        <tr>
+          <th scope="col" aria-sort="ascending"><button type="button" class="sort" data-sort-key="date">Date</button></th>
+          <th scope="col">Days away</th>
+          <th scope="col"><button type="button" class="sort" data-sort-key="type">Type</button></th>
+          <th scope="col"><button type="button" class="sort" data-sort-key="tenant">Tenant</button></th>
+          <th scope="col"><button type="button" class="sort" data-sort-key="property">Property</button></th>
+          <th scope="col">Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr data-date={r.time} data-type={r.type} data-tenant={r.tenant} data-property={r.property}>
+              <td class="num">{fmt.date(r.time)}</td>
+              <td class:list={['num', r.days <= 30 && 'is-alert']} data-label="Days away">
+                {r.days === 0 ? 'Today' : `${r.days}`}
+              </td>
+              <td data-label="Type">{r.type}</td>
+              <td data-label="Tenant">{r.tenant}</td>
+              <td data-label="Property">
+                {r.property}
+                <span class="sub">{r.suite}</span>
+              </td>
+              <td class="is-dim" data-label="Note">
+                {r.note}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

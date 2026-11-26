@@ -1,0 +1,136 @@
+---
+// Overview: key figures, collections by week, properties table.
+import { keyFigures, weekly, propertyRows, fmt } from '../../lib/demo';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
+// Line chart: an SVG stretched to the box (preserveAspectRatio none, non-scaling stroke) with
+// HTML labels and points positioned in percent, so text and dots keep their size at any width.
+const max = Math.ceil(Math.max(...weekly.map((w) => w.amount)) / 100000) * 100000;
+const xp = (i: number) => (100 * i) / (weekly.length - 1);
+const yp = (v: number) => 100 * (1 - v / max);
+const line = weekly.map((w, i) => `${i ? 'L' : 'M'}${(xp(i) * 10).toFixed(1)} ${(yp(w.amount) * 10).toFixed(1)}`).join('');
+const ticks = [0, 0.25, 0.5, 0.75, 1].map((p) => max * p);
+const last = weekly[weekly.length - 1];
+const showX = (i: number) => i % 2 === (weekly.length - 1) % 2;
+---
+
+<dl class="demo-figures">
+  <div class="demo-figure"><dt>Occupancy</dt><dd>{fmt.pct(keyFigures.occupancy)}</dd></div>
+  <div class="demo-figure"><dt>Collected this month</dt><dd>{fmt.usd(keyFigures.collected)}</dd></div>
+  <div class="demo-figure"><dt>Past due</dt><dd class="is-alert">{fmt.usd(keyFigures.pastDue)}</dd></div>
+  <div class="demo-figure"><dt>Open tasks</dt><dd>{keyFigures.openTasks}</dd></div>
+</dl>
+
+<figure class="demo-block">
+  <div class="demo-block__head">
+    <h3 class="demo-block__title">Collections by week</h3>
+    <span class="demo-meta">Last 12 weeks</span>
+  </div>
+  <div class="demo-chartbox" role="img" aria-label={`Weekly collections over the last 12 weeks. Latest week ${fmt.usd(last.amount)}.`}>
+    <div class="demo-chartbox__plot">
+      {ticks.map((v) => <span class="demo-chartbox__grid" style={`top:${yp(v)}%`} />)}
+      {
+        ticks.map((v) => (
+          <span class="demo-chartbox__y" style={`top:${yp(v)}%`}>
+            {v === 0 ? '$0' : `$${v / 1000}k`}
+          </span>
+        ))
+      }
+      <svg class="demo-chartbox__svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+        <path class="line" d={line} />
+      </svg>
+      {
+        weekly.map((w, i) => (
+          <span
+            class="demo-chartbox__pt"
+            style={`left:${xp(i)}%;top:${yp(w.amount)}%`}
+            title={`Week ending ${fmt.short(w.time)}: ${fmt.usd(w.amount)}`}
+          />
+        ))
+      }
+    </div>
+    <div class="demo-chartbox__x">
+      {
+        weekly.map((w, i) =>
+          showX(i) ? (
+            <span style={`left:${xp(i)}%`} class:list={[i === weekly.length - 1 && 'is-last']}>
+              {fmt.short(w.time)}
+            </span>
+          ) : null,
+        )
+      }
+    </div>
+  </div>
+  <table class="visually-hidden">
+    <caption>Collections by week</caption>
+    <thead>
+      <tr><th>Week ending</th><th>Collected</th></tr>
+    </thead>
+    <tbody>
+      {
+        weekly.map((w) => (
+          <tr>
+            <td>{fmt.date(w.time)}</td>
+            <td>{fmt.usd(w.amount)}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</figure>
+
+<section class="demo-block" aria-label="Properties">
+  <div class="demo-block__head">
+    <h3 class="demo-block__title">Properties</h3>
+    <span class="demo-meta">{propertyRows.length} properties</span>
+  </div>
+  <div class="dt-wrap">
+    <table class="dt">
+      <thead>
+        <tr>
+          <th scope="col">Property</th>
+          {!compact && <th scope="col">Type</th>}
+          <th scope="col">SF</th>
+          <th scope="col">Occupancy</th>
+          <th scope="col">Collected MTD</th>
+          <th scope="col">Past due</th>
+          <th scope="col">Open tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          propertyRows.map((p) => (
+            <tr>
+              <td>
+                {p.name}
+                <span class="sub">
+                  {p.city}, {p.state}
+                </span>
+              </td>
+              {!compact && <td data-label="Type">{p.type}</td>}
+              <td class="num" data-label="SF">
+                {fmt.num(p.sf)}
+              </td>
+              <td class="num" data-label="Occupancy">
+                {fmt.pct(p.occupancy)}
+              </td>
+              <td class="num" data-label="Collected MTD">
+                {fmt.usd(p.collected)}
+              </td>
+              <td class:list={['num', p.pastDue > 0 && 'is-alert']} data-label="Past due">
+                {fmt.usdOrDash(p.pastDue)}
+              </td>
+              <td class="num" data-label="Open tasks">
+                {p.openTasks}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
