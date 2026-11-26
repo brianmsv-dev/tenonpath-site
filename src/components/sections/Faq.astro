@@ -1,7 +1,7 @@
 ---
-// 09 FAQ. Copy: docs/COPY.md > 09 FAQ (via src/data/faq.ts). Native <details> accordion, so it
+// 09 FAQ. Copy: docs/COPY.md > 09 FAQ (headline here, questions via src/data/faq.ts). Native <details> accordion, so it
 // works without JS and with the keyboard. FAQPage schema is generated from the same data.
-import SectionLabel from '../SectionLabel.astro';
+import SectionHead from './SectionHead.astro';
 import { FAQ } from '../../data/faq';
 
 const schema = {
@@ -15,10 +15,10 @@ const schema = {
 };
 ---
 
-<section class="home-section faq" id="faq" aria-label="Questions">
+<section class="home-section faq" id="faq" aria-labelledby="faq-title">
   <div class="container grid-12">
-    <div class="faq__head" data-reveal>
-      <SectionLabel number="09" label="QUESTIONS" as="h2" />
+    <div class="faq__head">
+      <SectionHead number="09" label="QUESTIONS" title="Before you ask." titleId="faq-title" />
     </div>
     <div class="faq__list" data-reveal>
       {
@@ -41,9 +41,6 @@ const schema = {
   .faq__head,
   .faq__list {
     grid-column: 1 / -1;
-  }
-  .faq__head :global(h2) {
-    margin: 0;
   }
   .faq__list {
     margin-top: var(--space-6);
