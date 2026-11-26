@@ -6,12 +6,6 @@
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-11",
-    "type": "Insurance certificate expires",
-    "tenantId": "T18",
-    "note": "Request renewed COI"
-  },
-  {
     "date": "2026-12-17",
     "type": "Rent increase",
     "tenantId": "T26",
@@ -48,9 +42,9 @@
     "note": "90 days before expiration"
   },
   {
-    "date": "2027-01-08",
+    "date": "2027-01-02",
     "type": "Insurance certificate expires",
-    "tenantId": "T01",
+    "tenantId": "T18",
     "note": "Request renewed COI"
   },
   {
@@ -68,7 +62,7 @@
   {
     "date": "2027-01-21",
     "type": "Insurance certificate expires",
-    "tenantId": "T02",
+    "tenantId": "T04",
     "note": "Request renewed COI"
   },
   {
@@ -84,9 +78,9 @@
     "note": "90 days before expiration"
   },
   {
-    "date": "2027-01-27",
+    "date": "2027-01-25",
     "type": "Insurance certificate expires",
-    "tenantId": "T40",
+    "tenantId": "T25",
     "note": "Request renewed COI"
   },
   {
@@ -108,9 +102,9 @@
     "note": "3% annual step"
   },
   {
-    "date": "2027-02-07",
+    "date": "2027-02-09",
     "type": "Insurance certificate expires",
-    "tenantId": "T07",
+    "tenantId": "T28",
     "note": "Request renewed COI"
   },
   {
@@ -126,15 +120,27 @@
     "note": "90 days before expiration"
   },
   {
+    "date": "2027-02-16",
+    "type": "Insurance certificate expires",
+    "tenantId": "T05",
+    "note": "Request renewed COI"
+  },
+  {
     "date": "2027-02-20",
     "type": "Rent increase",
     "tenantId": "T04",
     "note": "3% annual step"
   },
   {
+    "date": "2027-02-23",
+    "type": "Insurance certificate expires",
+    "tenantId": "T14",
+    "note": "Request renewed COI"
+  },
+  {
     "date": "2027-02-24",
     "type": "Insurance certificate expires",
-    "tenantId": "T16",
+    "tenantId": "T21",
     "note": "Request renewed COI"
   },
   {
@@ -154,12 +160,6 @@
     "type": "Rent increase",
     "tenantId": "T20",
     "note": "3% annual step"
-  },
-  {
-    "date": "2027-03-28",
-    "type": "Insurance certificate expires",
-    "tenantId": "T06",
-    "note": "Request renewed COI"
   },
   {
     "date": "2027-03-28",
@@ -186,9 +186,9 @@
     "note": "3% annual step"
   },
   {
-    "date": "2027-04-18",
+    "date": "2027-04-19",
     "type": "Insurance certificate expires",
-    "tenantId": "T30",
+    "tenantId": "T23",
     "note": "Request renewed COI"
   },
   {
@@ -210,9 +210,9 @@
     "note": "7,900 SF"
   },
   {
-    "date": "2027-05-01",
+    "date": "2027-05-03",
     "type": "Insurance certificate expires",
-    "tenantId": "T32",
+    "tenantId": "T13",
     "note": "Request renewed COI"
   },
   {

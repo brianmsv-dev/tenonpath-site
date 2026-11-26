@@ -2,39 +2,39 @@
   {
     "id": "K01",
     "propertyId": "P01",
-    "title": "Paving patch, Bldg B",
-    "status": "Not started",
-    "owner": "Asset manager",
-    "due": "2027-01-03"
+    "title": "Paving patch, Bldg A",
+    "status": "Working on it",
+    "owner": "Maintenance",
+    "due": "2026-11-20"
   },
   {
     "id": "K02",
     "propertyId": "P02",
-    "title": "Security camera upgrade",
+    "title": "Pest control contract",
     "status": "Working on it",
-    "owner": "Leasing",
+    "owner": "Property manager",
     "due": "2026-12-28"
   },
   {
     "id": "K03",
     "propertyId": "P03",
-    "title": "Tenant move-out inspection, Ste 170",
+    "title": "Paving patch",
     "status": "Stuck",
-    "owner": "Maintenance",
+    "owner": "Property manager",
     "due": "2026-12-11"
   },
   {
     "id": "K04",
     "propertyId": "P04",
-    "title": "Lease renewal proposal, Bldg D",
-    "status": "Working on it",
-    "owner": "Maintenance",
-    "due": "2026-12-23"
+    "title": "HVAC service contract renewal",
+    "status": "Stuck",
+    "owner": "Property manager",
+    "due": "2026-12-31"
   },
   {
     "id": "K05",
     "propertyId": "P05",
-    "title": "Dock door repair",
+    "title": "Estoppel request from lender",
     "status": "Not started",
     "owner": "Asset manager",
     "due": "2026-12-17"
@@ -43,376 +43,376 @@
     "id": "K06",
     "propertyId": "P06",
     "title": "Backflow test",
-    "status": "Stuck",
-    "owner": "Property manager",
-    "due": "2026-11-11"
+    "status": "Not started",
+    "owner": "Maintenance",
+    "due": "2026-11-27"
   },
   {
     "id": "K07",
     "propertyId": "P07",
-    "title": "Landscaping bids, Bldg A",
+    "title": "Collect renewed COI",
     "status": "Working on it",
     "owner": "Property manager",
-    "due": "2026-12-30"
+    "due": "2026-11-16"
   },
   {
     "id": "K08",
     "propertyId": "P08",
-    "title": "Fire sprinkler inspection",
+    "title": "Landscaping bids",
     "status": "Working on it",
-    "owner": "Asset manager",
+    "owner": "Property manager",
     "due": "2026-12-03"
   },
   {
     "id": "K09",
     "propertyId": "P01",
-    "title": "Broker tour",
-    "status": "Not started",
-    "owner": "Property manager",
-    "due": "2026-12-06"
+    "title": "Update monument signage",
+    "status": "Stuck",
+    "owner": "Leasing",
+    "due": "2026-11-08"
   },
   {
     "id": "K10",
     "propertyId": "P02",
     "title": "Insurance renewal questionnaire",
     "status": "Waiting on vendor",
-    "owner": "Maintenance",
+    "owner": "Property manager",
     "due": "2026-12-06"
   },
   {
     "id": "K11",
     "propertyId": "P03",
-    "title": "Lease renewal proposal",
+    "title": "Property tax appeal filing",
     "status": "Working on it",
-    "owner": "Leasing",
-    "due": "2026-11-24"
+    "owner": "Asset manager",
+    "due": "2026-11-10"
   },
   {
     "id": "K12",
     "propertyId": "P04",
-    "title": "Roof inspection, Bldg D",
-    "status": "Working on it",
-    "owner": "Leasing",
-    "due": "2026-12-26"
+    "title": "Parking lot restripe",
+    "status": "Waiting on vendor",
+    "owner": "Maintenance",
+    "due": "2026-12-01"
   },
   {
     "id": "K13",
     "propertyId": "P05",
-    "title": "Property tax appeal filing",
+    "title": "Dock door repair",
     "status": "Not started",
-    "owner": "Asset manager",
+    "owner": "Maintenance",
     "due": "2026-11-29"
   },
   {
     "id": "K14",
     "propertyId": "P06",
-    "title": "Backflow test",
-    "status": "Stuck",
-    "owner": "Property manager",
-    "due": "2026-11-28"
+    "title": "Paving patch",
+    "status": "Not started",
+    "owner": "Maintenance",
+    "due": "2026-11-19"
   },
   {
     "id": "K15",
     "propertyId": "P07",
-    "title": "Estoppel request from lender, Bldg D",
+    "title": "Security camera upgrade",
     "status": "Waiting on vendor",
-    "owner": "Maintenance",
+    "owner": "Property manager",
     "due": "2026-12-03"
   },
   {
     "id": "K16",
     "propertyId": "P08",
-    "title": "HVAC service contract renewal",
-    "status": "Stuck",
-    "owner": "Accounting",
-    "due": "2026-12-14"
+    "title": "Broker tour, Ste 150",
+    "status": "Waiting on vendor",
+    "owner": "Leasing",
+    "due": "2026-12-02"
   },
   {
     "id": "K17",
     "propertyId": "P01",
-    "title": "Make-ready, Ste 110",
+    "title": "Landscaping bids",
     "status": "Working on it",
-    "owner": "Asset manager",
-    "due": "2026-12-02"
+    "owner": "Property manager",
+    "due": "2026-12-22"
   },
   {
     "id": "K18",
     "propertyId": "P02",
-    "title": "Trash compactor service",
+    "title": "Fire sprinkler inspection",
     "status": "Working on it",
-    "owner": "Accounting",
-    "due": "2026-11-20"
+    "owner": "Property manager",
+    "due": "2026-11-08"
   },
   {
     "id": "K19",
     "propertyId": "P03",
-    "title": "Make-ready, Ste 170",
+    "title": "Broker tour, Ste 170",
     "status": "Working on it",
-    "owner": "Accounting",
-    "due": "2026-11-08"
+    "owner": "Leasing",
+    "due": "2026-11-26"
   },
   {
     "id": "K20",
     "propertyId": "P04",
-    "title": "Parking lot restripe",
-    "status": "Working on it",
+    "title": "Insurance renewal questionnaire",
+    "status": "Not started",
     "owner": "Property manager",
-    "due": "2026-11-26"
+    "due": "2026-11-09"
   },
   {
     "id": "K21",
     "propertyId": "P05",
-    "title": "Insurance renewal questionnaire",
-    "status": "Not started",
-    "owner": "Accounting",
-    "due": "2026-11-09"
+    "title": "Make-ready, Ste 150",
+    "status": "Waiting on vendor",
+    "owner": "Property manager",
+    "due": "2026-12-04"
   },
   {
     "id": "K22",
     "propertyId": "P06",
-    "title": "Collect renewed COI",
-    "status": "Working on it",
-    "owner": "Accounting",
-    "due": "2026-12-08"
+    "title": "Parking lot restripe",
+    "status": "Stuck",
+    "owner": "Property manager",
+    "due": "2026-11-29"
   },
   {
     "id": "K23",
     "propertyId": "P07",
-    "title": "Broker tour",
+    "title": "Lease renewal proposal",
     "status": "Not started",
-    "owner": "Maintenance",
-    "due": "2026-11-23"
+    "owner": "Leasing",
+    "due": "2027-01-03"
   },
   {
     "id": "K24",
     "propertyId": "P08",
-    "title": "Fire sprinkler inspection",
+    "title": "Estoppel request from lender",
     "status": "Working on it",
-    "owner": "Property manager",
-    "due": "2026-11-19"
+    "owner": "Asset manager",
+    "due": "2026-12-07"
   },
   {
     "id": "K25",
     "propertyId": "P01",
-    "title": "Paving patch, Bldg C",
+    "title": "Security camera upgrade",
     "status": "Working on it",
-    "owner": "Asset manager",
-    "due": "2026-12-04"
+    "owner": "Property manager",
+    "due": "2026-12-13"
   },
   {
     "id": "K26",
     "propertyId": "P02",
-    "title": "Dock door repair",
-    "status": "Working on it",
-    "owner": "Accounting",
-    "due": "2026-11-27"
+    "title": "Security camera upgrade",
+    "status": "Waiting on vendor",
+    "owner": "Property manager",
+    "due": "2026-12-02"
   },
   {
     "id": "K27",
     "propertyId": "P03",
-    "title": "Lease renewal proposal",
+    "title": "Collect renewed COI",
     "status": "Waiting on vendor",
-    "owner": "Accounting",
-    "due": "2026-12-23"
+    "owner": "Property manager",
+    "due": "2026-12-03"
   },
   {
     "id": "K28",
     "propertyId": "P04",
-    "title": "Security camera upgrade",
-    "status": "Working on it",
-    "owner": "Asset manager",
-    "due": "2026-11-17"
+    "title": "LED lighting retrofit quote",
+    "status": "Waiting on vendor",
+    "owner": "Property manager",
+    "due": "2026-11-28"
   },
   {
     "id": "K29",
     "propertyId": "P05",
-    "title": "LED lighting retrofit quote",
-    "status": "Waiting on vendor",
-    "owner": "Leasing",
-    "due": "2026-12-15"
+    "title": "Paving patch",
+    "status": "Working on it",
+    "owner": "Maintenance",
+    "due": "2026-11-29"
   },
   {
     "id": "K30",
     "propertyId": "P06",
-    "title": "Trash compactor service",
-    "status": "Working on it",
+    "title": "Insurance renewal questionnaire",
+    "status": "Not started",
     "owner": "Asset manager",
-    "due": "2026-11-14"
+    "due": "2026-12-08"
   },
   {
     "id": "K31",
     "propertyId": "P07",
-    "title": "Landscaping bids",
+    "title": "Paving patch, Bldg D",
     "status": "Stuck",
-    "owner": "Asset manager",
-    "due": "2026-11-15"
+    "owner": "Property manager",
+    "due": "2026-12-15"
   },
   {
     "id": "K32",
     "propertyId": "P08",
-    "title": "Fire sprinkler inspection",
-    "status": "Stuck",
+    "title": "Make-ready, Ste 150",
+    "status": "Working on it",
     "owner": "Maintenance",
-    "due": "2026-11-15"
+    "due": "2027-01-01"
   },
   {
     "id": "K33",
     "propertyId": "P01",
-    "title": "Estoppel request from lender",
-    "status": "Stuck",
-    "owner": "Maintenance",
-    "due": "2026-12-31"
-  },
-  {
-    "id": "K34",
-    "propertyId": "P02",
-    "title": "Gutter cleaning",
-    "status": "Waiting on vendor",
-    "owner": "Property manager",
-    "due": "2026-11-08"
-  },
-  {
-    "id": "K35",
-    "propertyId": "P03",
-    "title": "Dock door repair",
-    "status": "Not started",
-    "owner": "Maintenance",
-    "due": "2026-12-25"
-  },
-  {
-    "id": "K36",
-    "propertyId": "P04",
-    "title": "Make-ready, Ste 110",
-    "status": "Stuck",
+    "title": "Insurance renewal questionnaire",
+    "status": "Working on it",
     "owner": "Property manager",
     "due": "2026-11-09"
   },
   {
+    "id": "K34",
+    "propertyId": "P02",
+    "title": "Listing photos and flyer, Ste 150",
+    "status": "Waiting on vendor",
+    "owner": "Leasing",
+    "due": "2026-11-25"
+  },
+  {
+    "id": "K35",
+    "propertyId": "P03",
+    "title": "Listing photos and flyer, Ste 170",
+    "status": "Not started",
+    "owner": "Leasing",
+    "due": "2026-11-28"
+  },
+  {
+    "id": "K36",
+    "propertyId": "P04",
+    "title": "Fire sprinkler inspection, Bldg A",
+    "status": "Working on it",
+    "owner": "Maintenance",
+    "due": "2026-11-29"
+  },
+  {
     "id": "K37",
     "propertyId": "P05",
-    "title": "Lease renewal proposal",
+    "title": "Gutter cleaning",
     "status": "Waiting on vendor",
-    "owner": "Asset manager",
-    "due": "2026-11-25"
+    "owner": "Maintenance",
+    "due": "2026-11-28"
   },
   {
     "id": "K38",
     "propertyId": "P06",
-    "title": "Parking lot restripe",
-    "status": "Done",
-    "owner": "Leasing",
-    "due": "2026-10-14"
-  },
-  {
-    "id": "K39",
-    "propertyId": "P07",
-    "title": "Roof inspection, Bldg B",
-    "status": "Done",
-    "owner": "Property manager",
-    "due": "2026-10-27"
-  },
-  {
-    "id": "K40",
-    "propertyId": "P08",
-    "title": "HVAC service contract renewal",
-    "status": "Done",
-    "owner": "Asset manager",
-    "due": "2026-11-13"
-  },
-  {
-    "id": "K41",
-    "propertyId": "P01",
-    "title": "Paving patch",
-    "status": "Done",
-    "owner": "Accounting",
-    "due": "2026-11-08"
-  },
-  {
-    "id": "K42",
-    "propertyId": "P02",
-    "title": "Lease renewal proposal",
-    "status": "Done",
-    "owner": "Asset manager",
-    "due": "2026-11-08"
-  },
-  {
-    "id": "K43",
-    "propertyId": "P03",
     "title": "LED lighting retrofit quote",
     "status": "Done",
     "owner": "Maintenance",
     "due": "2026-10-21"
   },
   {
+    "id": "K39",
+    "propertyId": "P07",
+    "title": "Pest control contract",
+    "status": "Done",
+    "owner": "Property manager",
+    "due": "2026-10-28"
+  },
+  {
+    "id": "K40",
+    "propertyId": "P08",
+    "title": "CAM reconciliation",
+    "status": "Done",
+    "owner": "Accounting",
+    "due": "2026-11-11"
+  },
+  {
+    "id": "K41",
+    "propertyId": "P01",
+    "title": "Backflow test",
+    "status": "Done",
+    "owner": "Maintenance",
+    "due": "2026-11-04"
+  },
+  {
+    "id": "K42",
+    "propertyId": "P02",
+    "title": "Update monument signage",
+    "status": "Done",
+    "owner": "Property manager",
+    "due": "2026-10-26"
+  },
+  {
+    "id": "K43",
+    "propertyId": "P03",
+    "title": "Landscaping bids",
+    "status": "Done",
+    "owner": "Property manager",
+    "due": "2026-11-17"
+  },
+  {
     "id": "K44",
     "propertyId": "P04",
-    "title": "Security camera upgrade",
+    "title": "Paving patch, Bldg C",
     "status": "Done",
-    "owner": "Leasing",
-    "due": "2026-11-01"
+    "owner": "Maintenance",
+    "due": "2026-10-13"
   },
   {
     "id": "K45",
     "propertyId": "P05",
-    "title": "CAM reconciliation",
+    "title": "Update monument signage",
     "status": "Done",
-    "owner": "Asset manager",
-    "due": "2026-11-11"
+    "owner": "Property manager",
+    "due": "2026-11-14"
   },
   {
     "id": "K46",
     "propertyId": "P06",
-    "title": "Backflow test",
+    "title": "Broker tour, Ste 160",
     "status": "Done",
-    "owner": "Property manager",
-    "due": "2026-11-04"
+    "owner": "Leasing",
+    "due": "2026-10-28"
   },
   {
     "id": "K47",
     "propertyId": "P07",
-    "title": "Tenant move-out inspection, Ste 110",
+    "title": "LED lighting retrofit quote",
     "status": "Done",
-    "owner": "Leasing",
-    "due": "2026-11-12"
+    "owner": "Maintenance",
+    "due": "2026-11-04"
   },
   {
     "id": "K48",
     "propertyId": "P08",
-    "title": "Update monument signage",
+    "title": "LED lighting retrofit quote",
     "status": "Done",
-    "owner": "Accounting",
-    "due": "2026-10-26"
+    "owner": "Maintenance",
+    "due": "2026-10-21"
   },
   {
     "id": "K49",
     "propertyId": "P01",
-    "title": "Paving patch",
+    "title": "Fire sprinkler inspection, Bldg B",
     "status": "Done",
-    "owner": "Maintenance",
-    "due": "2026-11-06"
+    "owner": "Property manager",
+    "due": "2026-10-17"
   },
   {
     "id": "K50",
     "propertyId": "P02",
-    "title": "Make-ready, Ste 150",
+    "title": "Budget variance review",
     "status": "Done",
-    "owner": "Property manager",
-    "due": "2026-11-18"
+    "owner": "Asset manager",
+    "due": "2026-10-25"
   },
   {
     "id": "K51",
     "propertyId": "P03",
-    "title": "Broker tour",
+    "title": "Gutter cleaning",
     "status": "Done",
-    "owner": "Accounting",
-    "due": "2026-11-14"
+    "owner": "Maintenance",
+    "due": "2026-11-02"
   },
   {
     "id": "K52",
     "propertyId": "P04",
-    "title": "HVAC service contract renewal",
+    "title": "Gutter cleaning, Bldg C",
     "status": "Done",
-    "owner": "Accounting",
-    "due": "2026-10-28"
+    "owner": "Maintenance",
+    "due": "2026-11-02"
   }
 ]

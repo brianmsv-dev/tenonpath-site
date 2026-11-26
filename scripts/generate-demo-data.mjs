@@ -165,30 +165,61 @@ const weekly = weeks.map((end) => {
 });
 
 /* ---------- Tasks: 37 open ---------- */
+// [task, who would plausibly own it]. Building-level tasks can be tagged to a building at
+// industrial sites; suite tasks only exist where a property has a vacant suite.
 const TASKS = [
-  'Roof inspection', 'HVAC service contract renewal', 'Parking lot restripe', 'Collect renewed COI', 'Estoppel request from lender',
-  'Dock door repair', 'Property tax appeal filing', 'Landscaping bids', 'Fire sprinkler inspection', 'Update monument signage',
-  'Make-ready', 'Broker tour', 'CAM reconciliation', 'Lease renewal proposal', 'LED lighting retrofit quote',
-  'Gutter cleaning', 'Pest control contract', 'Security camera upgrade', 'Trash compactor service', 'Insurance renewal questionnaire',
-  'Budget variance review', 'Tenant move-out inspection', 'Backflow test', 'Paving patch',
+  ['Roof inspection', ['Property manager', 'Maintenance']],
+  ['HVAC service contract renewal', ['Property manager']],
+  ['Parking lot restripe', ['Property manager', 'Maintenance']],
+  ['Collect renewed COI', ['Property manager']],
+  ['Estoppel request from lender', ['Asset manager', 'Accounting']],
+  ['Dock door repair', ['Maintenance']],
+  ['Property tax appeal filing', ['Asset manager']],
+  ['Landscaping bids', ['Property manager']],
+  ['Fire sprinkler inspection', ['Maintenance', 'Property manager']],
+  ['Update monument signage', ['Leasing', 'Property manager']],
+  ['CAM reconciliation', ['Accounting']],
+  ['Lease renewal proposal', ['Leasing', 'Asset manager']],
+  ['LED lighting retrofit quote', ['Property manager', 'Maintenance']],
+  ['Gutter cleaning', ['Maintenance']],
+  ['Pest control contract', ['Property manager']],
+  ['Security camera upgrade', ['Property manager']],
+  ['Insurance renewal questionnaire', ['Asset manager', 'Property manager']],
+  ['Budget variance review', ['Asset manager', 'Accounting']],
+  ['Backflow test', ['Maintenance']],
+  ['Paving patch', ['Maintenance', 'Property manager']],
 ];
-const OWNERS = ['Property manager', 'Asset manager', 'Leasing', 'Accounting', 'Maintenance'];
+const SUITE_TASKS = [
+  ['Make-ready', ['Maintenance', 'Property manager']],
+  ['Listing photos and flyer', ['Leasing']],
+  ['Broker tour', ['Leasing']],
+];
+const BUILDING_LEVEL = new Set(['Roof inspection', 'Dock door repair', 'Fire sprinkler inspection', 'Gutter cleaning', 'Paving patch']);
 const OPEN = ['Not started', 'Working on it', 'Working on it', 'Waiting on vendor', 'Stuck'];
 const tasks = [];
+const used = new Set();
 for (let i = 0; i < 52; i++) {
   const p = properties[i % properties.length];
   const open = i < TARGET.openTasks;
-  let title = pick(TASKS);
-  if (title === 'Make-ready' || title === 'Tenant move-out inspection') {
-    const v = vacancies.find((x) => x.propertyId === p.id);
-    title = `${title}, ${v ? v.suite : 'Ste 110'}`;
-  } else if (p.type === 'Industrial' && rnd() < 0.4) title = `${title}, Bldg ${String.fromCharCode(65 + int(0, 3))}`;
+  const vacancy = vacancies.find((x) => x.propertyId === p.id);
+  let title;
+  let owners;
+  // Pick a task this property does not already have, so each list reads as real work.
+  for (let tries = 0; tries < 50; tries++) {
+    const useSuite = vacancy && rnd() < 0.2;
+    const [base, who] = useSuite ? pick(SUITE_TASKS) : pick(TASKS);
+    title = useSuite ? `${base}, ${vacancy.suite}` : base;
+    if (!useSuite && p.type === 'Industrial' && BUILDING_LEVEL.has(base)) title = `${base}, Bldg ${String.fromCharCode(65 + int(0, 3))}`;
+    owners = who;
+    if (!used.has(p.id + title)) break;
+  }
+  used.add(p.id + title);
   tasks.push({
     id: `K${String(i + 1).padStart(2, '0')}`,
     propertyId: p.id,
     title,
     status: open ? pick(OPEN) : 'Done',
-    owner: pick(OWNERS),
+    owner: pick(owners),
     due: iso(addDays(asOf, open ? int(-12, 45) : int(-40, -1))),
   });
 }

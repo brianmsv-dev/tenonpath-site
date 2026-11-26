@@ -6,10 +6,10 @@
     "state": "GA",
     "type": "Industrial",
     "sf": 96000,
-    "price": 7775000,
-    "pricePerSf": 80.99,
+    "price": 8975000,
+    "pricePerSf": 93.49,
     "capRate": 7.1,
-    "occupancy": 86,
+    "occupancy": 95,
     "stage": "Under review",
     "nextDate": {
       "label": "Underwriting due",
@@ -23,14 +23,14 @@
     "state": "SC",
     "type": "Small bay",
     "sf": 41000,
-    "price": 4500000,
-    "pricePerSf": 109.76,
+    "price": 4000000,
+    "pricePerSf": 97.56,
     "capRate": 7.6,
-    "occupancy": 82,
+    "occupancy": 86,
     "stage": "Under review",
     "nextDate": {
       "label": "Underwriting due",
-      "date": "2026-12-04"
+      "date": "2026-12-11"
     }
   },
   {
@@ -40,14 +40,14 @@
     "state": "FL",
     "type": "Flex",
     "sf": 52000,
-    "price": 5725000,
-    "pricePerSf": 110.1,
+    "price": 5625000,
+    "pricePerSf": 108.17,
     "capRate": 7.3,
-    "occupancy": 87,
+    "occupancy": 84,
     "stage": "Under review",
     "nextDate": {
       "label": "Underwriting due",
-      "date": "2026-11-29"
+      "date": "2026-12-02"
     }
   },
   {
@@ -57,14 +57,14 @@
     "state": "TN",
     "type": "Industrial",
     "sf": 128000,
-    "price": 11750000,
-    "pricePerSf": 91.8,
+    "price": 10075000,
+    "pricePerSf": 78.71,
     "capRate": 6.9,
-    "occupancy": 88,
+    "occupancy": 95,
     "stage": "LOI",
     "nextDate": {
       "label": "LOI response due",
-      "date": "2026-11-30"
+      "date": "2026-11-24"
     }
   },
   {
@@ -74,10 +74,10 @@
     "state": "SC",
     "type": "Small bay",
     "sf": 38500,
-    "price": 4025000,
-    "pricePerSf": 104.55,
+    "price": 3550000,
+    "pricePerSf": 92.21,
     "capRate": 7.4,
-    "occupancy": 90,
+    "occupancy": 84,
     "stage": "LOI",
     "nextDate": {
       "label": "LOI response due",
@@ -91,14 +91,14 @@
     "state": "GA",
     "type": "Flex",
     "sf": 61000,
-    "price": 7125000,
-    "pricePerSf": 116.8,
+    "price": 7800000,
+    "pricePerSf": 127.87,
     "capRate": 7,
-    "occupancy": 99,
+    "occupancy": 84,
     "stage": "Under contract",
     "nextDate": {
       "label": "Due diligence ends",
-      "date": "2026-12-16"
+      "date": "2026-12-19"
     }
   },
   {
@@ -108,14 +108,14 @@
     "state": "FL",
     "type": "Industrial",
     "sf": 154000,
-    "price": 12675000,
-    "pricePerSf": 82.31,
+    "price": 12125000,
+    "pricePerSf": 78.73,
     "capRate": 6.7,
-    "occupancy": 92,
+    "occupancy": 89,
     "stage": "Under contract",
     "nextDate": {
       "label": "Due diligence ends",
-      "date": "2026-12-27"
+      "date": "2026-12-08"
     }
   },
   {
@@ -125,14 +125,14 @@
     "state": "NC",
     "type": "Small bay",
     "sf": 44000,
-    "price": 4375000,
-    "pricePerSf": 99.43,
+    "price": 4150000,
+    "pricePerSf": 94.32,
     "capRate": 7.2,
-    "occupancy": 90,
+    "occupancy": 98,
     "stage": "Closed",
     "nextDate": {
       "label": "Closed on",
-      "date": "2026-11-04"
+      "date": "2026-11-09"
     }
   },
   {
@@ -142,14 +142,14 @@
     "state": "AL",
     "type": "Industrial",
     "sf": 110000,
-    "price": 10050000,
-    "pricePerSf": 91.36,
+    "price": 8675000,
+    "pricePerSf": 78.86,
     "capRate": 6.8,
-    "occupancy": 83,
+    "occupancy": 92,
     "stage": "Closed",
     "nextDate": {
       "label": "Closed on",
-      "date": "2026-10-05"
+      "date": "2026-11-06"
     }
   }
 ]
