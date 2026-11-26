@@ -8,6 +8,7 @@
 import '../../styles/global.css';
 import LogoMark from '../../components/LogoMark.astro';
 import DemoApp from '../../components/demo/DemoApp.astro';
+import Seo from '../../components/Seo.astro';
 import { NAME } from '../../lib/demo';
 ---
 
@@ -16,8 +17,7 @@ import { NAME } from '../../lib/demo';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Demo dashboard | Tenonpath</title>
-    <meta name="description" content="Click around a working dashboard for a fictional industrial portfolio." />
+    <Seo title="Demo dashboard | Tenonpath" description="Click around a working dashboard for a fictional industrial portfolio." />
     <meta name="theme-color" content="#0e1116" />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />

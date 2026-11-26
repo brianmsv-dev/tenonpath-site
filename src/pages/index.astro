@@ -11,11 +11,43 @@ import Pricing from '../components/sections/Pricing.astro';
 import About from '../components/sections/About.astro';
 import Faq from '../components/sections/Faq.astro';
 import Contact from '../components/sections/Contact.astro';
+
+// Structured data (SITE_SPEC > SEO): facts only, from COPY.md and PROJECT_LOG.
+const description =
+  'We connect the software your firm already uses into one clear dashboard. Fixed scope, fixed price, delivered in weeks.';
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://tenonpath.com/#organization',
+  name: 'Tenonpath',
+  url: 'https://tenonpath.com/',
+  logo: 'https://tenonpath.com/brand/logo-full-light.svg',
+  email: 'hello@tenonpath.com',
+  description,
+  address: { '@type': 'PostalAddress', addressLocality: 'Nairobi', addressCountry: 'KE' },
+};
+const service = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://tenonpath.com/#service',
+  name: 'Tenonpath',
+  url: 'https://tenonpath.com/',
+  image: 'https://tenonpath.com/og.png',
+  email: 'hello@tenonpath.com',
+  description,
+  address: { '@type': 'PostalAddress', addressLocality: 'Nairobi', addressCountry: 'KE' },
+  areaServed: [
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'Country', name: 'Kenya' },
+  ],
+  parentOrganization: { '@id': 'https://tenonpath.com/#organization' },
+};
 ---
 
 <BaseLayout
   title="Tenonpath | Dashboards and integrations for real estate teams"
-  description="We connect the software your firm already uses into one clear dashboard. Fixed scope, fixed price, delivered in weeks."
+  description={description}
+  schema={[organization, service]}
 >
   <Hero />
   <Problem />
