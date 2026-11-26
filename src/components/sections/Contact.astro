@@ -1,0 +1,242 @@
+---
+/*
+  10 Contact. Copy: docs/COPY.md > 10 Contact. Behaviour: src/scripts/contact.ts.
+  Phase 3 is UI only. Submission:
+  - PUBLIC_FORM_ENDPOINT set (phase 5): POST as JSON, then the success or error state.
+  - not set (now): Send opens the visitor's email app with the message filled in, addressed to
+    hello@tenonpath.com. Nothing claims "Received" unless a server actually accepted it.
+  Preview the states while reviewing: /?form=success#contact and /?form=error#contact
+*/
+import SectionHead from './SectionHead.astro';
+import LogoMark from '../LogoMark.astro';
+
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const budgets = ['Under $2,500', '$2,500 to $6,000', '$6,000 to $15,000', 'Not sure yet'];
+---
+
+<section class="home-section contact" id="contact" aria-labelledby="contact-title">
+  <div class="container grid-12">
+    <div class="contact__head">
+      <SectionHead number="10" label="START" title="Tell us what you're running on." titleId="contact-title">
+        <p class="t-lead">A few lines is enough. We reply within one business day.</p>
+        <p class="contact__alt">Prefer email? <a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a></p>
+        </SectionHead>
+    </div>
+
+    <div class="contact__panel" data-reveal>
+      <form class="form" novalidate data-contact-form data-endpoint={endpoint}>
+        <div class="form__grid">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err" />
+            <p class="field__error" id="f-name-err" data-error-for="name" hidden>Please add your name.</p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-err" />
+            <p class="field__error" id="f-email-err" data-error-for="email" hidden>Please add an email address we can reply to.</p>
+          </div>
+          <div class="field field--wide">
+            <label for="f-company">Company</label>
+            <input id="f-company" name="company" type="text" autocomplete="organization" required aria-describedby="f-company-err" />
+            <p class="field__error" id="f-company-err" data-error-for="company" hidden>Please add your company name.</p>
+          </div>
+          <div class="field field--wide">
+            <label for="f-systems">What systems do you use today?</label>
+            <textarea id="f-systems" name="systems" rows="3" required aria-describedby="f-systems-err"></textarea>
+            <p class="field__error" id="f-systems-err" data-error-for="systems" hidden>Please list the systems you use, even roughly.</p>
+          </div>
+          <div class="field field--wide">
+            <label for="f-wants">What do you want to see in one place?</label>
+            <textarea id="f-wants" name="wants" rows="3" required aria-describedby="f-wants-err"></textarea>
+            <p class="field__error" id="f-wants-err" data-error-for="wants" hidden>Please tell us what you want to see.</p>
+          </div>
+          <div class="field">
+            <label for="f-budget">Budget range</label>
+            <div class="select">
+              <select id="f-budget" name="budget" required aria-describedby="f-budget-err">
+                <option value="" selected disabled></option>
+                {budgets.map((b) => <option value={b}>{b}</option>)}
+              </select>
+            </div>
+            <p class="field__error" id="f-budget-err" data-error-for="budget" hidden>Please pick a budget range.</p>
+          </div>
+          <div class="field">
+            <label for="f-source">How did you hear about us? (optional)</label>
+            <input id="f-source" name="source" type="text" />
+          </div>
+          <!-- Honeypot: hidden from people and assistive tech; bots fill it, and those sends are dropped. -->
+          <div class="form__trap" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="form__actions">
+          <button class="btn btn--primary" type="submit" data-submit>
+            Send
+            <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25"></path></svg>
+          </button>
+          <p class="form__status" role="status" aria-live="polite" data-form-status></p>
+        </div>
+        <p class="form__error" role="alert" data-form-error hidden>
+          That didn't send. Please try again, or email <a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a>.
+        </p>
+      </form>
+
+      <div class="form-success" data-form-success tabindex="-1" hidden>
+        <LogoMark concept="a" size={64} title="" />
+        <p class="t-h3">Received. We reply within one business day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact__head,
+  .contact__panel {
+    grid-column: 1 / -1;
+  }
+  .contact__alt {
+    color: var(--bone-dim);
+  }
+  .contact__panel {
+    margin-top: var(--space-7);
+  }
+
+  .form__grid {
+    display: grid;
+    gap: var(--space-5) var(--gutter);
+  }
+  .field {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+  .field label {
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--bone);
+  }
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem 0.875rem;
+    background: var(--ink-2);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    color: var(--bone);
+    font-size: 1rem;
+    line-height: 1.4;
+    transition: border-color var(--dur-1) var(--ease-out);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 6.5rem;
+  }
+  .field :is(input, textarea, select):hover {
+    border-color: var(--bone-dim);
+  }
+  .field :is(input, textarea, select):focus-visible {
+    border-color: var(--brass);
+    outline: var(--focus-ring);
+    outline-offset: 1px;
+  }
+  .field :is(input, textarea, select)[aria-invalid='true'] {
+    border-color: var(--alert);
+  }
+  .field__error {
+    font-size: var(--fs-small);
+    color: var(--alert);
+  }
+  /* Select: native control, our own hairline chevron */
+  .select {
+    position: relative;
+  }
+  .select select {
+    appearance: none;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .select::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid var(--bone-dim);
+    border-bottom: 1px solid var(--bone-dim);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+  .select option {
+    background: var(--ink-2);
+    color: var(--bone);
+  }
+
+  .form__trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-6);
+  }
+  .form__status {
+    color: var(--bone-dim);
+    font-size: var(--fs-small);
+  }
+  .form__error {
+    margin-top: var(--space-4);
+    color: var(--alert);
+  }
+  .form__error .link {
+    color: var(--bone);
+  }
+
+  .form-success {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-5);
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .form-success:focus {
+    outline: none;
+  }
+
+  @media (min-width: 720px) {
+    .form__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .field--wide {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .contact__head {
+      grid-column: 1 / span 5;
+    }
+    .contact__panel {
+      grid-column: 7 / span 6;
+      margin-top: 0;
+    }
+  }
+</style>
+
+<script>
+  import '../../scripts/contact';
+</script>
