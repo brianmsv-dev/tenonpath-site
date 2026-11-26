@@ -61,7 +61,7 @@ Fast, clean websites that make a serious first impression and are easy to keep c
 ## 04 Live demo
 Label: 04 / LIVE DEMO
 Headline: Don't take our word for it.
-Body: Click around a working dashboard for a fictional industrial portfolio. Same build quality you would get, connected to your own systems.
+Body: Click around a working dashboard for a fictional commercial real estate portfolio. Same build quality you would get, connected to your own systems.
 Button: Open the full demo
 Note: Fictional portfolio. Real build quality.
 Frame labels: LIVE DEMO / FICTIONAL DATA
@@ -168,3 +168,70 @@ Demo · Real estate · Privacy
 Headline: This piece doesn't fit.
 Body: The page you were looking for isn't here.
 Link: Back to the homepage
+
+## /real-estate (SEO landing page)
+Meta title: Real estate dashboards and integrations | Tenonpath
+Meta description: Portfolio dashboards, property management integrations and reporting automation for commercial real estate owners, operators and property managers. Fixed scope, fixed price.
+
+Label: REAL ESTATE
+H1: Dashboards and integrations for commercial real estate teams.
+Lead: Your property management system, task board, spreadsheets, inbox and bank exports each hold part of the picture. We connect them into one portfolio view, built to the reports you already run.
+CTA: Start a project · See the live demo
+
+Section: What we build for real estate teams
+- Portfolio dashboards. Occupancy, collections, past due and open items across every property, updated from your systems.
+- Collections and AR views. Who has paid, who hasn't, aging by tenant and property, and which payments came in outside the portal.
+- Lease and critical date tracking. Expirations, renewal notices, rent steps and insurance certificates, with alerts before they become problems.
+- Task board integrations. Property data flowing into boards like Monday.com, and board updates flowing back into one view.
+- Acquisitions pipeline. Deals under review, at LOI, under contract and closed, with the metrics your investment committee asks for.
+- Reporting automation. The weekly and monthly numbers rebuilt for you, not by hand.
+
+Section: Systems we connect
+Any property management system with an API or data export, task boards like Monday.com, Excel and Google Sheets, Outlook and Gmail, and bank exports. If you are not sure whether your system qualifies, ask us on a discovery call before you pay anything.
+
+Section: Who it's for
+Owners, operators, asset managers, property managers and acquisitions teams at firms that have outgrown spreadsheets but do not need an enterprise software project.
+
+Section: How it works
+Discovery call, written fixed scope and price within three business days, weekly previews you can click, then launch and support. Most dashboards take two to four weeks and start at $2,500.
+
+Section: Questions
+1. Will this replace our property management software?
+No. Your property management system stays the system of record. We read from it and connect it to the rest of your tools.
+2. Can our team still update things in Monday.com or Excel?
+Yes. We build around how your team already works, so nobody has to learn a new process to keep the dashboard current.
+3. Can it handle multiple entities or portfolios?
+Yes. Dashboards can be split by entity, fund, region or property, with totals that roll up.
+4. Who can see the dashboard?
+Only the people you choose. Every dashboard sits behind a login.
+
+Closing CTA headline: Tell us what you're running on.
+Closing body: A few lines is enough. We reply within one business day.
+Button: Start a project
+
+## /privacy
+Meta title: Privacy | Tenonpath
+H1: Privacy
+Last updated: [launch date]
+
+Intro: This page explains what information Tenonpath collects through this website and what we do with it. We keep it short because we collect very little.
+
+What we collect
+When you use the contact form, we collect what you type into it: your name, email address, and anything else you choose to share, such as your company, the systems you use, what you want to see, your budget range and how you heard about us. If you email us directly, we receive your email address and your message.
+
+We do not use advertising cookies or tracking pixels. The live demo's "Make it yours" controls run only in your browser. Nothing you type there is stored or sent to us.
+
+How we use it
+Only to reply to you, discuss a possible project and keep a record of our conversation. We do not sell, rent or share your information for marketing.
+
+Who processes it
+Form submissions are delivered to our inbox through our form provider [Formspree], and our email is hosted by [GoDaddy]. The site is hosted on Railway. These providers process data on our behalf to run those services.
+
+How long we keep it
+We keep enquiries for up to 24 months, or longer if we start working together, so we have a record of the project. You can ask us to delete your information at any time.
+
+Your choices
+You can ask to see, correct or delete the information we hold about you by emailing hello@tenonpath.com.
+
+Contact
+Tenonpath, Nairobi, Kenya. hello@tenonpath.com

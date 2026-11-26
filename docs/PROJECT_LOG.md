@@ -45,9 +45,9 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 1. **Contact form.** Pick one: (a) **Formspree** (recommended, simplest): create a free account with hello@tenonpath.com, create a form, send the form URL (https://formspree.io/f/xxxx). It becomes `PUBLIC_FORM_ENDPOINT` in Railway's variables. It is public by design (used in the browser), so it is not a secret. Formspree adds its own spam filtering and rate limits on top of our honeypot. Or (b) a small endpoint on our own Railway server that sends mail: needs SMTP credentials for the GoDaddy mailbox (host, port, user, app password) as Railway secrets, and about half a day more work.
 2. **Railway.** A Railway account (or an invite to Brian's), connected to the GitHub repo brianmsv-dev/tenonpath-site. No secrets needed for the site itself.
 3. **DNS.** Decide: move DNS to Cloudflare (recommended in the open questions) or stay on GoDaddy. Then access to add the records Railway gives for tenonpath.com and www (usually a CNAME for www and an ALIAS/ANAME or flattened CNAME for the root). Keep the existing MX records for email untouched.
-4. **Copy for /real-estate and /privacy.** Both are in SITE_SPEC but have no text in COPY.md. Privacy needs to say what the form collects, where it goes (Formspree or our server), how long it is kept and who to contact. Ask the orchestrator to draft both.
+4. ~~Copy for /real-estate and /privacy~~: drafted by orchestrator in COPY.md (v1, Brian to approve). Privacy needs to say what the form collects, where it goes (Formspree or our server), how long it is kept and who to contact. Ask the orchestrator to draft both.
 5. **Demo photos** (optional): 8 property images into `src/assets/demo/photos/` (README there).
-6. **COPY wording**: the demo body says "fictional industrial portfolio" but the portfolio is now mixed (see open questions).
+6. ~~COPY wording~~: done by orchestrator ("a fictional commercial real estate portfolio").
 7. **Real-device check** after the first deploy: an iPhone (Safari) and an Android phone, plus Safari on a Mac if available.
 
 ## Decisions
@@ -117,7 +117,6 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 
 ## Open questions (for Brian)
 - [ ] Footer links to /real-estate and /privacy, which arrive in phase 5. /demo now exists.
-- [ ] COPY: the demo body says "a fictional industrial portfolio", but the portfolio is now mixed (industrial, flex, retail, office). Suggest "a fictional commercial real estate portfolio" (homepage 04 body and the /demo meta description). Not changed: copy is the orchestrator's call.
 - [ ] Property photos for /demo: 8 images into `src/assets/demo/photos/` as property-1.jpg ... property-8.jpg (see the README there).
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 
