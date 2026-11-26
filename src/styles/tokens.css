@@ -1,0 +1,85 @@
+/*
+  Tenonpath design tokens. Source of truth: docs/BRAND.md.
+  Contrast ratios (WCAG) are noted so nobody has to recompute them.
+*/
+
+:root {
+  /* ---------- Color: the drafting table at night ---------- */
+  --ink: #0e1116;        /* main background */
+  --ink-2: #151a21;      /* raised sections, demo frame */
+  --rule: #2a313b;       /* hairlines, grid, borders (decorative, 1.44:1 on ink) */
+  --rule-strong: #5d6674;/* borders that must be seen: inputs, controls. 3.26:1 on ink, 3.01:1 on ink-2 */
+  --bone: #ede8df;       /* primary text, 15.5:1 on ink */
+  --bone-dim: #a9a39a;   /* secondary text, 7.56:1 on ink */
+  --brass: #c8963e;      /* accent: CTAs, the tenon, focus, key numbers. 7.1:1 on ink */
+  --brass-soft: #8a6a33; /* hover lines, secondary accent. 3.77:1 on ink: not for body text */
+  --brass-press: #b5852f;/* primary button hover fill, ink text 5.73:1 */
+  --data: #3fb6a8;       /* data only: chart lines, live values. Never decoration */
+  --alert: #d4694a;      /* data only: past due, risk */
+
+  /* Inverted (bone) sections. Brass and bone-dim fail AA on bone, so these replace them there. */
+  --inv-bg: var(--bone);
+  --inv-text: var(--ink);
+  --inv-text-dim: #5c5a55;   /* 5.64:1 on bone */
+  --inv-accent: #7a5a24;     /* deep brass, 5.19:1 on bone */
+  --inv-rule: #cfc8bb;
+
+  /* ---------- Type ---------- */
+  --font-sans: 'General Sans', 'General Sans Fallback', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, monospace;
+
+  /* Fluid scale, tuned for 360px to 1440px viewports */
+  --fs-hero: clamp(3.5rem, 2.2rem + 5.8vw, 7.5rem);      /* 56 to 120 */
+  --fs-display: clamp(2.25rem, 1.6rem + 2.9vw, 4.25rem); /* 36 to 68, section headlines */
+  --fs-h3: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);          /* 24 to 32 */
+  --fs-h4: clamp(1.1875rem, 1.12rem + 0.3vw, 1.375rem);  /* 19 to 22 */
+  --fs-lead: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem); /* 19 to 22 */
+  --fs-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem); /* 17 to 18 */
+  --fs-small: 0.9375rem;  /* 15 */
+  --fs-label: 0.8125rem;  /* 13, mono labels */
+  --fs-micro: 0.6875rem;  /* 11, dimension marks */
+
+  --lh-tight: 1.02;
+  --lh-heading: 1.1;
+  --lh-body: 1.6;
+
+  --track-tight: -0.02em; /* large headlines */
+  --track-wordmark: -0.03em;
+  --track-label: 0.08em;  /* mono uppercase labels */
+
+  /* ---------- Space (4px base) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-y: clamp(6rem, 4rem + 8vw, 12rem);
+
+  /* ---------- Grid ---------- */
+  --grid-max: 1440px;
+  --grid-cols: 12;
+  --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
+  --pad-x: clamp(1.25rem, 5vw, 5rem);       /* 20px mobile, 48 to 80px desktop */
+  --bp-pitch: 32px;                          /* blueprint grid */
+  --bp-opacity: 0.4;
+
+  /* ---------- Shape ---------- */
+  --radius: 2px;
+  --hairline: 1px;
+  --focus-ring: 2px solid var(--brass);
+  --focus-offset: 3px;
+
+  /* ---------- Motion: short ease in, firm stop ---------- */
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1); /* power3.out */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);      /* expo.out */
+  --dur-1: 0.4s;
+  --dur-2: 0.6s;
+  --dur-3: 0.9s;
+
+  --header-h: 4.5rem;
+}
