@@ -3,7 +3,7 @@
 The running record. Newest entries at the top of each section. Anyone (Brian, the orchestrator, Claude Code) updates this at the end of a work session.
 
 ## Current phase
-**Phase 2: Hero**: built, waiting at the review gate (Brian approves the hero).
+**Phase 3: Homepage sections**: in progress.
 
 ## Phases
 ### Phase 1: Foundation
@@ -20,7 +20,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [x] Hero layout and copy
 - [x] Joinery scroll animation (SITE_SPEC 01), desktop pinned/scrubbed, mobile play-once, reduced-motion end state
 - [x] Final logo applied in header, favicon set
-- **Review gate:** Brian approves the hero
+- **Review gate:** Brian approves the hero. Done 2026-11-26 with changes (see Decisions).
 
 ### Phase 3: Homepage sections
 - [ ] Sections 02 to 10 per SITE_SPEC and COPY (demo section uses a placeholder frame until phase 4)
@@ -42,6 +42,12 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Brian, phase 2 review): Layout fills the screen. Side padding 20px on mobile, 32 to 40px on desktop (was 48 to 80px); max content width raised, only very wide screens center. Set globally in tokens and in SITE_SPEC's Grid line. Claude Code set the max to 1840px rather than 1760px: the container is max width plus 2 x 40px padding, so 1840px is what lets a 1920px screen fill edge to edge with only very wide screens (2560px) centering. Lower it if you prefer 1760px.
+- 2026-11-26 (Brian, phase 2 review): Joinery drawing scaled up about 25 to 30% on desktop to fill the right 7 columns, vertically centered with the headline block; snippet text readable at 1440px (mono, dim). Checked at 1280, 1440, 1920 and 2560px.
+- 2026-11-26 (Brian, phase 2 review): Source blocks stay visible but dimmed in the end state. Not folded away.
+- 2026-11-26 (Brian, phase 2 review): Mobile play-once and reduced motion must always end on 94.2%, $412,860, $18,240, 37 with the chart fully drawn, including fast scrolling and background tabs.
+- 2026-11-26 (Brian, phase 2 review): Pin length stays at 175vh.
+- 2026-11-26 (Claude Code, phase 2 revision): The hero headline is also capped at 14% of the viewport height on desktop, so the pinned hero (text, drawing and CTAs) fits a 1280x720 laptop screen. On taller screens nothing changes.
 - 2026-11-26 (Claude Code, phase 2): Joinery breakpoints. 1024px and up: pinned for 175vh and scrubbed (text and drawing side by side). 640 to 1023px: the same drawing stacked under the text, played once on enter (pinning a stacked hero taller than the screen would trap the scroll). Under 640px: a simplified phone drawing, five labelled tabs that drop into slots on the frame's top edge, no content snippets, played once. Reduced motion: no pin, finished dashboard.
 - 2026-11-26 (Claude Code, phase 2): The block snippets (rent roll rows, task items, a #REF! cell, email subjects, CSV lines) and the dashboard figures and chart are fictional and only decorate the animation. No real names or addresses. The figures are the ones in SITE_SPEC.
 - 2026-11-26 (Claude Code, phase 2): Hero headline is capped at 8.2vw from 1024px up so "systems," always fits its 5 columns. It reaches the full 120px at about 1460px wide.
@@ -69,7 +75,6 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 
 ## Open questions (for Brian)
 - [ ] Header, footer and hero link to anchors and routes that do not exist yet (#demo, #contact, #services, /demo, /real-estate, /privacy and so on). They come alive in phases 3 to 5. Fine while the site is not deployed.
-- [ ] Hero review: pin length (175vh of scroll), block snippet content, and whether the dashboard should keep the source blocks visible at the end (now dimmed) or fold them away.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 
 ## Account and infrastructure notes
