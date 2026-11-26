@@ -1,0 +1,39 @@
+---
+// 08 About. Copy: docs/COPY.md > 08 About.
+import SectionHead from './SectionHead.astro';
+---
+
+<section class="home-section about" id="about" aria-labelledby="about-title">
+  <div class="container grid-12">
+    <div class="about__head">
+      <SectionHead number="08" label="ABOUT" title="Built by someone who's done the work." titleId="about-title" />
+    </div>
+    <p class="t-lead about__body" data-reveal>
+      Tenonpath is a small studio based in Nairobi, working with clients in the US and worldwide. We have hands-on
+      experience inside US commercial real estate operations: rent rolls, leases, due diligence, insurance, investor
+      reporting. We know what the numbers mean, not just how to move them. That is why what we build fits.
+    </p>
+  </div>
+</section>
+
+<style>
+  .about__head,
+  .about__body {
+    grid-column: 1 / -1;
+  }
+  .about__body {
+    margin-top: var(--space-6);
+    max-width: 44rem;
+    color: var(--bone);
+  }
+  @media (min-width: 1024px) {
+    .about__head {
+      grid-column: 1 / span 6;
+    }
+    .about__body {
+      grid-column: 7 / span 6;
+      margin-top: 0;
+      align-self: end;
+    }
+  }
+</style>

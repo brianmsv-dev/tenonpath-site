@@ -1,0 +1,81 @@
+---
+// 06 Who it's for. Copy: docs/COPY.md > 06 Who it's for.
+// Two columns: commercial real estate on the left, larger; growing businesses on the right.
+import SectionLabel from '../SectionLabel.astro';
+---
+
+<section class="home-section audience" id="who" aria-label="Who it's for">
+  <div class="container">
+    <div data-reveal>
+      <SectionLabel number="06" label="WHO IT'S FOR" />
+    </div>
+    <div class="grid-12 audience__grid">
+      <div class="audience__main" data-reveal>
+        <h2 class="t-display">Commercial real estate teams</h2>
+        <p class="t-lead">
+          Owners, operators, asset managers, property managers and acquisitions teams who are tired of rebuilding the
+          same reports.
+        </p>
+        <p class="audience__systems">
+          We work with any property management system that has an API or data export, task boards like Monday.com,
+          Excel and Google Sheets, Outlook and Gmail, and bank exports.
+        </p>
+      </div>
+      <div class="audience__side" data-reveal>
+        <h2 class="t-h3">Growing businesses</h2>
+        <p class="t-dim">
+          Web apps, automations and websites for companies in Kenya and around the world that want work done properly
+          and on time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .audience__grid {
+    row-gap: var(--space-8);
+    margin-top: var(--space-6);
+  }
+  .audience__main,
+  .audience__side {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--space-5);
+    align-content: start;
+  }
+  .audience__main .t-display {
+    max-width: 14ch;
+  }
+  .audience__main .t-lead {
+    max-width: 42rem;
+  }
+  .audience__systems {
+    max-width: 44rem;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rule);
+    color: var(--bone-dim);
+    font-size: var(--fs-small);
+  }
+  .audience__side {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--rule);
+  }
+  .audience__side p {
+    max-width: 34ch;
+  }
+
+  @media (min-width: 1024px) {
+    .audience__main {
+      grid-column: 1 / span 7;
+    }
+    .audience__side {
+      grid-column: 9 / span 4;
+      padding-top: 0;
+      padding-left: var(--gutter);
+      border-top: 0;
+      border-left: 1px solid var(--rule);
+      align-self: stretch;
+    }
+  }
+</style>

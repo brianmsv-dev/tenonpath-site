@@ -1,0 +1,160 @@
+---
+// 07 Pricing. Copy: docs/COPY.md > 07 Pricing. Prices approved in PROJECT_LOG (2026-11-26).
+// Inverted (bone) section. Four columns laid out like a table, divided by hairlines, not cards.
+import SectionHead from './SectionHead.astro';
+
+const plans = [
+  {
+    name: 'Dashboard',
+    price: 'From $2,500',
+    timeline: 'Typical timeline: 2 to 4 weeks.',
+    items: ['Connected to one core system plus your task board or spreadsheets', 'Overview, tables and charts built to your reports', 'Secure login, hosted for you', 'Two rounds of changes'],
+  },
+  {
+    name: 'Automation sprint',
+    price: 'From $750',
+    timeline: 'Typical timeline: 1 to 2 weeks.',
+    items: ['One workflow, start to finish', 'Example: email updates filed to your task board', 'Error alerts so nothing fails silently', 'Handover notes'],
+  },
+  {
+    name: 'Website',
+    price: 'From $1,200',
+    timeline: 'Typical timeline: 1 to 3 weeks.',
+    items: ['Up to 5 pages, written and designed for you', 'Fast, mobile ready, search ready', 'Contact form to your inbox', 'Easy updates after launch'],
+  },
+  {
+    name: 'Monthly support',
+    price: 'From $200',
+    unit: 'per month',
+    timeline: null,
+    items: ['Hosting and monitoring', 'Security and dependency updates', 'Small changes each month', 'Priority response'],
+  },
+];
+---
+
+<section class="home-section section--inverted pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <SectionHead number="07" label="PRICING" title="Know the cost before we start." titleId="pricing-title" />
+
+    <ul role="list" class="plans">
+      {
+        plans.map((p) => (
+          <li class="plan" data-reveal>
+            <h3 class="t-h4 plan__name">{p.name}</h3>
+            <p class="plan__price t-figure">
+              {p.price}
+              {p.unit && <span class="plan__unit">{p.unit}</span>}
+            </p>
+            <ul role="list" class="plan__items">
+              {p.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+            {p.timeline && <p class="t-label plan__timeline">{p.timeline}</p>}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="pricing__note t-dim" data-reveal>
+      Every project gets a written fixed quote before work starts. Kenyan clients: pricing in KSh on request.
+    </p>
+  </div>
+</section>
+
+<style>
+  .plans {
+    display: grid;
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--inv-text);
+  }
+  .plan {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--space-4);
+    padding: var(--space-6) 0 var(--space-6);
+    border-bottom: 1px solid var(--rule);
+  }
+  .plan__price {
+    font-size: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--inv-text);
+  }
+  .plan__unit {
+    display: inline-block;
+    margin-left: 0.4em;
+    font-size: var(--fs-small);
+    letter-spacing: 0;
+    color: var(--inv-text-dim);
+  }
+  .plan__items {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    font-size: var(--fs-small);
+    color: var(--inv-text-dim);
+  }
+  .plan__items li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .plan__items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 0.625rem;
+    height: 1px;
+    background: var(--inv-accent);
+  }
+  .plan__timeline {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+    color: var(--inv-accent);
+    font-size: var(--fs-micro);
+  }
+  .pricing__note {
+    margin-top: var(--space-6);
+    max-width: 60ch;
+    font-size: var(--fs-small);
+  }
+
+  @media (min-width: 720px) {
+    .plans {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .plan {
+      padding-inline: var(--space-5);
+      border-right: 1px solid var(--rule);
+    }
+    .plan:nth-child(2n) {
+      border-right: 0;
+    }
+    .plan:nth-child(2n + 1) {
+      padding-left: 0;
+    }
+  }
+  @media (min-width: 1200px) {
+    .plans {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .plan {
+      padding: var(--space-6) var(--space-5) var(--space-7);
+      border-bottom: 1px solid var(--inv-text);
+    }
+    .plan:nth-child(2n) {
+      border-right: 1px solid var(--rule);
+    }
+    .plan:nth-child(2n + 1) {
+      padding-left: var(--space-5);
+    }
+    .plan:first-child {
+      padding-left: 0;
+    }
+    .plan:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+  }
+</style>
