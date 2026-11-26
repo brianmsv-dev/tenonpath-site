@@ -28,7 +28,6 @@ function startLenis() {
   lenis = new Lenis({
     lerp: 0.12,
     smoothWheel: true,
-    anchors: { offset: -72 }, // leave room for the header when it reappears
     autoRaf: false,
   });
   lenis.on('scroll', ScrollTrigger.update);
@@ -107,6 +106,82 @@ initReveals();
 
 // Fonts change line lengths; recalc trigger positions once they are in.
 document.fonts?.ready.then(() => ScrollTrigger.refresh());
+
+/* ---------- Anchor links ----------
+  Content below the hero can change height after a jump starts (the pinned hero's spacer
+  settling, fonts, and the lazy-loaded demo embed growing by ~800px). A plain scroll to the
+  target's position at click time can then land a whole section early. So we keep the target
+  and, while the jump is in progress and for a short time after, re-snap whenever the page
+  height changes, until the target sits under the header.
+*/
+const HEADER_OFFSET = 72;
+let pendingTarget: HTMLElement | null = null;
+let settleTimer = 0;
+
+function targetY(el: HTMLElement) {
+  return Math.max(0, el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET);
+}
+
+function scrollToTarget(el: HTMLElement, immediate = false) {
+  if (lenis && !immediate) {
+    lenis.scrollTo(targetY(el), { duration: 1.1, onComplete: () => settle(el) });
+  } else {
+    lenis ? lenis.scrollTo(targetY(el), { immediate: true }) : window.scrollTo(0, targetY(el));
+    settle(el);
+  }
+}
+
+function settle(el: HTMLElement) {
+  if (pendingTarget !== el) return;
+  const off = el.getBoundingClientRect().top - HEADER_OFFSET;
+  const maxY = document.documentElement.scrollHeight - window.innerHeight;
+  const want = Math.min(targetY(el), maxY);
+  // Stop when we are there, or when the page cannot scroll any closer (e.g. the last section).
+  if (Math.abs(off) <= 4 || Math.abs(window.scrollY - want) <= 2) return;
+  scrollToTarget(el, true);
+}
+
+function goToHash(hash: string, immediate = false) {
+  const id = decodeURIComponent(hash.replace(/^#/, ''));
+  const el = id ? document.getElementById(id) : null;
+  if (!el) return false;
+  pendingTarget = el;
+  window.clearTimeout(settleTimer);
+  settleTimer = window.setTimeout(() => (pendingTarget = null), 4000);
+  ScrollTrigger.refresh();
+  scrollToTarget(el, immediate || prefersReducedMotion());
+  return true;
+}
+
+// Re-snap when the layout grows or shrinks during a pending jump.
+new ResizeObserver(() => {
+  if (pendingTarget) settle(pendingTarget);
+}).observe(document.body);
+
+// The user taking over (wheel, touch, keys) cancels the pending jump.
+['wheel', 'touchstart', 'keydown'].forEach((type) =>
+  window.addEventListener(type, () => (pendingTarget = null), { passive: true }),
+);
+
+document.addEventListener('click', (e) => {
+  const a = (e.target as Element | null)?.closest?.('a[href*="#"]') as HTMLAnchorElement | null;
+  if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  const url = new URL(a.href, location.href);
+  if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+  if (!document.getElementById(decodeURIComponent(url.hash.slice(1)))) return;
+  e.preventDefault();
+  history.pushState(null, '', url.hash);
+  goToHash(url.hash);
+});
+
+// Arriving from another page with a hash (e.g. /privacy -> /#pricing).
+if (location.hash) {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const go = () => goToHash(location.hash, true);
+  window.addEventListener('load', () => { go(); window.setTimeout(go, 300); }, { once: true });
+  document.fonts?.ready.then(go);
+}
+window.addEventListener('popstate', () => goToHash(location.hash, true));
 
 export function getLenis() {
   return lenis;
