@@ -2,200 +2,206 @@
   {
     "date": "2026-12-07",
     "type": "Rent increase",
-    "tenantId": "T10",
+    "tenantId": "T11",
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-17",
+    "date": "2026-12-10",
+    "type": "Lease expiration",
+    "tenantId": "T25",
+    "note": "5,800 SF"
+  },
+  {
+    "date": "2026-12-14",
+    "type": "Insurance certificate expires",
+    "tenantId": "T16",
+    "note": "Request renewed COI"
+  },
+  {
+    "date": "2026-12-15",
+    "type": "Lease expiration",
+    "tenantId": "T18",
+    "note": "22,100 SF"
+  },
+  {
+    "date": "2026-12-16",
+    "type": "Renewal notice deadline",
+    "tenantId": "T16",
+    "note": "90 days before expiration"
+  },
+  {
+    "date": "2026-12-18",
+    "type": "Insurance certificate expires",
+    "tenantId": "T36",
+    "note": "Request renewed COI"
+  },
+  {
+    "date": "2026-12-23",
+    "type": "Renewal notice deadline",
+    "tenantId": "T13",
+    "note": "90 days before expiration"
+  },
+  {
+    "date": "2027-01-02",
+    "type": "Renewal notice deadline",
+    "tenantId": "T08",
+    "note": "90 days before expiration"
+  },
+  {
+    "date": "2027-01-04",
     "type": "Rent increase",
     "tenantId": "T26",
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-21",
+    "date": "2027-01-07",
+    "type": "Lease expiration",
+    "tenantId": "T30",
+    "note": "5,400 SF"
+  },
+  {
+    "date": "2027-01-08",
+    "type": "Renewal notice deadline",
+    "tenantId": "T29",
+    "note": "90 days before expiration"
+  },
+  {
+    "date": "2027-01-10",
+    "type": "Renewal notice deadline",
+    "tenantId": "T04",
+    "note": "90 days before expiration"
+  },
+  {
+    "date": "2027-01-13",
     "type": "Rent increase",
-    "tenantId": "T06",
+    "tenantId": "T33",
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-26",
+    "date": "2027-01-20",
+    "type": "Insurance certificate expires",
+    "tenantId": "T04",
+    "note": "Request renewed COI"
+  },
+  {
+    "date": "2027-01-20",
+    "type": "Rent increase",
+    "tenantId": "T40",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-01-23",
+    "type": "Lease expiration",
+    "tenantId": "T09",
+    "note": "11,900 SF"
+  },
+  {
+    "date": "2027-01-23",
+    "type": "Rent increase",
+    "tenantId": "T28",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-01-23",
+    "type": "Lease expiration",
+    "tenantId": "T32",
+    "note": "8,700 SF"
+  },
+  {
+    "date": "2027-02-06",
+    "type": "Rent increase",
+    "tenantId": "T22",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-02-07",
+    "type": "Lease expiration",
+    "tenantId": "T02",
+    "note": "48,800 SF"
+  },
+  {
+    "date": "2027-02-15",
+    "type": "Lease expiration",
+    "tenantId": "T34",
+    "note": "32,700 SF"
+  },
+  {
+    "date": "2027-02-26",
+    "type": "Rent increase",
+    "tenantId": "T42",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-03-04",
+    "type": "Rent increase",
+    "tenantId": "T19",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-03-16",
+    "type": "Lease expiration",
+    "tenantId": "T16",
+    "note": "49,600 SF"
+  },
+  {
+    "date": "2027-03-23",
+    "type": "Lease expiration",
+    "tenantId": "T13",
+    "note": "13,400 SF"
+  },
+  {
+    "date": "2027-04-01",
     "type": "Rent increase",
     "tenantId": "T01",
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-28",
-    "type": "Renewal notice deadline",
-    "tenantId": "T17",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2026-12-28",
+    "date": "2027-04-01",
     "type": "Rent increase",
-    "tenantId": "T31",
+    "tenantId": "T06",
     "note": "3% annual step"
   },
   {
-    "date": "2026-12-30",
-    "type": "Renewal notice deadline",
-    "tenantId": "T09",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2027-01-02",
-    "type": "Insurance certificate expires",
-    "tenantId": "T18",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-01-10",
+    "date": "2027-04-02",
     "type": "Lease expiration",
-    "tenantId": "T40",
-    "note": "6,300 SF"
+    "tenantId": "T08",
+    "note": "9,400 SF"
   },
   {
-    "date": "2027-01-17",
-    "type": "Renewal notice deadline",
-    "tenantId": "T24",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2027-01-21",
+    "date": "2027-04-04",
     "type": "Insurance certificate expires",
-    "tenantId": "T04",
+    "tenantId": "T38",
     "note": "Request renewed COI"
   },
   {
-    "date": "2027-01-23",
-    "type": "Lease expiration",
-    "tenantId": "T33",
-    "note": "43,000 SF"
-  },
-  {
-    "date": "2027-01-24",
-    "type": "Renewal notice deadline",
-    "tenantId": "T12",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2027-01-25",
-    "type": "Insurance certificate expires",
-    "tenantId": "T25",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-01-31",
-    "type": "Renewal notice deadline",
-    "tenantId": "T27",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2027-01-31",
-    "type": "Rent increase",
-    "tenantId": "T29",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-02-06",
-    "type": "Rent increase",
-    "tenantId": "T21",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-02-09",
-    "type": "Insurance certificate expires",
-    "tenantId": "T28",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-02-09",
-    "type": "Lease expiration",
-    "tenantId": "T30",
-    "note": "6,800 SF"
-  },
-  {
-    "date": "2027-02-10",
-    "type": "Renewal notice deadline",
-    "tenantId": "T02",
-    "note": "90 days before expiration"
-  },
-  {
-    "date": "2027-02-16",
-    "type": "Insurance certificate expires",
-    "tenantId": "T05",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-02-20",
-    "type": "Rent increase",
-    "tenantId": "T04",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-02-23",
+    "date": "2027-04-07",
     "type": "Insurance certificate expires",
     "tenantId": "T14",
     "note": "Request renewed COI"
   },
   {
-    "date": "2027-02-24",
-    "type": "Insurance certificate expires",
-    "tenantId": "T21",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-03-04",
-    "type": "Rent increase",
-    "tenantId": "T08",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-03-04",
-    "type": "Rent increase",
-    "tenantId": "T18",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-03-10",
-    "type": "Rent increase",
-    "tenantId": "T20",
-    "note": "3% annual step"
-  },
-  {
-    "date": "2027-03-28",
+    "date": "2027-04-08",
     "type": "Lease expiration",
-    "tenantId": "T17",
-    "note": "32,600 SF"
+    "tenantId": "T29",
+    "note": "5,100 SF"
   },
   {
-    "date": "2027-03-30",
+    "date": "2027-04-10",
     "type": "Lease expiration",
-    "tenantId": "T09",
-    "note": "6,900 SF"
+    "tenantId": "T04",
+    "note": "60,600 SF"
   },
   {
-    "date": "2027-04-17",
-    "type": "Lease expiration",
-    "tenantId": "T24",
-    "note": "12,500 SF"
-  },
-  {
-    "date": "2027-04-18",
+    "date": "2027-04-12",
     "type": "Rent increase",
-    "tenantId": "T05",
+    "tenantId": "T10",
     "note": "3% annual step"
   },
   {
     "date": "2027-04-19",
-    "type": "Insurance certificate expires",
-    "tenantId": "T23",
-    "note": "Request renewed COI"
-  },
-  {
-    "date": "2027-04-24",
-    "type": "Lease expiration",
-    "tenantId": "T12",
-    "note": "12,800 SF"
+    "type": "Rent increase",
+    "tenantId": "T17",
+    "note": "3% annual step"
   },
   {
     "date": "2027-04-27",
@@ -204,21 +210,21 @@
     "note": "3% annual step"
   },
   {
-    "date": "2027-05-01",
-    "type": "Lease expiration",
-    "tenantId": "T27",
-    "note": "7,900 SF"
-  },
-  {
-    "date": "2027-05-03",
+    "date": "2027-04-29",
     "type": "Insurance certificate expires",
-    "tenantId": "T13",
+    "tenantId": "T39",
     "note": "Request renewed COI"
   },
   {
-    "date": "2027-05-11",
-    "type": "Lease expiration",
-    "tenantId": "T02",
-    "note": "29,900 SF"
+    "date": "2027-05-16",
+    "type": "Rent increase",
+    "tenantId": "T05",
+    "note": "3% annual step"
+  },
+  {
+    "date": "2027-05-17",
+    "type": "Rent increase",
+    "tenantId": "T36",
+    "note": "3% annual step"
   }
 ]

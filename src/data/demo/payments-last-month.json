@@ -1,0 +1,248 @@
+[
+  {
+    "tenantId": "T16",
+    "date": "2026-10-01",
+    "amount": 2196600,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T18",
+    "date": "2026-10-01",
+    "amount": 882400,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T42",
+    "date": "2026-10-01",
+    "amount": 1080600,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T01",
+    "date": "2026-10-02",
+    "amount": 2092800,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T06",
+    "date": "2026-10-02",
+    "amount": 524900,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T08",
+    "date": "2026-10-02",
+    "amount": 639600,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T20",
+    "date": "2026-10-02",
+    "amount": 874600,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T25",
+    "date": "2026-10-02",
+    "amount": 754900,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T27",
+    "date": "2026-10-02",
+    "amount": 693500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T30",
+    "date": "2026-10-02",
+    "amount": 728300,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T32",
+    "date": "2026-10-02",
+    "amount": 1041000,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T37",
+    "date": "2026-10-02",
+    "amount": 885500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T38",
+    "date": "2026-10-02",
+    "amount": 708000,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T39",
+    "date": "2026-10-02",
+    "amount": 888700,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T03",
+    "date": "2026-10-03",
+    "amount": 1360700,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T09",
+    "date": "2026-10-03",
+    "amount": 751000,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T11",
+    "date": "2026-10-03",
+    "amount": 532500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T15",
+    "date": "2026-10-03",
+    "amount": 440300,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T17",
+    "date": "2026-10-03",
+    "amount": 1534200,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T33",
+    "date": "2026-10-03",
+    "amount": 1139700,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T35",
+    "date": "2026-10-03",
+    "amount": 1489700,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T21",
+    "date": "2026-10-04",
+    "amount": 945200,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T24",
+    "date": "2026-10-04",
+    "amount": 879700,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T26",
+    "date": "2026-10-04",
+    "amount": 781500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T28",
+    "date": "2026-10-04",
+    "amount": 554400,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T29",
+    "date": "2026-10-04",
+    "amount": 698900,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T31",
+    "date": "2026-10-04",
+    "amount": 817400,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T40",
+    "date": "2026-10-04",
+    "amount": 1159100,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T04",
+    "date": "2026-10-05",
+    "amount": 2730200,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T13",
+    "date": "2026-10-05",
+    "amount": 580000,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T19",
+    "date": "2026-10-05",
+    "amount": 1411800,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T34",
+    "date": "2026-10-05",
+    "amount": 1478700,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T36",
+    "date": "2026-10-05",
+    "amount": 1189800,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T41",
+    "date": "2026-10-05",
+    "amount": 552700,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T12",
+    "date": "2026-10-06",
+    "amount": 643500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T10",
+    "date": "2026-10-15",
+    "amount": 734800,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T22",
+    "date": "2026-10-17",
+    "amount": 1038100,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T14",
+    "date": "2026-10-18",
+    "amount": 461100,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T05",
+    "date": "2026-10-26",
+    "amount": 520500,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T02",
+    "date": "2026-10-28",
+    "amount": 2215900,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T07",
+    "date": "2026-10-30",
+    "amount": 1173700,
+    "method": "ACH"
+  }
+]
