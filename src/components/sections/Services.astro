@@ -1,0 +1,203 @@
+---
+// 03 What we build. Copy: docs/COPY.md > 03 What we build.
+// Each card carries a small hand-drawn line diagram (no icon sets). On hover or keyboard focus
+// inside the card, its lines draw themselves again. Reduced motion: static.
+import SectionHead from './SectionHead.astro';
+
+const cards = [
+  {
+    n: '01',
+    title: 'Dashboards',
+    body: 'A single, live view of your portfolio, pulled straight from the systems you already use. No more rebuilding the numbers by hand.',
+    examples: ['Portfolio overview: occupancy, collections, past due', 'Lease expirations and critical dates', 'Acquisitions pipeline and deal records'],
+    diagram: 'dash',
+  },
+  {
+    n: '02',
+    title: 'Integrations and automations',
+    body: 'Your tools talk to each other, so data moves on its own and the right people hear about it.',
+    examples: ['Property system to task board sync', 'Email updates filed to the right deal or property', 'Scheduled checks and alerts for what needs attention'],
+    diagram: 'join',
+  },
+  {
+    n: '03',
+    title: 'Internal tools and web apps',
+    body: 'Purpose-built tools for the jobs your off-the-shelf software was never designed for.',
+    examples: ['Data entry and approval flows', 'Tracking tools that replace fragile spreadsheets', 'Client and investor portals'],
+    diagram: 'form',
+  },
+  {
+    n: '04',
+    title: 'Websites',
+    body: 'Fast, clean websites that make a serious first impression and are easy to keep current.',
+    examples: ['Company and fund websites', 'Property and listing pages', 'Landing pages for campaigns and raises'],
+    diagram: 'site',
+  },
+];
+---
+
+<section class="home-section services" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <SectionHead number="03" label="WHAT WE BUILD" title="Software cut to fit your operation." titleId="services-title" />
+
+    <ul role="list" class="cards">
+      {
+        cards.map((c) => (
+          <li class="card" data-reveal>
+            <div class="card__top">
+              <span class="t-label card__num">{c.n}</span>
+              <svg class="card__diagram" viewBox="0 0 120 80" aria-hidden="true" focusable="false">
+                {c.diagram === 'dash' && (
+                  <>
+                    <rect x="4" y="4" width="112" height="72" pathLength="1" style="--i:0" />
+                    <path d="M4 18H116" pathLength="1" style="--i:1" />
+                    <rect x="12" y="26" width="26" height="14" pathLength="1" style="--i:2" />
+                    <rect x="46" y="26" width="26" height="14" pathLength="1" style="--i:3" />
+                    <rect x="80" y="26" width="28" height="14" pathLength="1" style="--i:4" />
+                    <path class="accent" d="M12 68L28 58L42 62L58 50L74 54L90 44L108 46" pathLength="1" style="--i:5" />
+                  </>
+                )}
+                {c.diagram === 'join' && (
+                  <>
+                    <rect x="4" y="22" width="38" height="36" pathLength="1" style="--i:0" />
+                    <path d="M78 22H116V58H78V46H72V34H78Z" pathLength="1" style="--i:1" />
+                    <path class="accent" d="M42 36H70V44H42" pathLength="1" style="--i:2" />
+                    <path d="M12 32H32M12 40H28M12 48H34" pathLength="1" style="--i:3" />
+                    <path d="M88 32H108M88 40H104M88 48H100" pathLength="1" style="--i:4" />
+                  </>
+                )}
+                {c.diagram === 'form' && (
+                  <>
+                    <path d="M8 10H40M8 32H34" pathLength="1" style="--i:0" />
+                    <rect x="8" y="14" width="104" height="10" pathLength="1" style="--i:1" />
+                    <rect x="8" y="36" width="104" height="18" pathLength="1" style="--i:2" />
+                    <rect class="accent" x="8" y="62" width="34" height="12" pathLength="1" style="--i:3" />
+                    <path d="M98 68L102 72L110 62" pathLength="1" style="--i:4" />
+                  </>
+                )}
+                {c.diagram === 'site' && (
+                  <>
+                    <rect x="4" y="4" width="112" height="72" pathLength="1" style="--i:0" />
+                    <path d="M4 16H116" pathLength="1" style="--i:1" />
+                    <rect x="30" y="8" width="60" height="4" pathLength="1" style="--i:2" />
+                    <path d="M14 30H70M14 38H58" pathLength="1" style="--i:3" />
+                    <path class="accent" d="M14 46H40" pathLength="1" style="--i:4" />
+                    <rect x="78" y="26" width="28" height="24" pathLength="1" style="--i:5" />
+                    <path d="M14 62H34M44 62H64M74 62H94" pathLength="1" style="--i:6" />
+                  </>
+                )}
+              </svg>
+            </div>
+            <h3 class="t-h3 card__title">{c.title}</h3>
+            <p class="card__body t-dim">{c.body}</p>
+            <ul role="list" class="card__examples">
+              {c.examples.map((e) => (
+                <li>{e}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--space-5) var(--space-7);
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-4);
+  }
+  .card__num {
+    color: var(--brass);
+  }
+  .card__diagram {
+    width: 7.5rem;
+    height: auto;
+    overflow: visible;
+  }
+  .card__diagram :is(rect, path) {
+    fill: none;
+    stroke: var(--bone-dim);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+  }
+  .card__diagram .accent {
+    stroke: var(--brass);
+    stroke-width: 1.5;
+  }
+  .card__body {
+    max-width: 46ch;
+  }
+  .card__examples {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    font-size: var(--fs-small);
+  }
+  .card__examples li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  /* A short brass dimension tick as the bullet */
+  .card__examples li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 0.625rem;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  /* Lines draw themselves again on hover or focus. Dash length is in path units (pathLength=1),
+     so non-scaling strokes are avoided on the animated state. */
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover .card__diagram :is(rect, path),
+    .card:focus-within .card__diagram :is(rect, path) {
+      vector-effect: none;
+      stroke-width: 1.1;
+      stroke-dasharray: 1;
+      animation: card-draw 0.9s var(--ease-out) both;
+      animation-delay: calc(var(--i) * 70ms);
+    }
+    .card:hover .card__diagram .accent,
+    .card:focus-within .card__diagram .accent {
+      stroke-width: 1.6;
+    }
+  }
+  @keyframes card-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+    .card {
+      padding: var(--space-7) var(--space-7) var(--space-8);
+    }
+  }
+</style>
