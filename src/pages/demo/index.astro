@@ -1,0 +1,117 @@
+---
+/*
+  /demo: full-screen interactive demo dashboard (docs/SITE_SPEC.md > /demo page).
+  Fictional portfolio. No site header or footer: a top bar with the logo, a banner, the
+  dashboard, and a fixed "DEMO DATA" label. No smooth scroll or scroll motion here.
+*/
+import '../../styles/global.css';
+import LogoMark from '../../components/LogoMark.astro';
+import DemoApp from '../../components/demo/DemoApp.astro';
+import { NAME } from '../../lib/demo';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo dashboard | Tenonpath</title>
+    <meta name="description" content="Click around a working dashboard for a fictional industrial portfolio." />
+    <meta name="theme-color" content="#0e1116" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/GeneralSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body class="demo-page">
+    <a class="skip-link" href="#dashboard">Skip to dashboard</a>
+    <p class="demo-banner">
+      This is a demo with fictional data. Want this for your portfolio? <a class="link" href="/#contact">Start a project</a>.
+    </p>
+
+    <header class="demo-top">
+      <a href="/" class="demo-top__brand" aria-label="Tenonpath home" data-logo-hover>
+        <LogoMark concept="a" size={24} title="" />
+        <span class="wordmark" aria-hidden="true">tenonpath</span>
+      </a>
+      <p class="demo-top__name">{NAME}</p>
+    </header>
+
+    <main id="dashboard" class="demo-main" tabindex="-1">
+      <h1 class="visually-hidden">{NAME} demo dashboard</h1>
+      <DemoApp variant="full" />
+    </main>
+
+    <p class="demo-corner" aria-hidden="true">DEMO DATA</p>
+
+    <script>
+      import '../../scripts/demo';
+      import '../../scripts/logo';
+    </script>
+  </body>
+</html>
+
+<style>
+  .demo-page {
+    --pad: var(--pad-x);
+  }
+  .demo-banner {
+    padding: var(--space-3) var(--pad);
+    background: var(--ink-2);
+    border-bottom: 1px solid var(--rule);
+    color: var(--bone-dim);
+    font-size: var(--fs-small);
+  }
+  .demo-banner .link {
+    color: var(--bone);
+    text-decoration-color: var(--brass);
+  }
+  .demo-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    padding: var(--space-4) var(--pad) 0;
+  }
+  .demo-top__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    text-decoration: none;
+  }
+  .demo-top__brand .wordmark {
+    font-size: 1.25rem;
+  }
+  .demo-top__name {
+    font-size: var(--fs-h4);
+    font-weight: 500;
+  }
+  .demo-main {
+    padding: var(--space-4) var(--pad) var(--space-9);
+  }
+  .demo-main:focus {
+    outline: none;
+  }
+  /* Fixed corner label, always visible, never in the way of a click */
+  .demo-corner {
+    position: fixed;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    z-index: 10;
+    padding: 0.25rem 0.5rem;
+    background: var(--ink);
+    border: 1px solid var(--brass-soft);
+    color: var(--brass);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    pointer-events: none;
+  }
+</style>

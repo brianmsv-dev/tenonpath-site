@@ -1,0 +1,22 @@
+---
+/*
+  /demo/embed/: the cut-down demo (Overview, Collections, Leases) as a bare fragment.
+  Not a page for people: the homepage fetches it when section 04 comes near the viewport,
+  copies its styles into the page, moves the [data-demo] element into the frame and runs
+  src/scripts/demo.ts on it. Kept out of search results.
+*/
+import DemoApp from '../../components/demo/DemoApp.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Demo embed | Tenonpath</title>
+  </head>
+  <body>
+    <DemoApp variant="embed" />
+  </body>
+</html>
