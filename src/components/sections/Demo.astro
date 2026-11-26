@@ -1,36 +1,43 @@
 ---
-// 04 Live demo. Copy: docs/COPY.md > 04 Live demo.
-// PHASE 3 PLACEHOLDER: the frame reserves the demo's exact space (16:9) so the phase 4 embed
-// causes no layout shift. The inner label is a build marker, not site copy, and goes in phase 4.
+/*
+  04 Live demo. Copy: docs/COPY.md > 04 Live demo.
+  The cut-down demo (Overview, Collections, Leases) is lazy loaded: when the frame comes within
+  about 800px of the viewport, /demo/embed/ is fetched, its styles are added to the page, its
+  [data-demo] element is moved into the frame and src/scripts/demo.ts is imported and run.
+  The frame keeps a fixed size before and after, so nothing shifts. It scrolls inside itself
+  (data-lenis-prevent lets the wheel scroll the frame, not the page, while the cursor is over it).
+*/
 import SectionHead from './SectionHead.astro';
 import MeasureLine from '../MeasureLine.astro';
 ---
 
-<section class="home-section demo" id="demo" aria-labelledby="demo-title">
+<section class="home-section livedemo" id="demo" aria-labelledby="demo-title">
   <div class="container">
-    <div class="grid-12 demo__intro">
-      <div class="demo__head">
+    <div class="grid-12 livedemo__intro">
+      <div class="livedemo__head">
         <SectionHead number="04" label="LIVE DEMO" title="Don't take our word for it." titleId="demo-title" />
       </div>
-      <p class="t-lead demo__body" data-reveal>
+      <p class="t-lead livedemo__body" data-reveal>
         Click around a working dashboard for a fictional industrial portfolio. Same build quality you would get,
         connected to your own systems.
       </p>
     </div>
 
-    <figure class="demo__figure" data-reveal>
+    <figure class="livedemo__figure">
       <MeasureLine label="1440 PX" />
-      <div class="demo__frame" data-demo-frame>
-        <span class="demo__corner demo__corner--tl" aria-hidden="true"></span>
-        <span class="demo__corner demo__corner--tr" aria-hidden="true"></span>
-        <span class="demo__corner demo__corner--bl" aria-hidden="true"></span>
-        <span class="demo__corner demo__corner--br" aria-hidden="true"></span>
-        <p class="t-label demo__placeholder">Placeholder / interactive demo arrives in phase 4</p>
+      <div class="livedemo__frame">
+        <span class="livedemo__corner livedemo__corner--tl" aria-hidden="true"></span>
+        <span class="livedemo__corner livedemo__corner--tr" aria-hidden="true"></span>
+        <span class="livedemo__corner livedemo__corner--bl" aria-hidden="true"></span>
+        <span class="livedemo__corner livedemo__corner--br" aria-hidden="true"></span>
+        <div class="livedemo__slot" data-demo-slot data-src="/demo/embed/" data-lenis-prevent aria-busy="true">
+          <p class="t-label livedemo__status" data-demo-status>Loading the demo</p>
+        </div>
       </div>
       <MeasureLine label="LIVE DEMO / FICTIONAL DATA" />
     </figure>
 
-    <div class="demo__foot">
+    <div class="livedemo__foot">
       <a class="btn btn--secondary" href="/demo">
         Open the full demo
         <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25"></path></svg>
@@ -41,59 +48,61 @@ import MeasureLine from '../MeasureLine.astro';
 </section>
 
 <style>
-  .demo__intro {
+  .livedemo__intro {
     row-gap: var(--space-5);
     align-items: end;
   }
-  .demo__head,
-  .demo__body {
+  .livedemo__head,
+  .livedemo__body {
     grid-column: 1 / -1;
   }
-  .demo__body {
+  .livedemo__body {
     max-width: 40rem;
   }
 
-  .demo__figure {
+  .livedemo__figure {
     display: grid;
     gap: var(--space-4);
     margin: var(--space-8) 0 0;
   }
-  .demo__frame {
+  .livedemo__frame {
     position: relative;
-    display: grid;
-    place-items: center;
-    aspect-ratio: 16 / 9;
-    background-color: var(--ink-2);
-    background-image:
-      linear-gradient(to right, var(--rule) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
-    background-size: var(--bp-pitch) var(--bp-pitch);
-    background-position: -1px -1px;
+    height: min(80svh, 46rem);
+    background-color: var(--ink);
     border: 1px solid var(--rule-strong);
   }
+  .livedemo__slot {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--space-4) var(--space-4) var(--space-6);
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
+  }
+  .livedemo__status {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+  }
   /* Registration marks at the frame corners, like a drawing sheet */
-  .demo__corner {
+  .livedemo__corner {
     position: absolute;
+    z-index: 1;
     width: 14px;
     height: 14px;
     border-color: var(--brass);
     border-style: solid;
     border-width: 0;
+    pointer-events: none;
   }
-  .demo__corner--tl { top: -6px; left: -6px; border-top-width: 1px; border-left-width: 1px; }
-  .demo__corner--tr { top: -6px; right: -6px; border-top-width: 1px; border-right-width: 1px; }
-  .demo__corner--bl { bottom: -6px; left: -6px; border-bottom-width: 1px; border-left-width: 1px; }
-  .demo__corner--br { bottom: -6px; right: -6px; border-bottom-width: 1px; border-right-width: 1px; }
-  .demo__placeholder {
-    padding: var(--space-2) var(--space-4);
-    background: var(--ink);
-    border: 1px solid var(--rule);
-    color: var(--bone-dim);
-    font-size: var(--fs-micro);
-    text-align: center;
-  }
+  .livedemo__corner--tl { top: -6px; left: -6px; border-top-width: 1px; border-left-width: 1px; }
+  .livedemo__corner--tr { top: -6px; right: -6px; border-top-width: 1px; border-right-width: 1px; }
+  .livedemo__corner--bl { bottom: -6px; left: -6px; border-bottom-width: 1px; border-left-width: 1px; }
+  .livedemo__corner--br { bottom: -6px; right: -6px; border-bottom-width: 1px; border-right-width: 1px; }
 
-  .demo__foot {
+  .livedemo__foot {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -101,12 +110,80 @@ import MeasureLine from '../MeasureLine.astro';
     margin-top: var(--space-6);
   }
 
+  @media (min-width: 900px) {
+    .livedemo__frame {
+      height: auto;
+      aspect-ratio: 16 / 9;
+      max-height: 85svh;
+    }
+    .livedemo__slot {
+      padding: var(--space-6) var(--space-6) var(--space-7);
+    }
+  }
   @media (min-width: 1024px) {
-    .demo__head {
+    .livedemo__head {
       grid-column: 1 / span 6;
     }
-    .demo__body {
+    .livedemo__body {
       grid-column: 8 / span 5;
     }
   }
 </style>
+
+<script>
+  const slot = document.querySelector<HTMLElement>('[data-demo-slot]');
+
+  async function load(el: HTMLElement) {
+    const status = el.querySelector<HTMLElement>('[data-demo-status]');
+    try {
+      const res = await fetch(el.dataset.src!);
+      if (!res.ok) throw new Error(String(res.status));
+      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+
+      // Bring the embed's styles over (stylesheets and inlined <style>), once.
+      doc.head.querySelectorAll<HTMLLinkElement | HTMLStyleElement>('link[rel="stylesheet"], style').forEach((node) => {
+        if (node instanceof HTMLLinkElement) {
+          const href = node.getAttribute('href');
+          if (!href || document.head.querySelector(`link[rel="stylesheet"][href="${href}"]`)) return;
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          document.head.append(link);
+        } else {
+          const style = document.createElement('style');
+          style.textContent = node.textContent;
+          document.head.append(style);
+        }
+      });
+
+      const root = doc.querySelector<HTMLElement>('[data-demo]');
+      if (!root) throw new Error('no demo root');
+      const { initDemo } = await import('../../scripts/demo');
+      el.replaceChildren(document.adoptNode(root));
+      el.removeAttribute('aria-busy');
+      initDemo(root);
+    } catch {
+      el.removeAttribute('aria-busy');
+      if (status) {
+        status.innerHTML = 'The demo did not load here. <a class="link" href="/demo">Open the full demo</a>';
+      }
+    }
+  }
+
+  if (slot) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            io.disconnect();
+            load(slot);
+          }
+        },
+        { rootMargin: '800px 0px' },
+      );
+      io.observe(slot);
+    } else {
+      load(slot);
+    }
+  }
+</script>
