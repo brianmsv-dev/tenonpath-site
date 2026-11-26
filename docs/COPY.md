@@ -119,6 +119,7 @@ Body: Tenonpath is a small studio based in Nairobi, working with clients in the 
 
 ## 09 FAQ
 Label: 09 / QUESTIONS
+Headline: Before you ask.
 1. Do you work with our property management software?
 If it has an API or can export data, almost certainly yes. Tell us what you use on the discovery call and we will confirm before you pay anything.
 2. Do we have to change our systems?
