@@ -1,0 +1,752 @@
+{
+  "name": "Harbor & Pine Industrial",
+  "asOf": "2026-11-20",
+  "fictional": true,
+  "properties": [
+    {
+      "id": "P01",
+      "name": "Heronfield Logistics",
+      "type": "Industrial",
+      "city": "Savannah",
+      "state": "GA",
+      "sf": 186000,
+      "vacant": 0
+    },
+    {
+      "id": "P02",
+      "name": "Pinewick Flex",
+      "type": "Flex",
+      "city": "Charlotte",
+      "state": "NC",
+      "sf": 64000,
+      "vacant": 12000
+    },
+    {
+      "id": "P03",
+      "name": "Cedarholt Business Park",
+      "type": "Small bay",
+      "city": "Greenville",
+      "state": "SC",
+      "sf": 88000,
+      "vacant": 9500
+    },
+    {
+      "id": "P04",
+      "name": "Tidemark Distribution",
+      "type": "Industrial",
+      "city": "Jacksonville",
+      "state": "FL",
+      "sf": 142000,
+      "vacant": 0
+    },
+    {
+      "id": "P05",
+      "name": "Magnolia Reach Commerce Center",
+      "type": "Flex",
+      "city": "Atlanta",
+      "state": "GA",
+      "sf": 72000,
+      "vacant": 8160
+    },
+    {
+      "id": "P06",
+      "name": "Riverlace Small Bay",
+      "type": "Small bay",
+      "city": "Chattanooga",
+      "state": "TN",
+      "sf": 54000,
+      "vacant": 7000
+    },
+    {
+      "id": "P07",
+      "name": "Sawmere Industrial",
+      "type": "Industrial",
+      "city": "Orlando",
+      "state": "FL",
+      "sf": 118000,
+      "vacant": 0
+    },
+    {
+      "id": "P08",
+      "name": "Oakhaven Trade Center",
+      "type": "Small bay",
+      "city": "Charleston",
+      "state": "SC",
+      "sf": 46000,
+      "vacant": 8000
+    }
+  ],
+  "vacancies": [
+    {
+      "propertyId": "P02",
+      "suite": "Ste 150",
+      "sf": 12000
+    },
+    {
+      "propertyId": "P03",
+      "suite": "Ste 170",
+      "sf": 9500
+    },
+    {
+      "propertyId": "P05",
+      "suite": "Ste 150",
+      "sf": 8160
+    },
+    {
+      "propertyId": "P06",
+      "suite": "Ste 160",
+      "sf": 7000
+    },
+    {
+      "propertyId": "P08",
+      "suite": "Ste 150",
+      "sf": 8000
+    }
+  ],
+  "tenants": [
+    {
+      "id": "T01",
+      "name": "Elmsworth Mobility",
+      "propertyId": "P01",
+      "suite": "Bldg A",
+      "sf": 46300,
+      "leaseStart": "2024-12-26",
+      "leaseEnd": "2031-12-26",
+      "monthlyRent": 24130.89,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T02",
+      "name": "Foxglen Furniture",
+      "propertyId": "P01",
+      "suite": "Bldg B",
+      "sf": 29900,
+      "leaseStart": "2022-05-11",
+      "leaseEnd": "2027-05-11",
+      "monthlyRent": 14173.18,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T03",
+      "name": "Tarrow Fabrication",
+      "propertyId": "P01",
+      "suite": "Bldg C",
+      "sf": 57400,
+      "leaseStart": "2023-10-07",
+      "leaseEnd": "2028-10-07",
+      "monthlyRent": 29552.87,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T04",
+      "name": "Rookwell Robotics",
+      "propertyId": "P01",
+      "suite": "Bldg D",
+      "sf": 52400,
+      "leaseStart": "2026-02-20",
+      "leaseEnd": "2033-02-20",
+      "monthlyRent": 26500.78,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T05",
+      "name": "Halberry Signs",
+      "propertyId": "P02",
+      "suite": "Ste 100",
+      "sf": 7700,
+      "leaseStart": "2022-04-18",
+      "leaseEnd": "2029-04-18",
+      "monthlyRent": 6222.63,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T06",
+      "name": "Sablecrest Apparel",
+      "propertyId": "P02",
+      "suite": "Ste 110",
+      "sf": 16000,
+      "leaseStart": "2023-12-21",
+      "leaseEnd": "2028-12-21",
+      "monthlyRent": 12527.94,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T07",
+      "name": "Corvane Logistics",
+      "propertyId": "P02",
+      "suite": "Ste 120",
+      "sf": 9500,
+      "leaseStart": "2024-07-09",
+      "leaseEnd": "2031-07-09",
+      "monthlyRent": 7818.25,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T08",
+      "name": "Brindle Print Works",
+      "propertyId": "P02",
+      "suite": "Ste 130",
+      "sf": 11900,
+      "leaseStart": "2023-03-04",
+      "leaseEnd": "2028-03-04",
+      "monthlyRent": 9363.24,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T09",
+      "name": "Ashby Lane Coffee Roasters",
+      "propertyId": "P02",
+      "suite": "Ste 140",
+      "sf": 6900,
+      "leaseStart": "2022-03-30",
+      "leaseEnd": "2027-03-30",
+      "monthlyRent": 5833.68,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T10",
+      "name": "Bramblecote Garden Supply",
+      "propertyId": "P03",
+      "suite": "Ste 100",
+      "sf": 12700,
+      "leaseStart": "2024-12-07",
+      "leaseEnd": "2027-12-07",
+      "monthlyRent": 9049.72,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T11",
+      "name": "Juniper Crest Labs",
+      "propertyId": "P03",
+      "suite": "Ste 110",
+      "sf": 14000,
+      "leaseStart": "2022-10-12",
+      "leaseEnd": "2027-10-12",
+      "monthlyRent": 8899.29,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T12",
+      "name": "Marrowgate Brewing",
+      "propertyId": "P03",
+      "suite": "Ste 120",
+      "sf": 12800,
+      "leaseStart": "2022-04-24",
+      "leaseEnd": "2027-04-24",
+      "monthlyRent": 8883.74,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T13",
+      "name": "Kestrow Air Systems",
+      "propertyId": "P03",
+      "suite": "Ste 130",
+      "sf": 10300,
+      "leaseStart": "2026-06-28",
+      "leaseEnd": "2033-06-28",
+      "monthlyRent": 7030.72,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T14",
+      "name": "Palvane Packaging",
+      "propertyId": "P03",
+      "suite": "Ste 140",
+      "sf": 9800,
+      "leaseStart": "2024-10-27",
+      "leaseEnd": "2029-10-27",
+      "monthlyRent": 6605.75,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T15",
+      "name": "Thistlewood Flooring",
+      "propertyId": "P03",
+      "suite": "Ste 150",
+      "sf": 9900,
+      "leaseStart": "2023-10-13",
+      "leaseEnd": "2030-10-13",
+      "monthlyRent": 6741.67,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T16",
+      "name": "Umberfield Solar",
+      "propertyId": "P03",
+      "suite": "Ste 160",
+      "sf": 9000,
+      "leaseStart": "2025-09-28",
+      "leaseEnd": "2030-09-28",
+      "monthlyRent": 5644.6,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T17",
+      "name": "Selvane Auto Parts",
+      "propertyId": "P04",
+      "suite": "Bldg A",
+      "sf": 32600,
+      "leaseStart": "2022-03-28",
+      "leaseEnd": "2027-03-28",
+      "monthlyRent": 15165.17,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T18",
+      "name": "Quillon Freight",
+      "propertyId": "P04",
+      "suite": "Bldg B",
+      "sf": 38000,
+      "leaseStart": "2024-03-04",
+      "leaseEnd": "2029-03-04",
+      "monthlyRent": 17665.41,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T19",
+      "name": "Vessa Medical Supply",
+      "propertyId": "P04",
+      "suite": "Bldg C",
+      "sf": 39300,
+      "leaseStart": "2022-11-05",
+      "leaseEnd": "2027-11-05",
+      "monthlyRent": 20378.35,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T20",
+      "name": "Fenlow Plumbing Supply",
+      "propertyId": "P04",
+      "suite": "Bldg D",
+      "sf": 32100,
+      "leaseStart": "2023-03-10",
+      "leaseEnd": "2029-03-10",
+      "monthlyRent": 17283.66,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T21",
+      "name": "Ironvale Machine",
+      "propertyId": "P05",
+      "suite": "Ste 100",
+      "sf": 15800,
+      "leaseStart": "2023-02-06",
+      "leaseEnd": "2028-02-06",
+      "monthlyRent": 11660.29,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T22",
+      "name": "Mirebank Millwork",
+      "propertyId": "P05",
+      "suite": "Ste 110",
+      "sf": 14300,
+      "leaseStart": "2023-06-24",
+      "leaseEnd": "2030-06-24",
+      "monthlyRent": 10930.61,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T23",
+      "name": "Gallowell Industrial Gas",
+      "propertyId": "P05",
+      "suite": "Ste 120",
+      "sf": 13600,
+      "leaseStart": "2022-08-28",
+      "leaseEnd": "2027-08-28",
+      "monthlyRent": 10638.25,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T24",
+      "name": "Grenmoor Tile",
+      "propertyId": "P05",
+      "suite": "Ste 130",
+      "sf": 12500,
+      "leaseStart": "2022-04-17",
+      "leaseEnd": "2027-04-17",
+      "monthlyRent": 9051.69,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T25",
+      "name": "Lumenrow Lighting",
+      "propertyId": "P05",
+      "suite": "Ste 140",
+      "sf": 7640,
+      "leaseStart": "2025-08-18",
+      "leaseEnd": "2028-08-18",
+      "monthlyRent": 5684,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T26",
+      "name": "Wrenford Pet Supply",
+      "propertyId": "P06",
+      "suite": "Ste 100",
+      "sf": 6500,
+      "leaseStart": "2024-12-17",
+      "leaseEnd": "2029-12-17",
+      "monthlyRent": 4205.56,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T27",
+      "name": "Northwick Cold Storage",
+      "propertyId": "P06",
+      "suite": "Ste 110",
+      "sf": 7900,
+      "leaseStart": "2022-05-01",
+      "leaseEnd": "2027-05-01",
+      "monthlyRent": 5277.41,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 4168.48
+      },
+      "collectionNote": "Old balance, payment plan proposed"
+    },
+    {
+      "id": "T28",
+      "name": "Valemont Glass",
+      "propertyId": "P06",
+      "suite": "Ste 120",
+      "sf": 10500,
+      "leaseStart": "2022-11-10",
+      "leaseEnd": "2029-11-10",
+      "monthlyRent": 6552.57,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T29",
+      "name": "Pellmont Fitness",
+      "propertyId": "P06",
+      "suite": "Ste 130",
+      "sf": 6600,
+      "leaseStart": "2023-01-31",
+      "leaseEnd": "2028-01-31",
+      "monthlyRent": 4144.57,
+      "aging": {
+        "d0_30": 4144.57,
+        "d31_60": 4144.57,
+        "d61_90": 0,
+        "d90p": 0
+      },
+      "collectionNote": "Two months behind, notice sent"
+    },
+    {
+      "id": "T30",
+      "name": "Zelmar Audio",
+      "propertyId": "P06",
+      "suite": "Ste 140",
+      "sf": 6800,
+      "leaseStart": "2022-02-09",
+      "leaseEnd": "2027-02-09",
+      "monthlyRent": 4227.06,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 1862.4,
+        "d90p": 0
+      },
+      "collectionNote": "Disputing CAM reconciliation"
+    },
+    {
+      "id": "T31",
+      "name": "Ondel Electric",
+      "propertyId": "P06",
+      "suite": "Ste 150",
+      "sf": 8700,
+      "leaseStart": "2024-12-28",
+      "leaseEnd": "2031-12-28",
+      "monthlyRent": 5837.86,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T32",
+      "name": "Dunmere Display",
+      "propertyId": "P07",
+      "suite": "Bldg A",
+      "sf": 32700,
+      "leaseStart": "2025-08-25",
+      "leaseEnd": "2030-08-25",
+      "monthlyRent": 15953.92,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T33",
+      "name": "Kinlow Cabinetry",
+      "propertyId": "P07",
+      "suite": "Bldg B",
+      "sf": 43000,
+      "leaseStart": "2022-01-23",
+      "leaseEnd": "2027-01-23",
+      "monthlyRent": 20495,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T34",
+      "name": "Yarrowby Bakery Wholesale",
+      "propertyId": "P07",
+      "suite": "Bldg C",
+      "sf": 22100,
+      "leaseStart": "2022-10-24",
+      "leaseEnd": "2027-10-24",
+      "monthlyRent": 12136.07,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T35",
+      "name": "Larkspur Event Rentals",
+      "propertyId": "P07",
+      "suite": "Bldg D",
+      "sf": 20200,
+      "leaseStart": "2023-10-10",
+      "leaseEnd": "2028-10-10",
+      "monthlyRent": 9318.27,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T36",
+      "name": "Carrowby Foods",
+      "propertyId": "P08",
+      "suite": "Ste 100",
+      "sf": 5900,
+      "leaseStart": "2025-10-30",
+      "leaseEnd": "2030-10-30",
+      "monthlyRent": 4067.41,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T37",
+      "name": "Quarrystone Countertops",
+      "propertyId": "P08",
+      "suite": "Ste 110",
+      "sf": 8800,
+      "leaseStart": "2025-08-04",
+      "leaseEnd": "2028-08-04",
+      "monthlyRent": 6287.06,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T38",
+      "name": "Orrin Bay Marine Supply",
+      "propertyId": "P08",
+      "suite": "Ste 120",
+      "sf": 9200,
+      "leaseStart": "2025-04-27",
+      "leaseEnd": "2032-04-27",
+      "monthlyRent": 6055.4,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T39",
+      "name": "Nettlefield Pharma Distribution",
+      "propertyId": "P08",
+      "suite": "Ste 130",
+      "sf": 7800,
+      "leaseStart": "2023-06-08",
+      "leaseEnd": "2028-06-08",
+      "monthlyRent": 5010.03,
+      "aging": {
+        "d0_30": 0,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      }
+    },
+    {
+      "id": "T40",
+      "name": "Coldharbor Ice Co",
+      "propertyId": "P08",
+      "suite": "Ste 140",
+      "sf": 6300,
+      "leaseStart": "2022-01-10",
+      "leaseEnd": "2027-01-10",
+      "monthlyRent": 3919.98,
+      "aging": {
+        "d0_30": 3919.98,
+        "d31_60": 0,
+        "d61_90": 0,
+        "d90p": 0
+      },
+      "collectionNote": "Promised payment by Friday"
+    }
+  ]
+}

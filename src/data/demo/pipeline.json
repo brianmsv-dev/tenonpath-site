@@ -1,0 +1,155 @@
+[
+  {
+    "id": "D1",
+    "name": "Project Osprey",
+    "city": "Macon",
+    "state": "GA",
+    "type": "Industrial",
+    "sf": 96000,
+    "price": 7775000,
+    "pricePerSf": 80.99,
+    "capRate": 7.1,
+    "occupancy": 86,
+    "stage": "Under review",
+    "nextDate": {
+      "label": "Underwriting due",
+      "date": "2026-11-28"
+    }
+  },
+  {
+    "id": "D2",
+    "name": "Project Wren",
+    "city": "Spartanburg",
+    "state": "SC",
+    "type": "Small bay",
+    "sf": 41000,
+    "price": 4500000,
+    "pricePerSf": 109.76,
+    "capRate": 7.6,
+    "occupancy": 82,
+    "stage": "Under review",
+    "nextDate": {
+      "label": "Underwriting due",
+      "date": "2026-12-04"
+    }
+  },
+  {
+    "id": "D3",
+    "name": "Project Kite",
+    "city": "Ocala",
+    "state": "FL",
+    "type": "Flex",
+    "sf": 52000,
+    "price": 5725000,
+    "pricePerSf": 110.1,
+    "capRate": 7.3,
+    "occupancy": 87,
+    "stage": "Under review",
+    "nextDate": {
+      "label": "Underwriting due",
+      "date": "2026-11-29"
+    }
+  },
+  {
+    "id": "D4",
+    "name": "Project Heron",
+    "city": "Knoxville",
+    "state": "TN",
+    "type": "Industrial",
+    "sf": 128000,
+    "price": 11750000,
+    "pricePerSf": 91.8,
+    "capRate": 6.9,
+    "occupancy": 88,
+    "stage": "LOI",
+    "nextDate": {
+      "label": "LOI response due",
+      "date": "2026-11-30"
+    }
+  },
+  {
+    "id": "D5",
+    "name": "Project Plover",
+    "city": "Columbia",
+    "state": "SC",
+    "type": "Small bay",
+    "sf": 38500,
+    "price": 4025000,
+    "pricePerSf": 104.55,
+    "capRate": 7.4,
+    "occupancy": 90,
+    "stage": "LOI",
+    "nextDate": {
+      "label": "LOI response due",
+      "date": "2026-11-25"
+    }
+  },
+  {
+    "id": "D6",
+    "name": "Project Egret",
+    "city": "Augusta",
+    "state": "GA",
+    "type": "Flex",
+    "sf": 61000,
+    "price": 7125000,
+    "pricePerSf": 116.8,
+    "capRate": 7,
+    "occupancy": 99,
+    "stage": "Under contract",
+    "nextDate": {
+      "label": "Due diligence ends",
+      "date": "2026-12-16"
+    }
+  },
+  {
+    "id": "D7",
+    "name": "Project Tern",
+    "city": "Lakeland",
+    "state": "FL",
+    "type": "Industrial",
+    "sf": 154000,
+    "price": 12675000,
+    "pricePerSf": 82.31,
+    "capRate": 6.7,
+    "occupancy": 92,
+    "stage": "Under contract",
+    "nextDate": {
+      "label": "Due diligence ends",
+      "date": "2026-12-27"
+    }
+  },
+  {
+    "id": "D8",
+    "name": "Project Avocet",
+    "city": "Wilmington",
+    "state": "NC",
+    "type": "Small bay",
+    "sf": 44000,
+    "price": 4375000,
+    "pricePerSf": 99.43,
+    "capRate": 7.2,
+    "occupancy": 90,
+    "stage": "Closed",
+    "nextDate": {
+      "label": "Closed on",
+      "date": "2026-11-04"
+    }
+  },
+  {
+    "id": "D9",
+    "name": "Project Curlew",
+    "city": "Huntsville",
+    "state": "AL",
+    "type": "Industrial",
+    "sf": 110000,
+    "price": 10050000,
+    "pricePerSf": 91.36,
+    "capRate": 6.8,
+    "occupancy": 83,
+    "stage": "Closed",
+    "nextDate": {
+      "label": "Closed on",
+      "date": "2026-10-05"
+    }
+  }
+]

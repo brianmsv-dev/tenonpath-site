@@ -1,0 +1,230 @@
+[
+  {
+    "tenantId": "T03",
+    "date": "2026-11-01",
+    "amount": 29552.87,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T23",
+    "date": "2026-11-01",
+    "amount": 10638.25,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T26",
+    "date": "2026-11-01",
+    "amount": 4205.56,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T30",
+    "date": "2026-11-01",
+    "amount": 4227.06,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T32",
+    "date": "2026-11-01",
+    "amount": 15953.92,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T33",
+    "date": "2026-11-01",
+    "amount": 20495,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T35",
+    "date": "2026-11-01",
+    "amount": 9318.27,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T36",
+    "date": "2026-11-01",
+    "amount": 4067.41,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T06",
+    "date": "2026-11-02",
+    "amount": 12527.94,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T10",
+    "date": "2026-11-02",
+    "amount": 9049.72,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T17",
+    "date": "2026-11-02",
+    "amount": 15165.17,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T21",
+    "date": "2026-11-02",
+    "amount": 11660.29,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T01",
+    "date": "2026-11-03",
+    "amount": 24130.89,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T08",
+    "date": "2026-11-03",
+    "amount": 9363.24,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T09",
+    "date": "2026-11-03",
+    "amount": 5833.68,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T11",
+    "date": "2026-11-04",
+    "amount": 8899.29,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T13",
+    "date": "2026-11-04",
+    "amount": 7030.72,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T18",
+    "date": "2026-11-04",
+    "amount": 17665.41,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T19",
+    "date": "2026-11-04",
+    "amount": 20378.35,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T20",
+    "date": "2026-11-04",
+    "amount": 17283.66,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T34",
+    "date": "2026-11-04",
+    "amount": 12136.07,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T38",
+    "date": "2026-11-04",
+    "amount": 6055.4,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T39",
+    "date": "2026-11-04",
+    "amount": 5010.03,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T02",
+    "date": "2026-11-05",
+    "amount": 14173.18,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T04",
+    "date": "2026-11-05",
+    "amount": 26500.78,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T05",
+    "date": "2026-11-05",
+    "amount": 6222.63,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T15",
+    "date": "2026-11-05",
+    "amount": 6741.67,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T16",
+    "date": "2026-11-05",
+    "amount": 5644.6,
+    "method": "Wire"
+  },
+  {
+    "tenantId": "T22",
+    "date": "2026-11-05",
+    "amount": 10930.61,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T24",
+    "date": "2026-11-05",
+    "amount": 9051.69,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T14",
+    "date": "2026-11-09",
+    "amount": 6605.75,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T28",
+    "date": "2026-11-10",
+    "amount": 6552.57,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T31",
+    "date": "2026-11-10",
+    "amount": 5837.86,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T37",
+    "date": "2026-11-11",
+    "amount": 6287.06,
+    "method": "Check"
+  },
+  {
+    "tenantId": "T07",
+    "date": "2026-11-16",
+    "amount": 7818.25,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T27",
+    "date": "2026-11-17",
+    "amount": 5277.41,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T12",
+    "date": "2026-11-19",
+    "amount": 8883.74,
+    "method": "ACH"
+  },
+  {
+    "tenantId": "T25",
+    "date": "2026-11-20",
+    "amount": 5684,
+    "method": "Wire"
+  }
+]
