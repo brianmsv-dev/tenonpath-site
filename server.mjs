@@ -90,11 +90,11 @@ createServer(async (req, res) => {
   const accept = String(req.headers['accept-encoding'] || '');
   const encoding = COMPRESSIBLE.has(ext) ? (accept.includes('br') ? 'br' : accept.includes('gzip') ? 'gzip' : null) : null;
 
-  // Hashed build assets never change. Fonts keep stable names, so cache them long but not forever.
-  const cacheControl = file.includes(sep + '_astro' + sep)
-    ? 'public, max-age=31536000, immutable'
-    : file.includes(sep + 'fonts' + sep)
-      ? 'public, max-age=2592000'
+  // Hashed build assets and fonts never change in place (a replaced font gets a new file name),
+  // so both are cached for a year. Everything else revalidates.
+  const cacheControl =
+    file.includes(sep + '_astro' + sep) || file.includes(sep + 'fonts' + sep)
+      ? 'public, max-age=31536000, immutable'
       : 'public, max-age=0, must-revalidate';
   const headers = {
     ...HEADERS,
