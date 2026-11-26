@@ -1,0 +1,112 @@
+---
+// 04 Live demo. Copy: docs/COPY.md > 04 Live demo.
+// PHASE 3 PLACEHOLDER: the frame reserves the demo's exact space (16:9) so the phase 4 embed
+// causes no layout shift. The inner label is a build marker, not site copy, and goes in phase 4.
+import SectionHead from './SectionHead.astro';
+import MeasureLine from '../MeasureLine.astro';
+---
+
+<section class="home-section demo" id="demo" aria-labelledby="demo-title">
+  <div class="container">
+    <div class="grid-12 demo__intro">
+      <div class="demo__head">
+        <SectionHead number="04" label="LIVE DEMO" title="Don't take our word for it." titleId="demo-title" />
+      </div>
+      <p class="t-lead demo__body" data-reveal>
+        Click around a working dashboard for a fictional industrial portfolio. Same build quality you would get,
+        connected to your own systems.
+      </p>
+    </div>
+
+    <figure class="demo__figure" data-reveal>
+      <MeasureLine label="1440 PX" />
+      <div class="demo__frame" data-demo-frame>
+        <span class="demo__corner demo__corner--tl" aria-hidden="true"></span>
+        <span class="demo__corner demo__corner--tr" aria-hidden="true"></span>
+        <span class="demo__corner demo__corner--bl" aria-hidden="true"></span>
+        <span class="demo__corner demo__corner--br" aria-hidden="true"></span>
+        <p class="t-label demo__placeholder">Placeholder / interactive demo arrives in phase 4</p>
+      </div>
+      <MeasureLine label="LIVE DEMO / FICTIONAL DATA" />
+    </figure>
+
+    <div class="demo__foot">
+      <a class="btn btn--secondary" href="/demo">
+        Open the full demo
+        <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25"></path></svg>
+      </a>
+      <p class="t-small t-dim">Fictional portfolio. Real build quality.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo__intro {
+    row-gap: var(--space-5);
+    align-items: end;
+  }
+  .demo__head,
+  .demo__body {
+    grid-column: 1 / -1;
+  }
+  .demo__body {
+    max-width: 40rem;
+  }
+
+  .demo__figure {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-8) 0 0;
+  }
+  .demo__frame {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    background-color: var(--ink-2);
+    background-image:
+      linear-gradient(to right, var(--rule) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+    background-size: var(--bp-pitch) var(--bp-pitch);
+    background-position: -1px -1px;
+    border: 1px solid var(--rule-strong);
+  }
+  /* Registration marks at the frame corners, like a drawing sheet */
+  .demo__corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--brass);
+    border-style: solid;
+    border-width: 0;
+  }
+  .demo__corner--tl { top: -6px; left: -6px; border-top-width: 1px; border-left-width: 1px; }
+  .demo__corner--tr { top: -6px; right: -6px; border-top-width: 1px; border-right-width: 1px; }
+  .demo__corner--bl { bottom: -6px; left: -6px; border-bottom-width: 1px; border-left-width: 1px; }
+  .demo__corner--br { bottom: -6px; right: -6px; border-bottom-width: 1px; border-right-width: 1px; }
+  .demo__placeholder {
+    padding: var(--space-2) var(--space-4);
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+    text-align: center;
+  }
+
+  .demo__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .demo__head {
+      grid-column: 1 / span 6;
+    }
+    .demo__body {
+      grid-column: 8 / span 5;
+    }
+  }
+</style>
