@@ -18,7 +18,7 @@ const frame = framePath(l);
 const f = l.frame;
 const panel = { x: f.x + f.band, y: f.y + f.band, w: f.w - 2 * f.band, h: f.h - 2 * f.band };
 const t = l.type;
-const pad = l.name === 'wide' ? 16 : 14;
+const pad = l.name === 'wide' ? 18 : 14;
 
 // Dashboard layout, derived from the panel so both layouts share one recipe.
 const headerY = panel.y + pad + t.header * 0.8;
@@ -78,19 +78,20 @@ const links = l.links.map(([a, b]) => {
   <!-- Dashboard -->
   <g class="jn-dash">
     <g data-dash>
-      <text class="jn-header" x={panel.x + pad} y={headerY}>Portfolio overview</text>
+      <text class="jn-header" x={panel.x + pad} y={headerY} font-size={t.header}>Portfolio overview</text>
       <line class="jn-rule" x1={panel.x} y1={ruleY} x2={panel.x + panel.w} y2={ruleY} />
     </g>
     {
       figs.map((fig) => (
         <g data-dash>
-          <text class="jn-fig-label" x={fig.x} y={fig.labelY}>
+          <text class="jn-fig-label" x={fig.x} y={fig.labelY} font-size={t.figLabel}>
             {fig.label.toUpperCase()}
           </text>
           <text
             class:list={['jn-fig-value', fig.tone === 'alert' && 'jn-fig-value--alert']}
             x={fig.x}
             y={fig.valueY}
+            font-size={t.figValue}
             data-count={fig.value}
             data-format={fig.format}
           >
@@ -111,14 +112,14 @@ const links = l.links.map(([a, b]) => {
       <g class="jn-block" data-block={i} data-axis={b.axis} data-from={b.from} data-rot={b.rot}>
         <path class="jn-block__shape" d={b.path} />
         {b.label.map((line, n) => (
-          <text class="jn-block__label" x={b.x + 10} y={b.y + 8 + t.label * (n + 1) * 1.15}>
+          <text class="jn-block__label" x={b.x + 12} y={b.y + 10 + t.label * (n + 1) * 1.15} font-size={t.label}>
             {line}
           </text>
         ))}
         {b.snippet && (
           <g class="jn-block__snippet" data-snippet>
             {b.snippet.map((line, n) => (
-              <text x={b.x + 10} y={b.y + 14 + t.label * 1.15 + (n + 1) * t.snippet * 1.45} xml:space="preserve">
+              <text x={b.x + 12} y={b.y + 16 + t.label * 1.15 + (n + 1) * t.snippet * 1.45} font-size={t.snippet} xml:space="preserve">
                 {line}
               </text>
             ))}
@@ -212,23 +213,14 @@ const links = l.links.map(([a, b]) => {
   .jn-fig-value--alert {
     fill: var(--alert);
   }
+  /* No non-scaling-stroke here: Chrome then measures the draw-in dash in screen pixels,
+     which leaves part of the line visible before it is meant to draw. */
   .jn-chart {
     fill: none;
     stroke: var(--data);
     stroke-width: 2;
     stroke-linejoin: round;
     stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
   }
 
-  /* Type sizes per layout, in user units */
-  .joinery--wide .jn-block__label { font-size: 10px; }
-  .joinery--wide .jn-block__snippet text { font-size: 8.5px; }
-  .joinery--wide .jn-header { font-size: 15px; }
-  .joinery--wide .jn-fig-label { font-size: 8.5px; }
-  .joinery--wide .jn-fig-value { font-size: 22px; }
-  .joinery--compact .jn-block__label { font-size: 9.5px; }
-  .joinery--compact .jn-header { font-size: 16px; }
-  .joinery--compact .jn-fig-label { font-size: 10.5px; }
-  .joinery--compact .jn-fig-value { font-size: 26px; }
 </style>

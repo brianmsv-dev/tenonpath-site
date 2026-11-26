@@ -93,7 +93,7 @@ import { WIDE, COMPACT } from '../data/joinery';
     position: relative;
   }
   .joinery-figure__stage :global(.joinery-figure__wide) {
-    aspect-ratio: 800 / 600;
+    aspect-ratio: 800 / 630;
   }
   .joinery-figure__stage :global(.joinery-figure__compact) {
     display: none;
@@ -164,10 +164,19 @@ import { WIDE, COMPACT } from '../data/joinery';
     }
     .hero__visual {
       grid-column: 6 / span 7;
+      align-self: center;
     }
-    /* The headline must fit 5 columns: cap it to the viewport as well as the brand scale. */
+    .hero {
+      padding-block: var(--space-6);
+    }
+    /* Pinned hero must fit the screen: never taller than the viewport allows. */
+    .joinery-figure__stage :global(.joinery-figure__wide) {
+      max-height: calc(100svh - var(--header-h) - 7rem);
+    }
+    /* The headline must fit 5 columns, and the pinned hero must fit short laptop screens:
+       cap it by viewport width and height as well as the brand scale. */
     .hero__title {
-      font-size: min(var(--fs-hero), 8.2vw);
+      font-size: min(var(--fs-hero), 8.2vw, 14svh);
     }
   }
 </style>
