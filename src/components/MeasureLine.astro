@@ -1,0 +1,106 @@
+---
+/*
+  Measurement-line divider, like a dimension on a technical drawing:  |<-- 1,240 SF -->|
+  variant "dimension" (default): end ticks, open arrowheads, optional centered mono label.
+  variant "ruler": a hairline with major ticks on the blueprint pitch and minor ticks between.
+  Decorative: hidden from assistive tech. Draws itself once on enter (src/scripts/motion.ts).
+*/
+interface Props {
+  label?: string;
+  variant?: 'dimension' | 'ruler';
+  class?: string;
+}
+const { label, variant = 'dimension', class: className } = Astro.props;
+---
+
+{
+  variant === 'ruler' ? (
+    <div class:list={['measure', 'measure--ruler', className]} data-measure aria-hidden="true">
+      <span class="measure__line measure__ruler" />
+    </div>
+  ) : (
+    <div class:list={['measure', label ? 'measure--labelled' : 'measure--plain', className]} data-measure aria-hidden="true">
+      <span class="measure__end" />
+      <span class="measure__line measure__line--start" />
+      {label && <span class="measure__label t-label">{label}</span>}
+      <span class="measure__line measure__line--end" />
+      <span class="measure__end" />
+    </div>
+  )
+}
+
+<style>
+  .measure {
+    --measure-color: var(--rule-strong);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: var(--measure-color);
+  }
+
+  .measure__end {
+    flex: none;
+    width: 1px;
+    height: 13px;
+    background: currentColor;
+  }
+
+  .measure__line {
+    position: relative;
+    flex: 1 1 0;
+    height: 1px;
+    background: currentColor;
+  }
+  /* Open arrowheads, drawn with two hairlines, pointing at the end ticks */
+  .measure__line::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-left: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+  }
+  .measure__line--start {
+    transform-origin: right center;
+  }
+  .measure__line--start::before {
+    left: 1px;
+    transform: rotate(45deg);
+  }
+  .measure__line--end {
+    transform-origin: left center;
+  }
+  .measure__line--end::before {
+    right: 1px;
+    transform: rotate(-135deg);
+  }
+  .measure--plain .measure__line--start {
+    transform-origin: right center;
+  }
+
+  .measure__label {
+    flex: none;
+    padding-inline: var(--space-4);
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+    white-space: nowrap;
+  }
+
+  /* Ruler */
+  .measure--ruler {
+    height: 9px;
+    align-items: flex-start;
+  }
+  .measure__ruler {
+    height: 9px;
+    transform-origin: left center;
+    background:
+      linear-gradient(currentColor, currentColor) top left / 100% 1px no-repeat,
+      repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px var(--bp-pitch)) top left / 100% 9px no-repeat,
+      repeating-linear-gradient(to right, currentColor 0 1px, transparent 1px calc(var(--bp-pitch) / 4)) top left / 100% 4px no-repeat;
+  }
+  .measure__ruler::before {
+    display: none;
+  }
+</style>

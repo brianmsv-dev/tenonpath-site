@@ -381,3 +381,13 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Wordmark: "tenonpath", General Sans 600, lowercase, tight ---------- */
+.wordmark {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-wordmark);
+  line-height: 1;
+  color: var(--bone);
+  text-transform: lowercase;
+}

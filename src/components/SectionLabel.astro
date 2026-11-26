@@ -1,0 +1,29 @@
+---
+// Section number in mono, "01 / PROBLEM" format, brass number. Pass the label as written in COPY.md.
+interface Props {
+  number: string;
+  label: string;
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+}
+const { number, label, as: Tag = 'p', class: className } = Astro.props;
+---
+
+<Tag class:list={['section-label', 't-label', className]}>
+  <span class="section-label__num">{number}</span><span class="section-label__sep" aria-hidden="true">/</span><span class="section-label__text">{label}</span>
+</Tag>
+
+<style>
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6em;
+    color: var(--bone-dim);
+  }
+  .section-label__num {
+    color: var(--brass);
+  }
+  .section-label__sep {
+    color: var(--rule-strong);
+  }
+</style>

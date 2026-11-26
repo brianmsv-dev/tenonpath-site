@@ -1,0 +1,53 @@
+---
+// Tenonpath mark. Geometry and notes live in src/data/logo-marks.ts.
+import { MARKS, type Concept } from '../data/logo-marks';
+
+interface Props {
+  concept: Concept;
+  /** CSS size, e.g. 240 or "100%". Numbers are px. */
+  size?: number | string;
+  /** Accessible name. Pass an empty string for a purely decorative mark. */
+  title?: string;
+  /** Play the slide-in on page load. */
+  autoplay?: boolean;
+  class?: string;
+}
+
+const { concept, size = 32, title = 'Tenonpath', autoplay = false, class: className } = Astro.props;
+const mark = MARKS[concept];
+const dim = typeof size === 'number' ? `${size}px` : size;
+const decorative = title === '';
+---
+
+<svg
+  class:list={['logo-mark', className]}
+  viewBox="0 0 32 32"
+  width="32"
+  height="32"
+  style={`width:${dim};height:${dim}`}
+  data-logo={concept}
+  data-axis={mark.axis}
+  data-from={mark.from}
+  data-autoplay={autoplay ? '' : undefined}
+  role={decorative ? undefined : 'img'}
+  aria-hidden={decorative ? 'true' : undefined}
+  aria-label={decorative ? undefined : title}
+  focusable="false"
+>
+  <path class="logo-mark__fixed" d={mark.fixed} fill="currentColor"></path>
+  <path class="logo-mark__tenon" d={mark.tenon} fill="currentColor" data-tenon></path>
+</svg>
+
+<style>
+  .logo-mark {
+    overflow: visible; /* the tenon starts outside the 32-unit box */
+    color: var(--brass);
+    flex: none;
+  }
+  /* Autoplay marks start hidden (only with JS and motion on) so the final state never flashes first. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .logo-mark[data-autoplay] .logo-mark__tenon {
+      opacity: 0;
+    }
+  }
+</style>

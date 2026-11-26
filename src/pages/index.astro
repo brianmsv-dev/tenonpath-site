@@ -1,14 +1,23 @@
 ---
+// Holding page until phase 2 (hero) and phase 3 (sections). Not indexed until launch.
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Tenonpath</title>
-  </head>
-  <body>
-    <p>Tenonpath. Dashboards, integrations and web apps, built to fit.</p>
-  </body>
-</html>
+
+<BaseLayout title="Tenonpath" noindex>
+  <section class="section container holding">
+    <p class="wordmark holding__mark" data-reveal>tenonpath</p>
+    <p data-reveal><a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .holding {
+    display: grid;
+    gap: var(--space-5);
+    min-height: 60vh;
+    align-content: center;
+  }
+  .holding__mark {
+    font-size: var(--fs-hero);
+  }
+</style>
