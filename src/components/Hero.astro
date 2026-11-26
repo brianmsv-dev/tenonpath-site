@@ -1,0 +1,177 @@
+---
+/*
+  01 Hero. Copy: docs/COPY.md > 01 Hero. Spec: docs/SITE_SPEC.md > 01 Hero.
+  Text on the left 5 columns, the joinery animation on the right 7 (stacked on smaller screens).
+  Motion lives in src/scripts/joinery.ts.
+*/
+import SectionLabel from './SectionLabel.astro';
+import JoinerySvg from './JoinerySvg.astro';
+import { WIDE, COMPACT } from '../data/joinery';
+---
+
+<section class="hero" id="top" data-hero aria-labelledby="hero-title">
+  <div class="container grid-12 hero__grid">
+    <div class="hero__text">
+      <SectionLabel number="01" label="BUILT TO FIT" />
+      <h1 class="hero__title" id="hero-title">Your systems, joined.</h1>
+      <p class="t-lead hero__sub">
+        Your property system, task board, spreadsheets and inbox each hold part of the picture. We connect them into
+        one clear view your team can trust, built exactly to how you work.
+      </p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="#demo">
+          See the live demo
+          <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25"></path></svg>
+        </a>
+        <a class="text-cta" href="#contact">Start a project</a>
+      </div>
+    </div>
+
+    <figure class="hero__visual joinery-figure" data-joinery-root>
+      <p class="visually-hidden">
+        Five separate systems, a property system, a task board, a spreadsheet, an inbox and bank exports, slide into
+        one frame and lock in place. The frame becomes a portfolio dashboard showing occupancy, collections, past due
+        and open tasks.
+      </p>
+      <div class="joinery-figure__stage">
+        <JoinerySvg layout={WIDE} class="joinery-figure__wide" />
+        <JoinerySvg layout={COMPACT} class="joinery-figure__compact" />
+      </div>
+      <figcaption class="joinery-figure__caption">
+        <span class="t-label joinery-figure__counter" data-joinery-counter aria-hidden="true">5/5 CONNECTED</span>
+        <span class="joinery-figure__rule" aria-hidden="true"></span>
+        <span class="t-label">5 SYSTEMS / 1 VIEW / UPDATED LIVE</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: calc(100svh - var(--header-h));
+    padding-block: var(--space-8) var(--space-9);
+  }
+  .hero__grid {
+    row-gap: var(--space-8);
+    align-items: center;
+  }
+  .hero__text,
+  .hero__visual {
+    grid-column: 1 / -1;
+  }
+  .hero__text {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+  .hero__title {
+    font-size: var(--fs-hero);
+    font-weight: 600;
+    line-height: var(--lh-tight);
+    letter-spacing: var(--track-tight);
+    margin-top: var(--space-2);
+  }
+  .hero__sub {
+    max-width: 34rem;
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    margin-top: var(--space-3);
+  }
+
+  .hero__visual {
+    margin: 0;
+    min-width: 0;
+  }
+  /* Reserve the drawing's space before anything loads: no layout shift. */
+  .joinery-figure__stage {
+    position: relative;
+  }
+  .joinery-figure__stage :global(.joinery-figure__wide) {
+    aspect-ratio: 800 / 600;
+  }
+  .joinery-figure__stage :global(.joinery-figure__compact) {
+    display: none;
+    aspect-ratio: 360 / 500;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+  .joinery-figure__caption {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+  }
+  .joinery-figure__counter {
+    color: var(--brass);
+    font-size: inherit;
+    min-width: 12ch;
+    font-variant-numeric: tabular-nums;
+  }
+  .joinery-figure__caption .t-label {
+    font-size: inherit;
+    white-space: nowrap;
+  }
+  .joinery-figure__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule-strong);
+  }
+
+  /* With JS and motion on, hold the drawing back until the script has set the loose state,
+     so the finished dashboard never flashes first. Fallback: show it after 2.5s regardless. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .joinery-figure:not(.is-ready) .joinery-figure__stage {
+      opacity: 0;
+      animation: joinery-fallback 0s linear 2.5s forwards;
+    }
+  }
+  @keyframes joinery-fallback {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 639.98px) {
+    .joinery-figure__stage :global(.joinery-figure__wide) {
+      display: none;
+    }
+    .joinery-figure__stage :global(.joinery-figure__compact) {
+      display: block;
+    }
+    .joinery-figure__caption {
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-4);
+    }
+    .joinery-figure__rule {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__grid {
+      align-items: center;
+    }
+    .hero__text {
+      grid-column: 1 / span 5;
+    }
+    .hero__visual {
+      grid-column: 6 / span 7;
+    }
+    /* The headline must fit 5 columns: cap it to the viewport as well as the brand scale. */
+    .hero__title {
+      font-size: min(var(--fs-hero), 8.2vw);
+    }
+  }
+</style>
+
+<script>
+  import '../scripts/joinery';
+</script>

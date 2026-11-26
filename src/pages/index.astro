@@ -1,23 +1,12 @@
 ---
-// Holding page until phase 2 (hero) and phase 3 (sections). Not indexed until launch.
+// Homepage. Phase 2: hero only. Sections 02 to 10 arrive in phase 3.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 ---
 
-<BaseLayout title="Tenonpath" noindex>
-  <section class="section container holding">
-    <h1 class="wordmark holding__mark" data-reveal>tenonpath</h1>
-    <p data-reveal><a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a></p>
-  </section>
+<BaseLayout
+  title="Tenonpath | Dashboards and integrations for real estate teams"
+  description="We connect the software your firm already uses into one clear dashboard. Fixed scope, fixed price, delivered in weeks."
+>
+  <Hero />
 </BaseLayout>
-
-<style>
-  .holding {
-    display: grid;
-    gap: var(--space-5);
-    min-height: 60vh;
-    align-content: center;
-  }
-  .holding__mark {
-    font-size: var(--fs-hero);
-  }
-</style>
