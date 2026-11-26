@@ -1,0 +1,216 @@
+---
+/*
+  /real-estate: SEO landing page. Copy: docs/COPY.md > /real-estate, word for word.
+  Sections use h2s with the drafting-table rules; the questions reuse the shared Accordion
+  (with FAQPage schema). CTAs go to the homepage contact form and the demo.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Accordion from '../components/Accordion.astro';
+import MeasureLine from '../components/MeasureLine.astro';
+
+const builds = [
+  ['Portfolio dashboards.', 'Occupancy, collections, past due and open items across every property, updated from your systems.'],
+  ['Collections and AR views.', "Who has paid, who hasn't, aging by tenant and property, and which payments came in outside the portal."],
+  ['Lease and critical date tracking.', 'Expirations, renewal notices, rent steps and insurance certificates, with alerts before they become problems.'],
+  ['Task board integrations.', 'Property data flowing into boards like Monday.com, and board updates flowing back into one view.'],
+  ['Acquisitions pipeline.', 'Deals under review, at LOI, under contract and closed, with the metrics your investment committee asks for.'],
+  ['Reporting automation.', 'The weekly and monthly numbers rebuilt for you, not by hand.'],
+];
+
+const questions = [
+  {
+    q: 'Will this replace our property management software?',
+    a: 'No. Your property management system stays the system of record. We read from it and connect it to the rest of your tools.',
+  },
+  {
+    q: 'Can our team still update things in Monday.com or Excel?',
+    a: 'Yes. We build around how your team already works, so nobody has to learn a new process to keep the dashboard current.',
+  },
+  {
+    q: 'Can it handle multiple entities or portfolios?',
+    a: 'Yes. Dashboards can be split by entity, fund, region or property, with totals that roll up.',
+  },
+  { q: 'Who can see the dashboard?', a: 'Only the people you choose. Every dashboard sits behind a login.' },
+];
+
+const arrow = '<svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25"></path></svg>';
+---
+
+<BaseLayout
+  title="Real estate dashboards and integrations | Tenonpath"
+  description="Portfolio dashboards, property management integrations and reporting automation for commercial real estate owners, operators and property managers. Fixed scope, fixed price."
+>
+  <section class="container re-hero">
+    <p class="t-label re-label">Real estate</p>
+    <h1 class="t-display re-title">Dashboards and integrations for commercial real estate teams.</h1>
+    <p class="t-lead re-lead">
+      Your property management system, task board, spreadsheets, inbox and bank exports each hold part of the picture.
+      We connect them into one portfolio view, built to the reports you already run.
+    </p>
+    <div class="re-ctas">
+      <a class="btn btn--primary" href="/#contact">Start a project <Fragment set:html={arrow} /></a>
+      <a class="text-cta" href="/demo">See the live demo</a>
+    </div>
+  </section>
+
+  <section class="container re-section" aria-labelledby="re-build">
+    <MeasureLine />
+    <div class="grid-12 re-grid">
+      <h2 class="t-h3 re-h2" id="re-build">What we build for real estate teams</h2>
+      <ul role="list" class="re-builds">
+        {
+          builds.map(([title, body]) => (
+            <li data-reveal>
+              <h3 class="t-h4">{title}</h3>
+              <p class="t-dim">{body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="container re-section" aria-labelledby="re-systems">
+    <div class="grid-12 re-grid re-rule">
+      <h2 class="t-h3 re-h2" id="re-systems">Systems we connect</h2>
+      <p class="t-lead re-body" data-reveal>
+        Any property management system with an API or data export, task boards like Monday.com, Excel and Google Sheets,
+        Outlook and Gmail, and bank exports. If you are not sure whether your system qualifies, ask us on a discovery call
+        before you pay anything.
+      </p>
+    </div>
+  </section>
+
+  <section class="container re-section" aria-labelledby="re-who">
+    <div class="grid-12 re-grid re-rule">
+      <h2 class="t-h3 re-h2" id="re-who">Who it's for</h2>
+      <p class="t-lead re-body" data-reveal>
+        Owners, operators, asset managers, property managers and acquisitions teams at firms that have outgrown
+        spreadsheets but do not need an enterprise software project.
+      </p>
+    </div>
+  </section>
+
+  <section class="container re-section" aria-labelledby="re-how">
+    <div class="grid-12 re-grid re-rule">
+      <h2 class="t-h3 re-h2" id="re-how">How it works</h2>
+      <p class="t-lead re-body" data-reveal>
+        Discovery call, written fixed scope and price within three business days, weekly previews you can click, then
+        launch and support. Most dashboards take two to four weeks and start at $2,500.
+      </p>
+    </div>
+  </section>
+
+  <section class="container re-section" aria-labelledby="re-questions">
+    <div class="grid-12 re-grid re-rule">
+      <h2 class="t-h3 re-h2" id="re-questions">Questions</h2>
+      <div class="re-body" data-reveal>
+        <Accordion items={questions} />
+      </div>
+    </div>
+  </section>
+
+  <section class="container re-close" aria-labelledby="re-close">
+    <MeasureLine />
+    <h2 class="t-display" id="re-close">Tell us what you're running on.</h2>
+    <p class="t-lead">A few lines is enough. We reply within one business day.</p>
+    <a class="btn btn--primary" href="/#contact">Start a project <Fragment set:html={arrow} /></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .re-hero {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+    padding-block: var(--space-9) var(--space-8);
+  }
+  .re-label {
+    color: var(--brass);
+  }
+  .re-title {
+    max-width: 20ch;
+  }
+  .re-lead {
+    max-width: 44rem;
+  }
+  .re-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    margin-top: var(--space-2);
+  }
+
+  .re-section {
+    padding-block: var(--space-7);
+  }
+  .re-grid {
+    row-gap: var(--space-5);
+    padding-top: var(--space-7);
+  }
+  .re-rule {
+    border-top: 1px solid var(--rule);
+  }
+  .re-h2,
+  .re-body,
+  .re-builds {
+    grid-column: 1 / -1;
+  }
+  .re-body {
+    max-width: 48rem;
+  }
+  .re-builds {
+    display: grid;
+    gap: var(--space-6) var(--gutter);
+  }
+  .re-builds li {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+  .re-builds h3 {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .re-builds h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.625rem;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  .re-close {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+    padding-block: var(--space-8) var(--space-9);
+  }
+  .re-close .t-display {
+    max-width: 18ch;
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 720px) {
+    .re-builds {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .re-h2 {
+      grid-column: 1 / span 4;
+    }
+    .re-body,
+    .re-builds {
+      grid-column: 5 / span 8;
+    }
+    .re-builds {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
