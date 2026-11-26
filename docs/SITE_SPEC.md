@@ -21,7 +21,7 @@ Keep it to these. No blog at launch.
 - **Header**: logo left; links right: Work (anchor to demo), Services, Process, Pricing; a brass "Start a project" button that scrolls to the contact form. Header hides on scroll down, shows on scroll up. Mobile: full-screen menu, mono labels.
 - **Footer**: logo, one-line description, hello@tenonpath.com, location line ("Nairobi, Kenya. Working with clients in the US and worldwide."), links (Demo, Real estate, Privacy), copyright. Thin measurement-line border on top.
 - **Section labels**: mono, `01 / PROBLEM` format, brass number.
-- **Grid**: 12 columns, max content width ~1440px, side padding fluid (20px mobile, 48 to 80px desktop).
+- **Grid**: 12 columns, max content width ~1840px (fills a 1920px screen; only very wide screens such as 2560px center the content), side padding fluid (20px mobile, 32 to 40px desktop). Set globally in `src/styles/tokens.css`.
 
 ## Homepage sections (in order)
 

@@ -61,10 +61,10 @@
   --section-y: clamp(6rem, 4rem + 8vw, 12rem);
 
   /* ---------- Grid ---------- */
-  --grid-max: 1440px;
+  --grid-max: 1840px;                       /* fills 1920px screens; only wider ones (2560) center */
   --grid-cols: 12;
   --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
-  --pad-x: clamp(1.25rem, 5vw, 5rem);       /* 20px mobile, 48 to 80px desktop */
+  --pad-x: clamp(1.25rem, 2.5vw, 2.5rem);   /* 20px mobile, 32px at 1280, 40px from 1600 */
   --bp-pitch: 32px;                          /* blueprint grid */
   --bp-opacity: 0.4;
 
