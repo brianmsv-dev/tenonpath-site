@@ -1,6 +1,7 @@
 ---
 // Site footer. Copy: docs/COPY.md > Footer.
 import MeasureLine from './MeasureLine.astro';
+import LogoMark from './LogoMark.astro';
 
 const links = [
   { href: '/demo', label: 'Demo' },
@@ -14,7 +15,10 @@ const links = [
     <MeasureLine variant="ruler" />
     <div class="grid-12 site-footer__grid">
       <div class="site-footer__brand">
-        <a href="/" class="wordmark site-footer__wordmark" aria-label="Tenonpath home">tenonpath</a>
+        <a href="/" class="site-footer__logo" aria-label="Tenonpath home" data-logo-hover>
+          <LogoMark concept="a" size={32} title="" />
+          <span class="wordmark site-footer__wordmark" aria-hidden="true">tenonpath</span>
+        </a>
         <p class="t-dim">Tenonpath. Dashboards, integrations and web apps, built to fit.</p>
       </div>
       <div class="site-footer__contact">
@@ -55,9 +59,15 @@ const links = [
     gap: var(--space-3);
     align-content: start;
   }
+  .site-footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-self: start;
+    text-decoration: none;
+  }
   .site-footer__wordmark {
     font-size: 1.75rem;
-    text-decoration: none;
   }
   .site-footer__nav ul {
     display: flex;

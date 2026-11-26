@@ -1,0 +1,31 @@
+---
+// Section label + headline (+ optional intro) used by every homepage section.
+import SectionLabel from '../SectionLabel.astro';
+
+interface Props {
+  number: string;
+  label: string;
+  title?: string;
+  /** id for the h2, so the section can be aria-labelledby it */
+  titleId?: string;
+  class?: string;
+}
+const { number, label, title, titleId, class: className } = Astro.props;
+---
+
+<div class:list={['section-head', className]} data-reveal>
+  <SectionLabel number={number} label={label} />
+  {title && <h2 class="t-display section-head__title" id={titleId}>{title}</h2>}
+  <slot />
+</div>
+
+<style>
+  .section-head {
+    display: grid;
+    gap: var(--space-5);
+    align-content: start;
+  }
+  .section-head__title {
+    max-width: 18ch;
+  }
+</style>
