@@ -1,6 +1,8 @@
 ---
 // 02 Problem. Copy: docs/COPY.md > 02 Problem. Motion: src/scripts/sections.ts (problem).
-// Markup is the end state: every line struck through in brass, the answer line showing.
+// Markup is the end state: every task struck through in brass and dimmed, the answer showing.
+// The strike is a background line on the inline task text (box-decoration-break: clone), so it
+// covers only the words, follows wrapped lines, and never crosses the timestamp.
 import SectionHead from './SectionHead.astro';
 
 const week = [
@@ -30,8 +32,7 @@ const week = [
           week.map(([when, what]) => (
             <li class="week__row" data-week-row>
               <span class="week__when t-mono">{when}</span>
-              <span class="week__what">{what}</span>
-              <span class="week__strike" aria-hidden="true" data-week-strike />
+              <span class="week__what"><s class="week__text" data-week-text>{what}</s></span>
             </li>
           ))
         }
@@ -68,19 +69,19 @@ const week = [
     color: var(--bone-dim);
   }
   .week__what {
-    color: var(--bone);
+    min-width: 0;
   }
-  /* The strike: one brass hairline through the row, drawn left to right */
-  .week__strike {
-    position: absolute;
-    left: 0;
-    right: 0;
-    /* through the middle of the first text line, even when the row wraps */
-    top: calc(var(--space-4) + 0.8em);
-    height: 1.5px; /* 1px blurs to grey on rows that land between pixels */
-    background: var(--brass);
-    transform-origin: left center;
-    pointer-events: none;
+  /* Struck task text: a 1.5px brass line drawn as a background on the inline text, cloned onto
+     every wrapped line. Animated by growing background-size from 0% to 100%. */
+  .week__text {
+    text-decoration: none;
+    color: var(--bone-dim);
+    background-image: linear-gradient(var(--brass), var(--brass));
+    background-repeat: no-repeat;
+    background-position: 0 60%; /* middle of the x-height, from General Sans metrics */
+    background-size: 100% 1.5px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
   .week__answer {
     margin-top: var(--space-6);

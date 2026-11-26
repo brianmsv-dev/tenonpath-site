@@ -3,7 +3,7 @@
   these only run with motion allowed, and gsap.matchMedia reverts them if that changes.
 
   02 Problem: on enter, the week's rows slide in one by one, then a brass line strikes through
-     each row in turn, then "Or: open one dashboard." arrives. Plays once.
+     each task's text in turn as it dims, then "Or: open one dashboard." arrives. Plays once.
   05 Process: a brass line draws along the measured line as the section scrolls through
      (scrubbed, no pin), and each step's tick locks when the line reaches it.
 */
@@ -16,11 +16,13 @@ mm.add(MOTION_OK, () => {
   const week = document.querySelector<HTMLElement>('[data-week]');
   if (week) {
     const rows = gsap.utils.toArray<HTMLElement>(week.querySelectorAll('[data-week-row]'));
-    const strikes = gsap.utils.toArray<HTMLElement>(week.querySelectorAll('[data-week-strike]'));
+    const texts = gsap.utils.toArray<HTMLElement>(week.querySelectorAll('[data-week-text]'));
     const answer = week.querySelector<HTMLElement>('[data-week-answer]');
+    // Unstruck start: full-brightness text, no line. Colours are the bone / bone-dim tokens.
+    gsap.set(texts, { backgroundSize: '0% 1.5px', color: '#ede8df' });
     const tl = gsap.timeline({ scrollTrigger: { trigger: week, start: 'top 70%', once: true } });
     tl.fromTo(rows, { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.5, stagger: 0.14, ease: 'power3.out' })
-      .fromTo(strikes, { scaleX: 0 }, { scaleX: 1, duration: 0.35, stagger: 0.07, ease: 'power3.out' }, '+=0.25')
+      .to(texts, { backgroundSize: '100% 1.5px', color: '#a9a39a', duration: 0.45, stagger: 0.09, ease: 'power3.out' }, '+=0.25')
       .fromTo(answer, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, '+=0.1');
   }
 });
