@@ -20,6 +20,17 @@ const STEP = 0.9; // timeline seconds between block starts
 const SLIDE = 0.8;
 const SETTLE = 0.15;
 
+/** Exact end values: the SITE_SPEC figures, full chart line, all five connected. */
+function writeFinalState(svg: SVGSVGElement, counter: HTMLElement | null) {
+  svg.querySelectorAll<SVGTextElement>('[data-count]').forEach((el) => {
+    el.textContent = formatFigure(Number(el.dataset.count), el.dataset.format as Format);
+  });
+  const chart = svg.querySelector<SVGPathElement>('[data-chart]');
+  if (chart) gsap.set(chart, { strokeDashoffset: 0 });
+  const total = svg.querySelectorAll('[data-block]').length;
+  if (counter) counter.textContent = `${total}/${total} CONNECTED`;
+}
+
 function build(svg: SVGSVGElement, counter: HTMLElement | null) {
   const vbWidth = svg.viewBox.baseVal.width;
   const unitsPerPx = vbWidth / Math.max(svg.getBoundingClientRect().width, 1);
@@ -107,13 +118,8 @@ function build(svg: SVGSVGElement, counter: HTMLElement | null) {
   tl.eventCallback('onUpdate', renderCount);
   renderCount();
 
-  const cleanup = () => {
-    // GSAP reverts the styles it set; text content is ours to restore.
-    values.forEach((el) => {
-      el.textContent = formatFigure(Number(el.dataset.count), el.dataset.format as Format);
-    });
-    if (counter) counter.textContent = `${total}/${total} CONNECTED`;
-  };
+  // GSAP reverts the styles it set; text content is ours to restore.
+  const cleanup = () => writeFinalState(svg, counter);
 
   return { tl, cleanup };
 }
@@ -150,17 +156,50 @@ function init() {
           anticipatePin: 1,
           animation: tl,
         });
-      } else {
-        tl.timeScale(1.9);
-        ScrollTrigger.create({
-          trigger: svg,
-          start: 'top 85%',
-          once: true,
-          onEnter: () => tl.play(),
-        });
+        return cleanup;
       }
 
-      return cleanup;
+      /* Play once. Whatever happens (fast scroll past, page loaded below the hero, tab sent to
+         the background mid-play, a stalled frame loop), it must end on the exact final state. */
+      tl.timeScale(1.9);
+      let safety = 0;
+      const finish = () => {
+        if (tl.progress() < 1) tl.progress(1);
+        writeFinalState(svg, counter);
+      };
+      const play = () => {
+        if (tl.progress() >= 1 || tl.isActive()) return;
+        tl.play();
+        // Backstop in case rAF is throttled: finish shortly after the nominal end.
+        window.clearTimeout(safety);
+        safety = window.setTimeout(finish, (tl.duration() / tl.timeScale()) * 1000 + 1500);
+      };
+      const onVisibility = () => {
+        if (document.hidden && tl.progress() > 0) finish();
+      };
+
+      const st = ScrollTrigger.create({
+        trigger: svg,
+        start: 'top 85%',
+        end: 'bottom top',
+        onEnter: play,
+        onEnterBack: play,
+        onLeave: finish, // scrolled past before it finished: show the end state
+      });
+      tl.eventCallback('onComplete', () => {
+        writeFinalState(svg, counter);
+        st.kill();
+      });
+      document.addEventListener('visibilitychange', onVisibility);
+
+      // Page opened (or restored) already scrolled past the drawing.
+      if (svg.getBoundingClientRect().bottom < 0) finish();
+
+      return () => {
+        window.clearTimeout(safety);
+        document.removeEventListener('visibilitychange', onVisibility);
+        cleanup();
+      };
     },
   );
 }
