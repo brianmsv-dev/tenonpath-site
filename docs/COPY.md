@@ -115,7 +115,7 @@ Note: Every project gets a written fixed quote before work starts. Kenyan client
 ## 08 About
 Label: 08 / ABOUT
 Headline: Built by someone who's done the work.
-Body: Tenonpath is a small studio based in Nairobi, working with clients in the US and worldwide. We have spent years inside US commercial real estate operations: rent rolls, leases, due diligence, insurance, investor reporting. We know what the numbers mean, not just how to move them. That is why what we build fits.
+Body: Tenonpath is a small studio based in Nairobi, working with clients in the US and worldwide. We have hands-on experience inside US commercial real estate operations: rent rolls, leases, due diligence, insurance, investor reporting. We know what the numbers mean, not just how to move them. That is why what we build fits.
 
 ## 09 FAQ
 Label: 09 / QUESTIONS
@@ -127,13 +127,11 @@ No. The point is to keep what you already pay for and connect it.
 Most take two to four weeks from signed scope to launch.
 4. What does it cost?
 Dashboards start at $2,500, automations at $750 and websites at $1,200. You get a fixed written quote before we start.
-5. Who owns what you build?
-You do. On final payment, the code and the work are yours.
-6. Where is our data stored, and is it secure?
+5. Where is our data stored, and is it secure?
 On secure hosting under accounts you control where possible, behind a login. We use read-only access unless a workflow needs to write, and we never share your data.
-7. You're in Kenya. How does that work with US clients?
+6. You're in Kenya. How does that work with US clients?
 We work across US time zones with overlap in your morning, communicate by email and scheduled calls, and invoice in USD.
-8. What happens after launch?
+7. What happens after launch?
 On a monthly plan we host, monitor and make small changes. Or we hand everything over and you run it yourselves.
 
 ## 10 Contact

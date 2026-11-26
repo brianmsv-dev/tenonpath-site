@@ -42,6 +42,9 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26: Prices approved: dashboards from $2,500, automation sprints from $750, websites from $1,200, monthly support from $200.
+- 2026-11-26: No claim about years of experience on the site for now. About says "hands-on experience" only.
+- 2026-11-26: No statement on code ownership on the site for now (FAQ question removed). Decide per contract.
 - 2026-11-26: Brand name **Tenonpath** (tenonpath.com registered). Tagline idea: "Built to fit."
 - 2026-11-26: Email: brian@tenonpath.com mailbox (GoDaddy), hello@tenonpath.com alias used on the site.
 - 2026-11-26: No real client work shown on the site until clients approve. Proof comes from a fictional demo dashboard.
@@ -51,9 +54,6 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - 2026-11-26: Brian chose to start from our own design direction (drafting table at night) before gathering outside inspiration, to stay original.
 
 ## Open questions (for Brian)
-- [ ] COPY.md About section says "years inside US commercial real estate operations". Confirm that is accurate, or give the right wording.
-- [ ] FAQ says clients own the code on final payment. Confirm that is the policy you want.
-- [ ] Prices in COPY.md (from $2,500 / $750 / $1,200 / $200 a month): approve or adjust.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 - [ ] Logo pick after phase 1.
 
