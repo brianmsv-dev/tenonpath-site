@@ -65,6 +65,18 @@ Body: Click around a working dashboard for a fictional industrial portfolio. Sam
 Button: Open the full demo
 Note: Fictional portfolio. Real build quality.
 Frame labels: LIVE DEMO / FICTIONAL DATA
+Embed controls: same "Make it yours" labels as /demo (Company name and Theme only).
+
+## /demo
+Banner: This is a demo with fictional data. Want this for your portfolio? Start a project.
+Banner label: DEMO DATA
+Portfolio name (default): Harbor & Pine Properties
+Controls title: Make it yours
+Control labels: Company name · Theme · Accent
+Theme options: Light · Classic · Dark
+Accent options (accessible names): Blue · Navy · Green · Burgundy · Amber
+Line under the controls: Every dashboard is built to your reports, your systems and your brand.
+[Dashboard labels inside the fictional product (column headers, block titles such as "Collected this month vs last month", "Showing 8 of 40.") are product UI, written by Claude Code; see PROJECT_LOG.]
 
 ## 05 How we work
 Label: 05 / PROCESS
