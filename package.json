@@ -13,7 +13,8 @@
     "start": "node server.mjs",
     "astro": "astro",
     "icons": "node scripts/build-icons.mjs",
-    "demo-data": "node scripts/generate-demo-data.mjs"
+    "demo-data": "node scripts/generate-demo-data.mjs",
+    "brand": "node scripts/build-brand.mjs"
   },
   "dependencies": {
     "astro": "^7.4.13",
