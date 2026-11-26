@@ -1,6 +1,7 @@
 ---
 // Site header. Copy: docs/COPY.md > Header. Behaviour: docs/SITE_SPEC.md > Global.
-// The mark is not chosen yet (phase 1 review gate), so the header shows the wordmark only.
+import LogoMark from './LogoMark.astro';
+
 const links = [
   { href: '/#demo', label: 'Work' },
   { href: '/#services', label: 'Services' },
@@ -11,7 +12,10 @@ const links = [
 
 <header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a href="/" class="wordmark site-header__brand" aria-label="Tenonpath home">tenonpath</a>
+    <a href="/" class="site-header__brand" aria-label="Tenonpath home" data-logo-hover>
+      <LogoMark concept="a" size={28} autoplay title="" />
+      <span class="wordmark" aria-hidden="true">tenonpath</span>
+    </a>
 
     <nav class="site-nav" aria-label="Main">
       <ul role="list" class="site-nav__list">
@@ -79,8 +83,14 @@ const links = [
     height: 100%;
   }
   .site-header__brand {
-    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 2.75rem;
     text-decoration: none;
+  }
+  .site-header__brand .wordmark {
+    font-size: 1.5rem;
   }
 
   .site-nav {
