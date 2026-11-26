@@ -3,7 +3,7 @@
 The running record. Newest entries at the top of each section. Anyone (Brian, the orchestrator, Claude Code) updates this at the end of a work session.
 
 ## Current phase
-**Phase 4: Demo dashboard**: built, waiting at the review gate.
+**Phase 5: Launch**: in progress (account-free work only).
 
 ## Phases
 ### Phase 1: Foundation
@@ -31,7 +31,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [x] Fictional data set in `src/data/demo/`
 - [x] `/demo` with Overview, Collections, Leases, Tasks, Pipeline
 - [x] Embedded cut-down demo in homepage section 04, lazy loaded
-- **Review gate**
+- **Review gate** Done 2026-11-26 with changes (see Decisions).
 
 ### Phase 5: Launch
 - [ ] Contact form backend, spam protection, `.env.example`
@@ -42,6 +42,18 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Brian + orchestrator, phase 4 review): Demo changes, all built:
+  1. Money in integer cents, whole dollars only, rounded once at display (no rounding happens, since amounts are whole). The generator refuses to write, and `astro build` fails, unless every total ties out: each tenant's buckets to its total, bucket columns to the aging figures, tenants to past due, properties to the portfolio, payments to collected, the chart's end to collected, task counts to the headline, and the headline figures to the hero. Proven: a $1 change to one balance fails the build. The old $1 mismatch (Pellmont $4,145 + $4,145 = $8,289) is gone.
+  2. "Collected this month vs last month" replaces "Collections by week": cumulative by day of month, this month in the data colour (solid), last month neutral and dashed (so the two differ by more than colour), as-of marker with the running total, and one line comparing to the same day last month. Overview and embed.
+  3. Open tasks past due show the date in the alert colour and count in an "Overdue" figure in the Tasks summary; Overview's open tasks show "N overdue" under the count, and the Open tasks figure shows it too. Currently 8 of 37 are overdue.
+  4. DEMO DATA label moved into the top banner (part of the page flow), so it can never cover content.
+  5. Tabs fit one line at 360px: neutral sans, size clamps from about 12.5px, tighter gaps. Measured at 360, 390, 414 and 768px on /demo and in the embed: one line, no overflow, no scrollbar.
+  6. Homepage embed shows all five tabs, no inner scroll; the frame grows to fit. Long tables (Paid this month, Leases, open tasks) show 8 rows with "Showing 8 of N." and an "Open the full demo" link; the Collections filter re-applies the cap and totals still count every matching row. The embed's Tasks view is one table of open tasks by due date.
+  A. The dashboard is now a neutral client product with its own theme system (Light default, Classic warm light with navy, Dark) and five accents (Blue, Navy, Green, Burgundy, Amber). Our chrome (banner, Tenonpath logo, "Make it yours", frame lines) stays in our brand around it. "Make it yours" on /demo: Company name (live, max 40, nothing stored or sent: no cookies or storage, no requests; verified), Theme, Accent, and the COPY line. Embed: Company name and Theme. Contrast, all AA: text 4.5:1 or better and chart lines and UI marks 3:1 or better in every theme. Data line 5.47 / 5.34 / 6.82, last-month line 3.77 / 3.76 / 5.39, alert text 6.57 / 6.84 / 6.89, accents as text 5.70 or better (Light / Classic / Dark).
+  B. Portfolio renamed "Harbor & Pine Properties", deliberately generic: 4 industrial, 2 flex, 1 neighborhood retail center, 1 small office building, across Dallas and Austin TX, Tempe AZ, Columbus OH, Indianapolis IN, Kansas City MO, Nashville TN and Charlotte NC. 42 tenants with invented names suited to each asset type. Tasks are generic operations (maintenance, inspections, vendors, leasing, tenant requests); insurance and lender items are capped at 4 of 52; snow removal only appears in the Midwest. Pipeline mixes types and markets (TX, AZ, OH, MO, NC, TN). Regenerated; everything ties out.
+  C. Property thumbnails on /demo only, lazy loaded, WebP at build. Photos go in `src/assets/demo/photos/property-1.jpg` ... `property-8.jpg`, not `public/demo/photos/` as first suggested: only files under `src/` go through Astro's built-in image pipeline (it uses sharp, which ships with Astro, so no new dependency). Tested with a temporary image: it came out as a 128x88 WebP with loading="lazy". Until photos exist, a hand-drawn line icon per asset type is shown. No photos on the homepage.
+- 2026-11-26 (Claude Code, phase 4 review): Originality. No code, data, naming or layout in this repo was copied from any other repository, including brianmsv-dev/rm-connector. Claude Code did not open, clone or read any other repository during this work; everything here was written from the docs in this repo.
+- 2026-11-26 (Claude Code, phase 4 review): Demo dates now shift by whole months (not weeks) to the latest 20th before the build, so "this month vs last month" lines up with calendar months.
 - 2026-11-26 (Claude Code, phase 4): Demo data is generated by `npm run demo-data` (scripts/generate-demo-data.mjs, fixed seed, Node built-ins) into src/data/demo/*.json. Fictional "Harbor & Pine Industrial": 8 properties in the US Southeast (invented names, city names only, no addresses), 40 tenants with invented names, payments, aging, 52 tasks, 37 critical dates, 9 acquisition deals. The generator refuses to write unless the totals match the hero exactly: 94.2% occupancy by SF, $412,860 collected this month, $18,240 past due (4 tenants, all four aging buckets used), 37 open tasks. The weekly chart's last three weeks are built from the same payments, so every number on the site reconciles. Invented names were chosen to avoid real companies, but a coincidental match with some real business somewhere cannot be ruled out entirely.
 - 2026-11-26 (Claude Code, phase 4): Demo dates are shifted forward in whole weeks at build time, so the "as of" date is always the latest Friday before the build and the 180-day window stays current. Each deploy refreshes it.
 - 2026-11-26 (Claude Code, phase 4): The demo is rendered at build time (Astro, plain HTML tables and SVG) with a small script (about 1.4 KB gzipped) for tabs, the property filter and sorting. No chart or table library. The Collections filter recomputes the aging buckets, counts and paid total from the visible rows.
@@ -91,7 +103,8 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 
 ## Open questions (for Brian)
 - [ ] Footer links to /real-estate and /privacy, which arrive in phase 5. /demo now exists.
-- [ ] Phase 4 review: demo data realism (names, figures, task mix), whether the embed should show Tasks or Pipeline too, and the 16:9 frame scrolling inside itself on the homepage.
+- [ ] COPY: the demo body says "a fictional industrial portfolio", but the portfolio is now mixed (industrial, flex, retail, office). Suggest "a fictional commercial real estate portfolio" (homepage 04 body and the /demo meta description). Not changed: copy is the orchestrator's call.
+- [ ] Property photos for /demo: 8 images into `src/assets/demo/photos/` as property-1.jpg ... property-8.jpg (see the README there).
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 
 ## Account and infrastructure notes
