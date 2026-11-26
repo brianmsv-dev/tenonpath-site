@@ -9,26 +9,21 @@ import MeasureLine from '../components/MeasureLine.astro';
 import LogoMark from '../components/LogoMark.astro';
 import type { Concept } from '../data/logo-marks';
 
-const concepts: { id: Concept; name: string; brief: string; motion: string }[] = [
+const concepts: { id: Concept; kicker: string; name: string; brief: string; motion: string }[] = [
   {
     id: 'a',
+    kicker: 'Concept A, refined. In use',
     name: 'Slot and stem',
     brief:
-      "The T's bar is the mortise, with a rectangular slot cut from below. The stem is the tenon: its shoulders are cut so the tongue seats in the slot.",
+      'Bar 10 units tall (was 12), stem 12 wide (was 16), tongue 4 wide. Same 32 unit grid, same 2 unit joint gap, every edge still on an even unit so the 16px favicon stays crisp.',
     motion: 'The stem rises into the bar and presses home the last pixel.',
   },
   {
-    id: 'b',
-    name: 'Offset blocks',
-    brief:
-      'Two blocks, one with a notch and one with a tongue, locked together into a square T. The seam sits just left of center, which keeps the two pieces readable.',
-    motion: 'The right block slides left until its tongue locks into the notch.',
-  },
-  {
-    id: 'c',
-    name: 'Cut and return',
-    brief: 'A single square with a T-shaped cut. The cut piece is the tenon and drops back into the square.',
-    motion: 'The T is lifted above the square, then drops into its cut.',
+    id: 'a-v1',
+    kicker: 'Concept A, original. For comparison',
+    name: 'Slot and stem, phase 1',
+    brief: "The T's bar is the mortise, with a rectangular slot cut from below. The stem is the tenon: its shoulders are cut so the tongue seats in the slot.",
+    motion: 'Same motion as the refined mark.',
   },
 ];
 
@@ -67,7 +62,7 @@ const labels: [string, string][] = [
 ];
 
 const toc = [
-  ['logo', 'Logo concepts'],
+  ['logo', 'Logo'],
   ['color', 'Color'],
   ['type', 'Type'],
   ['buttons', 'Buttons and links'],
@@ -108,11 +103,11 @@ const gridLines = Array.from({ length: 33 }, (_, i) => i);
   <section id="logo" class="section container sg-section">
     <MeasureLine label="LOGO / 32 UNIT GRID" />
     <div class="sg-head">
-      <SectionLabel number="01" label="LOGO CONCEPTS" />
-      <h2 class="t-h3">Three marks. Pick one.</h2>
+      <SectionLabel number="01" label="LOGO" />
+      <h2 class="t-h3">Concept A, refined.</h2>
       <p class="t-dim measure-text">
-        Each mark is two pieces on a 32 unit grid with a 2 unit gap at the joint, which is exactly 1px at favicon size.
-        Hover a mark or press Replay to see the tenon slide in. All three are one color and work in brass or bone.
+        Lighter bar, narrower stem, same joint. The refined mark is on top and is now in the header and the favicon. The
+        phase 1 original sits below it for comparison. Hover a mark or press Replay to see the tenon slide in.
       </p>
     </div>
 
@@ -120,7 +115,7 @@ const gridLines = Array.from({ length: 33 }, (_, i) => i);
       concepts.map((c) => (
         <article class="sg-concept" id={`concept-${c.id}`} aria-labelledby={`concept-${c.id}-title`}>
           <div class="sg-concept__info">
-            <p class="t-label sg-concept__kicker">Concept {c.id.toUpperCase()}</p>
+            <p class="t-label sg-concept__kicker">{c.kicker}</p>
             <h3 class="t-h3" id={`concept-${c.id}-title`}>{c.name}</h3>
             <p class="t-dim">{c.brief}</p>
             <p class="t-dim t-small">{c.motion}</p>
@@ -140,7 +135,7 @@ const gridLines = Array.from({ length: 33 }, (_, i) => i);
               ))}
             </svg>
             <div class="sg-stage__mark">
-              <LogoMark concept={c.id} size="100%" autoplay title={`Concept ${c.id.toUpperCase()} mark`} />
+              <LogoMark concept={c.id} size="100%" autoplay title={`${c.kicker} mark`} />
             </div>
           </div>
 
@@ -170,8 +165,8 @@ const gridLines = Array.from({ length: 33 }, (_, i) => i);
             <div class="sg-block">
               <p class="t-label sg-block__title">Favicon pixels, 16 px enlarged 8x</p>
               <div class="sg-pixels">
-                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#C8963E" data-bg="#0E1116" role="img" aria-label={`Concept ${c.id.toUpperCase()} rendered at 16 pixels, brass on ink, enlarged`}></canvas>
-                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#0E1116" data-bg="#EDE8DF" role="img" aria-label={`Concept ${c.id.toUpperCase()} rendered at 16 pixels, ink on bone, enlarged`}></canvas>
+                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#C8963E" data-bg="#0E1116" role="img" aria-label={`${c.kicker}, rendered at 16 pixels, brass on ink, enlarged`}></canvas>
+                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#0E1116" data-bg="#EDE8DF" role="img" aria-label={`${c.kicker}, rendered at 16 pixels, ink on bone, enlarged`}></canvas>
               </div>
             </div>
             <div class="sg-block">

@@ -1,12 +1,13 @@
 /*
-  Tenonpath mark geometry, three concepts (docs/BRAND.md > Logo).
+  Tenonpath mark geometry. Concept A (slot and stem) was chosen at the phase 1 review.
   32-unit grid. Every edge sits on an even coordinate so the mark lands on whole pixels at 16px.
-  The 2-unit gap around each joint is 1px at 16px, the thinnest line that still renders.
+  The 2-unit gap around the joint is 1px at 16px, the thinnest line that still renders.
 
-  fixed = the mortise piece. tenon = the moving piece.
+  fixed = the mortise piece (the T's bar, slot cut from below).
+  tenon = the moving piece (the stem, shoulders cut so its tongue seats in the slot).
   axis / from = how the tenon travels into place, in grid units (see src/scripts/logo.ts).
 */
-export type Concept = 'a' | 'b' | 'c';
+export type Concept = 'a' | 'a-v1';
 
 export interface MarkGeometry {
   fixed: string;
@@ -16,27 +17,20 @@ export interface MarkGeometry {
 }
 
 export const MARKS: Record<Concept, MarkGeometry> = {
-  // A: the T's bar is the mortise with a slot cut from below; the stem is the tenon,
-  // shoulders cut so its tongue seats in the slot. Travels up.
+  // A, refined (the mark in use). Bar 10 units tall (was 12), stem 12 wide (was 16),
+  // tongue 4 wide in an 8 wide slot. Stem edges stay symmetric on even units, so 12 is the
+  // next step down from 16 that keeps the 16px favicon crisp.
   a: {
+    fixed: 'M2 2H30V12H20V6H12V12H2Z',
+    tenon: 'M14 8H18V14H22V30H10V14H14Z',
+    axis: 'y',
+    from: 12,
+  },
+  // A, original from phase 1. Kept on /styleguide for comparison only.
+  'a-v1': {
     fixed: 'M2 2H30V14H22V8H10V14H2Z',
     tenon: 'M12 10H20V16H24V30H8V16H12Z',
     axis: 'y',
     from: 12,
-  },
-  // B: two offset blocks, a stout square T. The left block carries a notch in its stem,
-  // the right block a tongue. The seam sits 1 unit left of center. Travels left.
-  b: {
-    fixed: 'M2 2H14V14H10V24H14V30H6V12H2Z',
-    tenon: 'M16 2H30V12H26V30H16V22H12V16H16Z',
-    axis: 'x',
-    from: 10,
-  },
-  // C: a square with a T cut out of it; the cut piece drops back into place. Travels down.
-  c: {
-    fixed: 'M2 2H6V12H10V26H22V12H26V2H30V30H2Z',
-    tenon: 'M8 2H24V10H20V24H12V10H8Z',
-    axis: 'y',
-    from: -10,
   },
 };
