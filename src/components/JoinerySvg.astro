@@ -1,0 +1,234 @@
+---
+/*
+  One layout of the hero joinery animation as inline SVG.
+  The markup IS the end state (blocks seated, dashboard showing, figures final, chart drawn).
+  That is what reduced-motion and no-JS visitors see. src/scripts/joinery.ts sets the loose
+  start state and builds the timeline from the data-* attributes below.
+*/
+import { blockGeometry, framePath, chartPath, FIGURES, formatFigure, type Layout } from '../data/joinery';
+
+interface Props {
+  layout: Layout;
+  class?: string;
+}
+const { layout: l, class: className } = Astro.props;
+
+const blocks = blockGeometry(l);
+const frame = framePath(l);
+const f = l.frame;
+const panel = { x: f.x + f.band, y: f.y + f.band, w: f.w - 2 * f.band, h: f.h - 2 * f.band };
+const t = l.type;
+const pad = l.name === 'wide' ? 16 : 14;
+
+// Dashboard layout, derived from the panel so both layouts share one recipe.
+const headerY = panel.y + pad + t.header * 0.8;
+const ruleY = headerY + 12;
+const colW = (panel.w - 2 * pad) / 2;
+const rowH = t.figLabel + 6 + t.figValue * 0.85 + 14;
+const figs = FIGURES.map((fig, i) => {
+  const col = i % 2;
+  const row = Math.floor(i / 2);
+  const x = panel.x + pad + col * colW;
+  const labelY = ruleY + pad + t.figLabel + row * rowH;
+  return { ...fig, x, labelY, valueY: labelY + 6 + t.figValue * 0.85 };
+});
+const chartTop = figs[3].valueY + pad + 4;
+const chartBottom = panel.y + panel.h - pad;
+const chart = { x: panel.x + pad, y: chartTop, w: panel.w - 2 * pad, h: chartBottom - chartTop };
+const chartD = chartPath(chart.x, chart.y + 4, chart.w, chart.h - 8);
+const gridYs = [0, 0.5, 1].map((p) => chart.y + chart.h * p);
+
+const byId = Object.fromEntries(blocks.map((b, i) => [b.id, { ...b, i }]));
+// Broken dashed links between neighbouring blocks: two stubs that never meet.
+const links = l.links.map(([a, b]) => {
+  const A = byId[a];
+  const B = byId[b];
+  const sx = (A.cx + B.cx) / 2;
+  const sy = (A.cy + B.cy) / 2;
+  const k = 0.12; // half of the missing gap, as a share of the distance
+  const ax = A.cx + (sx - A.cx) * (1 - 2 * k);
+  const ay = A.cy + (sy - A.cy) * (1 - 2 * k);
+  const bx = B.cx + (sx - B.cx) * (1 - 2 * k);
+  const by = B.cy + (sy - B.cy) * (1 - 2 * k);
+  return { d: `M${A.cx} ${A.cy}L${ax} ${ay}M${B.cx} ${B.cy}L${bx} ${by}`, fadeAt: Math.min(A.i, B.i) };
+});
+---
+
+<svg
+  class:list={['joinery', `joinery--${l.name}`, className]}
+  viewBox={`0 0 ${l.width} ${l.height}`}
+  data-joinery={l.name}
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- Loose-state links, under everything else -->
+  <g class="jn-links">
+    {links.map((k) => <path d={k.d} data-link={k.fadeAt} />)}
+  </g>
+
+  <!-- The frame: a band with mortises, and the dashboard panel inside it -->
+  <path class="jn-frame" d={frame} />
+  <rect class="jn-panel" x={panel.x} y={panel.y} width={panel.w} height={panel.h} />
+
+  <!-- Seat lines: brass, one per joint -->
+  <g class="jn-ticks">
+    {blocks.map((b, i) => <line x1={b.tick[0]} y1={b.tick[1]} x2={b.tick[2]} y2={b.tick[3]} data-tick={i} />)}
+  </g>
+
+  <!-- Dashboard -->
+  <g class="jn-dash">
+    <g data-dash>
+      <text class="jn-header" x={panel.x + pad} y={headerY}>Portfolio overview</text>
+      <line class="jn-rule" x1={panel.x} y1={ruleY} x2={panel.x + panel.w} y2={ruleY} />
+    </g>
+    {
+      figs.map((fig) => (
+        <g data-dash>
+          <text class="jn-fig-label" x={fig.x} y={fig.labelY}>
+            {fig.label.toUpperCase()}
+          </text>
+          <text
+            class:list={['jn-fig-value', fig.tone === 'alert' && 'jn-fig-value--alert']}
+            x={fig.x}
+            y={fig.valueY}
+            data-count={fig.value}
+            data-format={fig.format}
+          >
+            {formatFigure(fig.value, fig.format)}
+          </text>
+        </g>
+      ))
+    }
+    <g data-dash>
+      {gridYs.map((y) => <line class="jn-grid" x1={chart.x} y1={y} x2={chart.x + chart.w} y2={y} />)}
+    </g>
+    <path class="jn-chart" d={chartD} pathLength="1" data-chart />
+  </g>
+
+  <!-- System blocks, in lock order -->
+  {
+    blocks.map((b, i) => (
+      <g class="jn-block" data-block={i} data-axis={b.axis} data-from={b.from} data-rot={b.rot}>
+        <path class="jn-block__shape" d={b.path} />
+        {b.label.map((line, n) => (
+          <text class="jn-block__label" x={b.x + 10} y={b.y + 8 + t.label * (n + 1) * 1.15}>
+            {line}
+          </text>
+        ))}
+        {b.snippet && (
+          <g class="jn-block__snippet" data-snippet>
+            {b.snippet.map((line, n) => (
+              <text x={b.x + 10} y={b.y + 14 + t.label * 1.15 + (n + 1) * t.snippet * 1.45} xml:space="preserve">
+                {line}
+              </text>
+            ))}
+          </g>
+        )}
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  .joinery {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .jn-links path {
+    fill: none;
+    stroke: var(--rule-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+    vector-effect: non-scaling-stroke;
+    opacity: 0;
+  }
+
+  .jn-frame {
+    fill: var(--ink-2);
+    stroke: var(--bone-dim);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .jn-panel {
+    fill: var(--ink);
+    stroke: var(--rule);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .jn-ticks line {
+    stroke: var(--brass);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .jn-block__shape {
+    fill: var(--ink-2);
+    stroke: var(--rule-strong);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .jn-block__label {
+    fill: var(--bone);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .jn-block__snippet text {
+    fill: var(--bone-dim);
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+  /* In the end state the sources step back so the dashboard leads. */
+  .jn-block__snippet {
+    opacity: 0.45;
+  }
+
+  .jn-header {
+    fill: var(--bone);
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+  .jn-rule,
+  .jn-grid {
+    stroke: var(--rule);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .jn-fig-label {
+    fill: var(--bone-dim);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .jn-fig-value {
+    fill: var(--bone);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+  .jn-fig-value--alert {
+    fill: var(--alert);
+  }
+  .jn-chart {
+    fill: none;
+    stroke: var(--data);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* Type sizes per layout, in user units */
+  .joinery--wide .jn-block__label { font-size: 10px; }
+  .joinery--wide .jn-block__snippet text { font-size: 8.5px; }
+  .joinery--wide .jn-header { font-size: 15px; }
+  .joinery--wide .jn-fig-label { font-size: 8.5px; }
+  .joinery--wide .jn-fig-value { font-size: 22px; }
+  .joinery--compact .jn-block__label { font-size: 9.5px; }
+  .joinery--compact .jn-header { font-size: 16px; }
+  .joinery--compact .jn-fig-label { font-size: 10.5px; }
+  .joinery--compact .jn-fig-value { font-size: 26px; }
+</style>
