@@ -3,7 +3,7 @@
 The running record. Newest entries at the top of each section. Anyone (Brian, the orchestrator, Claude Code) updates this at the end of a work session.
 
 ## Current phase
-**Phase 3: Homepage sections**: built, waiting at the review gate.
+**Phase 4: Demo dashboard**: in progress.
 
 ## Phases
 ### Phase 1: Foundation
@@ -25,7 +25,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 ### Phase 3: Homepage sections
 - [x] Sections 02 to 10 per SITE_SPEC and COPY (demo section uses a placeholder frame until phase 4)
 - [x] Contact form UI (submission wired in phase 5)
-- **Review gate**
+- **Review gate** Done 2026-11-26 with changes (see Decisions).
 
 ### Phase 4: Demo dashboard
 - [ ] Fictional data set in `src/data/demo/`
@@ -42,6 +42,9 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Brian, phase 3 review): Problem strike-through redone. A 1.5px brass line on the task text only (inline background line with box-decoration-break: clone, so it follows wrapped lines), never across timestamps or empty space; the text dims to bone-dim once struck; row hairlines only between rows. Reduced motion shows the same struck, dimmed end state with the answer visible. Checked at 390, 1440 and 1920px, motion on and off.
+- 2026-11-26 (Brian, phase 3 review): FAQ gets the COPY headline "Before you ask." in the left column, styled like the other section headlines.
+- 2026-11-26 (Brian, phase 3 review): Contact form requires only Name, Email and "What systems do you use today?". Company, "What do you want to see in one place?", Budget range and "How did you hear about us?" are optional. Error wording unchanged. Labels stay exactly as COPY (only the last says "(optional)").
 - 2026-11-26 (Claude Code, phase 3): 02 Problem. "A thin brass line strikes through the whole list" is built as one brass line through each row, drawn in quick succession after the rows slide in, then "Or: open one dashboard." appears in brass. Plays once on enter.
 - 2026-11-26 (Claude Code, phase 3): 05 Process. SITE_SPEC says the brass line draws "as the user scrolls"; BRAND says scrub only the hero. SITE_SPEC wins (authority order), so the line is scroll-scrubbed but not pinned. Each tick locks when the line reaches it. Horizontal from 900px, vertical below.
 - 2026-11-26 (Claude Code, phase 3): 04 Demo uses COPY.md's split (body, then the note "Fictional portfolio. Real build quality.") rather than SITE_SPEC's one-line note; the body already carries "connected to your own systems". The frame is 16:9 with dimension lines, brass corner marks and a build marker inside ("Placeholder / interactive demo arrives in phase 4") that phase 4 removes. "Open the full demo" links to /demo, which 404s until phase 4.
@@ -82,7 +85,6 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 
 ## Open questions (for Brian)
 - [ ] Footer and demo section link to routes that do not exist yet (/demo, /real-estate, /privacy). They arrive in phases 4 and 5. All homepage anchors (#demo, #services, #process, #pricing, #contact) now work.
-- [ ] Phase 3 review: field error wording, which form fields are required, and the problem strike-through treatment.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 
 ## Account and infrastructure notes
