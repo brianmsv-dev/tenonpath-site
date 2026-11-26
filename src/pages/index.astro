@@ -1,7 +1,16 @@
 ---
-// Homepage. Phase 2: hero only. Sections 02 to 10 arrive in phase 3.
+// Homepage: the full story in one scroll (docs/SITE_SPEC.md > Homepage sections).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Problem from '../components/sections/Problem.astro';
+import Services from '../components/sections/Services.astro';
+import Demo from '../components/sections/Demo.astro';
+import Process from '../components/sections/Process.astro';
+import Audience from '../components/sections/Audience.astro';
+import Pricing from '../components/sections/Pricing.astro';
+import About from '../components/sections/About.astro';
+import Faq from '../components/sections/Faq.astro';
+import Contact from '../components/sections/Contact.astro';
 ---
 
 <BaseLayout
@@ -9,4 +18,17 @@ import Hero from '../components/Hero.astro';
   description="We connect the software your firm already uses into one clear dashboard. Fixed scope, fixed price, delivered in weeks."
 >
   <Hero />
+  <Problem />
+  <Services />
+  <Demo />
+  <Process />
+  <Audience />
+  <Pricing />
+  <About />
+  <Faq />
+  <Contact />
 </BaseLayout>
+
+<script>
+  import '../scripts/sections';
+</script>
