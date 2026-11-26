@@ -1,0 +1,985 @@
+---
+/*
+  /styleguide: phase 1 review page for Brian. Not linked anywhere, noindex.
+  Specimen text is taken from docs/COPY.md so the type is judged on real words.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import MeasureLine from '../components/MeasureLine.astro';
+import LogoMark from '../components/LogoMark.astro';
+import type { Concept } from '../data/logo-marks';
+
+const concepts: { id: Concept; name: string; brief: string; motion: string }[] = [
+  {
+    id: 'a',
+    name: 'Slot and stem',
+    brief:
+      "The T's bar is the mortise, with a rectangular slot cut from below. The stem is the tenon: its shoulders are cut so the tongue seats in the slot.",
+    motion: 'The stem rises into the bar and presses home the last pixel.',
+  },
+  {
+    id: 'b',
+    name: 'Offset blocks',
+    brief:
+      'Two blocks, one with a notch and one with a tongue, locked together into a square T. The seam sits just left of center, which keeps the two pieces readable.',
+    motion: 'The right block slides left until its tongue locks into the notch.',
+  },
+  {
+    id: 'c',
+    name: 'Cut and return',
+    brief: 'A single square with a T-shaped cut. The cut piece is the tenon and drops back into the square.',
+    motion: 'The T is lifted above the square, then drops into its cut.',
+  },
+];
+
+const sizes = [64, 32, 24, 16];
+
+const colors = [
+  { token: '--ink', hex: '#0E1116', use: 'Main background', contrast: 'Base' },
+  { token: '--ink-2', hex: '#151A21', use: 'Raised sections, demo frame', contrast: 'Base' },
+  { token: '--rule', hex: '#2A313B', use: 'Hairlines, grid, borders', contrast: '1.44:1, decorative only' },
+  { token: '--bone', hex: '#EDE8DF', use: 'Primary text', contrast: '15.5:1 on ink' },
+  { token: '--bone-dim', hex: '#A9A39A', use: 'Secondary text', contrast: '7.56:1 on ink' },
+  { token: '--brass', hex: '#C8963E', use: 'CTAs, the tenon, focus, key numbers', contrast: '7.10:1 on ink' },
+  { token: '--brass-soft', hex: '#8A6A33', use: 'Hover lines, secondary accent', contrast: '3.77:1, not for text' },
+  { token: '--data', hex: '#3FB6A8', use: 'Data only: chart lines, live values', contrast: '7.63:1 on ink' },
+  { token: '--alert', hex: '#D4694A', use: 'Data only: past due, risk', contrast: '5.33:1 on ink' },
+];
+
+const added = [
+  { token: '--rule-strong', hex: '#5D6674', use: 'Borders that must be seen: inputs, secondary buttons, dimension lines', contrast: '3.26:1 on ink' },
+  { token: '--brass-press', hex: '#B5852F', use: 'Primary button hover fill', contrast: 'Ink text 5.73:1' },
+  { token: '--inv-text-dim', hex: '#5C5A55', use: 'Secondary text on bone sections', contrast: '5.64:1 on bone' },
+  { token: '--inv-accent', hex: '#7A5A24', use: 'Brass on bone sections (brass itself is 2.18:1 there)', contrast: '5.19:1 on bone' },
+];
+
+const labels: [string, string][] = [
+  ['01', 'BUILT TO FIT'],
+  ['02', 'THE PROBLEM'],
+  ['03', 'WHAT WE BUILD'],
+  ['04', 'LIVE DEMO'],
+  ['05', 'PROCESS'],
+  ['06', "WHO IT'S FOR"],
+  ['07', 'PRICING'],
+  ['08', 'ABOUT'],
+  ['09', 'QUESTIONS'],
+  ['10', 'START'],
+];
+
+const toc = [
+  ['logo', 'Logo concepts'],
+  ['color', 'Color'],
+  ['type', 'Type'],
+  ['buttons', 'Buttons and links'],
+  ['labels', 'Section labels'],
+  ['rules', 'Rules and dividers'],
+  ['grid', 'Grid'],
+  ['motion', 'Motion'],
+];
+
+// Construction grid behind the large marks: every unit, with a heavier line every 8.
+const gridLines = Array.from({ length: 33 }, (_, i) => i);
+---
+
+<BaseLayout title="Styleguide | Tenonpath" description="Tenonpath phase 1 styleguide for review." noindex>
+  <!-- Intro -->
+  <section class="container sg-intro">
+    <SectionLabel number="00" label="STYLEGUIDE" />
+    <h1 class="t-display">Phase 1 styleguide</h1>
+    <p class="t-lead measure-text">
+      Not linked from the site and not indexed. Logo concepts, color, type, buttons, labels and dividers, for review
+      before the hero is built.
+    </p>
+    <nav class="sg-toc" aria-label="On this page">
+      <ol role="list">
+        {toc.map(([id, name], i) => (
+          <li>
+            <a href={`#${id}`} class="sg-toc__link">
+              <span class="t-label sg-toc__num">{String(i + 1).padStart(2, '0')}</span>
+              {name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </section>
+
+  <!-- 01 Logo -->
+  <section id="logo" class="section container sg-section">
+    <MeasureLine label="LOGO / 32 UNIT GRID" />
+    <div class="sg-head">
+      <SectionLabel number="01" label="LOGO CONCEPTS" />
+      <h2 class="t-h3">Three marks. Pick one.</h2>
+      <p class="t-dim measure-text">
+        Each mark is two pieces on a 32 unit grid with a 2 unit gap at the joint, which is exactly 1px at favicon size.
+        Hover a mark or press Replay to see the tenon slide in. All three are one color and work in brass or bone.
+      </p>
+    </div>
+
+    {
+      concepts.map((c) => (
+        <article class="sg-concept" id={`concept-${c.id}`} aria-labelledby={`concept-${c.id}-title`}>
+          <div class="sg-concept__info">
+            <p class="t-label sg-concept__kicker">Concept {c.id.toUpperCase()}</p>
+            <h3 class="t-h3" id={`concept-${c.id}-title`}>{c.name}</h3>
+            <p class="t-dim">{c.brief}</p>
+            <p class="t-dim t-small">{c.motion}</p>
+            <button type="button" class="btn btn--secondary" data-logo-replay={`concept-${c.id}`}>
+              Replay
+              <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+            </button>
+          </div>
+
+          <div class="sg-stage" data-logo-hover>
+            <svg class="sg-stage__grid" viewBox="0 0 32 32" aria-hidden="true">
+              {gridLines.map((i) => (
+                <>
+                  <line x1={i} y1="0" x2={i} y2="32" class={i % 8 === 0 ? 'major' : ''} />
+                  <line x1="0" y1={i} x2="32" y2={i} class={i % 8 === 0 ? 'major' : ''} />
+                </>
+              ))}
+            </svg>
+            <div class="sg-stage__mark">
+              <LogoMark concept={c.id} size="100%" autoplay title={`Concept ${c.id.toUpperCase()} mark`} />
+            </div>
+          </div>
+
+          <div class="sg-concept__details">
+            <div class="sg-block">
+              <p class="t-label sg-block__title">Actual size, brass</p>
+              <ul role="list" class="sg-sizes">
+                {sizes.map((s) => (
+                  <li data-logo-hover>
+                    <LogoMark concept={c.id} size={s} title="" />
+                    <span class="t-label">{s} px</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="sg-block">
+              <p class="t-label sg-block__title">Actual size, bone</p>
+              <ul role="list" class="sg-sizes sg-sizes--bone">
+                {sizes.map((s) => (
+                  <li data-logo-hover>
+                    <LogoMark concept={c.id} size={s} title="" />
+                    <span class="t-label">{s} px</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="sg-block">
+              <p class="t-label sg-block__title">Favicon pixels, 16 px enlarged 8x</p>
+              <div class="sg-pixels">
+                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#C8963E" data-bg="#0E1116" role="img" aria-label={`Concept ${c.id.toUpperCase()} rendered at 16 pixels, brass on ink, enlarged`}></canvas>
+                <canvas class="sg-pixel" width="16" height="16" data-pixel={c.id} data-fg="#0E1116" data-bg="#EDE8DF" role="img" aria-label={`Concept ${c.id.toUpperCase()} rendered at 16 pixels, ink on bone, enlarged`}></canvas>
+              </div>
+            </div>
+            <div class="sg-block">
+              <p class="t-label sg-block__title">Lockup with wordmark</p>
+              <div class="sg-lockups">
+                <span class="sg-lockup sg-lockup--lg" data-logo-hover>
+                  <LogoMark concept={c.id} size={56} title="" />
+                  <span class="wordmark">tenonpath</span>
+                </span>
+                <span class="sg-lockup sg-lockup--sm" data-logo-hover>
+                  <LogoMark concept={c.id} size={24} title="" />
+                  <span class="wordmark">tenonpath</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <!-- 02 Color -->
+  <section id="color" class="section container sg-section">
+    <MeasureLine label="COLOR / 9 TOKENS FROM BRAND.MD" />
+    <div class="sg-head">
+      <SectionLabel number="02" label="COLOR" />
+      <h2 class="t-h3">The drafting table at night.</h2>
+      <p class="t-dim measure-text">
+        Contrast ratios are measured against ink unless noted. Teal and red are reserved for data. Brass is the only
+        accent.
+      </p>
+    </div>
+    <ul role="list" class="sg-swatches">
+      {colors.map((c) => (
+        <li class="sg-swatch">
+          <span class="sg-swatch__chip" style={`background:${c.hex}`}></span>
+          <span class="t-label">{c.token}</span>
+          <span class="t-mono t-small">{c.hex}</span>
+          <span class="t-small t-dim">{c.use}</span>
+          <span class="t-label sg-swatch__ratio">{c.contrast}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="sg-sub">
+      <p class="t-label sg-block__title">Added in phase 1, for your approval</p>
+      <p class="t-dim t-small measure-text">
+        The brand palette fails contrast in a few places: brass-soft as text, brass and bone-dim on the bone
+        section, and rule as an input border. These four tokens fix that without changing the look.
+      </p>
+      <ul role="list" class="sg-swatches">
+        {added.map((c) => (
+          <li class="sg-swatch">
+            <span class="sg-swatch__chip" style={`background:${c.hex}`}></span>
+            <span class="t-label">{c.token}</span>
+            <span class="t-mono t-small">{c.hex}</span>
+            <span class="t-small t-dim">{c.use}</span>
+            <span class="t-label sg-swatch__ratio">{c.contrast}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="sg-sub">
+      <p class="t-label sg-block__title">Inverted section (pricing, one or two per page at most)</p>
+      <div class="section--inverted sg-inverted">
+        <SectionLabel number="07" label="PRICING" />
+        <p class="t-display">Know the cost before we start.</p>
+        <div class="sg-inverted__row">
+          <p class="t-h4">Dashboard. <span class="t-figure sg-inverted__price">From $2,500.</span></p>
+          <p class="t-dim">Typical timeline: 2 to 4 weeks.</p>
+        </div>
+        <p class="t-small t-dim">
+          Every project gets a written fixed quote before work starts. Kenyan clients: pricing in KSh on request.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Type -->
+  <section id="type" class="section container sg-section">
+    <MeasureLine label="TYPE / GENERAL SANS + IBM PLEX MONO" />
+    <div class="sg-head">
+      <SectionLabel number="03" label="TYPE" />
+      <h2 class="t-h3">Two families, one scale.</h2>
+      <p class="t-dim measure-text">
+        Sizes are fluid between 360px and 1440px wide. Resize the window to see them move. Both families are self
+        hosted, with metric-matched fallbacks so nothing jumps when they load.
+      </p>
+    </div>
+
+    <dl class="sg-type">
+      <div class="sg-type__row">
+        <dt class="t-label">Hero<br />General Sans 600<br />56 to 120 px, -0.02em</dt>
+        <dd><p class="t-hero">Your systems, joined.</p></dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Display<br />General Sans 600<br />36 to 68 px, -0.02em</dt>
+        <dd><p class="t-display">Five systems. One analyst. Every Monday.</p></dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Heading 3<br />General Sans 500<br />24 to 32 px</dt>
+        <dd><p class="t-h3">Integrations and automations</p></dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Heading 4<br />General Sans 500<br />19 to 22 px</dt>
+        <dd><p class="t-h4">Fixed scope and price.</p></dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Lead<br />General Sans 400<br />19 to 22 px, bone-dim</dt>
+        <dd>
+          <p class="t-lead measure-text">
+            Your property system, task board, spreadsheets and inbox each hold part of the picture. We connect them
+            into one clear view your team can trust, built exactly to how you work.
+          </p>
+        </dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Body<br />General Sans 400<br />17 to 18 px, 1.6</dt>
+        <dd>
+          <p class="measure-text">
+            The data is all there. It is just in five places. So someone exports, pastes, reconciles and rebuilds the
+            same numbers every week, and the answer to "what's our occupancy?" still takes an hour.
+          </p>
+        </dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Small<br />General Sans 400<br />15 px</dt>
+        <dd>
+          <p class="t-small t-dim measure-text">
+            Every project gets a written fixed quote before work starts. Kenyan clients: pricing in KSh on request.
+          </p>
+        </dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Label<br />Plex Mono 500<br />13 px, +0.08em, caps</dt>
+        <dd><p class="t-label">5 SYSTEMS / 1 VIEW / UPDATED LIVE</p></dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Timeline<br />Plex Mono 400<br />15 px</dt>
+        <dd>
+          <ul role="list" class="sg-timeline t-mono t-small">
+            <li><span class="t-dim">MON 08:10</span> Export the rent roll</li>
+            <li><span class="t-dim">MON 08:40</span> Paste it into the master spreadsheet</li>
+            <li><span class="t-dim">MON 09:30</span> Check the task board for what moved</li>
+          </ul>
+        </dd>
+      </div>
+      <div class="sg-type__row">
+        <dt class="t-label">Figures<br />Plex Mono 400<br />tabular numbers</dt>
+        <dd>
+          <dl class="sg-figures">
+            <div><dt class="t-label t-dim">Occupancy</dt><dd class="t-figure sg-figures__value">94.2%</dd></div>
+            <div><dt class="t-label t-dim">Collected this month</dt><dd class="t-figure sg-figures__value sg-figures__value--data">$412,860</dd></div>
+            <div><dt class="t-label t-dim">Past due</dt><dd class="t-figure sg-figures__value sg-figures__value--alert">$18,240</dd></div>
+            <div><dt class="t-label t-dim">Open tasks</dt><dd class="t-figure sg-figures__value">37</dd></div>
+          </dl>
+          <p class="t-small t-dim sg-note">Teal and red appear here only because these are data values.</p>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 04 Buttons -->
+  <section id="buttons" class="section container sg-section">
+    <MeasureLine label="BUTTONS / 2PX CORNERS, NO SHADOWS" />
+    <div class="sg-head">
+      <SectionLabel number="04" label="BUTTONS AND LINKS" />
+      <h2 class="t-h3">One primary action per view.</h2>
+      <p class="t-dim measure-text">
+        Hover to see the arrow slide and stop. Press Tab to see the brass focus ring. The specimens on this page link
+        back to this section.
+      </p>
+    </div>
+
+    <div class="sg-buttons">
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Primary</p>
+        <div class="sg-row">
+          <a class="btn btn--primary" href="#buttons">Start a project</a>
+          <a class="btn btn--primary" href="#buttons">
+            See the live demo
+            <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+          </a>
+        </div>
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Secondary</p>
+        <div class="sg-row">
+          <a class="btn btn--secondary" href="#buttons">
+            Open the full demo
+            <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+          </a>
+        </div>
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Text link CTA</p>
+        <div class="sg-row">
+          <a class="text-cta" href="#buttons">
+            Start a project
+            <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+          </a>
+        </div>
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Inline link</p>
+        <p>Prefer email? <a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a></p>
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Focus state (shown static)</p>
+        <div class="sg-row">
+          <span class="btn btn--primary sg-focus" aria-hidden="true">Start a project</span>
+          <span class="btn btn--secondary sg-focus" aria-hidden="true">Open the full demo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Section labels -->
+  <section id="labels" class="section container sg-section">
+    <MeasureLine label="LABELS / MONO, BRASS NUMBER" />
+    <div class="sg-head">
+      <SectionLabel number="05" label="SECTION LABELS" />
+      <h2 class="t-h3">Every homepage section, numbered.</h2>
+    </div>
+    <ol role="list" class="sg-labels">
+      {labels.map(([n, l]) => (
+        <li>
+          <SectionLabel number={n} label={l} as="span" />
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- 06 Rules -->
+  <section id="rules" class="section container sg-section">
+    <MeasureLine label="RULES / DRAW ONCE ON ENTER" />
+    <div class="sg-head">
+      <SectionLabel number="06" label="RULES AND DIVIDERS" />
+      <h2 class="t-h3">Thin, exact lines.</h2>
+      <p class="t-dim measure-text">
+        Measurement lines draw outward from their label the first time they scroll into view. With reduced motion on,
+        they are simply there.
+      </p>
+    </div>
+    <div class="sg-rules">
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Hairline</p>
+        <hr class="sg-hairline" />
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Dimension line with label</p>
+        <MeasureLine label="1,240 SF" />
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Demo frame label</p>
+        <MeasureLine label="LIVE DEMO / FICTIONAL DATA" />
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Dimension line, no label</p>
+        <MeasureLine />
+      </div>
+      <div class="sg-block">
+        <p class="t-label sg-block__title">Ruler (footer top border)</p>
+        <MeasureLine variant="ruler" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Grid -->
+  <section id="grid" class="section container sg-section">
+    <MeasureLine label="GRID / 12 COLUMNS / 1440 PX MAX" />
+    <div class="sg-head">
+      <SectionLabel number="07" label="GRID" />
+      <h2 class="t-h3">Twelve columns, wide.</h2>
+      <p class="t-dim measure-text">
+        Content runs up to 1440px with fluid side padding: 20px on phones, 48 to 80px on desktop. The hero splits 5 and
+        7 columns.
+      </p>
+    </div>
+    <div class="grid-12 sg-grid" aria-hidden="true">
+      {Array.from({ length: 12 }, (_, i) => <span class="sg-grid__col t-label">{i + 1}</span>)}
+    </div>
+    <div class="grid-12 sg-grid sg-grid--split" aria-hidden="true">
+      <span class="sg-grid__span sg-grid__span--5 t-label">5 / Text</span>
+      <span class="sg-grid__span sg-grid__span--7 t-label">7 / Joinery animation</span>
+    </div>
+  </section>
+
+  <!-- 08 Motion -->
+  <section id="motion" class="section container sg-section">
+    <MeasureLine label="MOTION / SLIDE, STOP, SETTLE" />
+    <div class="sg-head">
+      <SectionLabel number="08" label="MOTION" />
+      <h2 class="t-h3">Like a well made joint.</h2>
+      <p class="t-dim measure-text">
+        One axis, a short ease in, a firm stop, then a 1px settle. No bounce, no spin. Smooth scrolling is on unless
+        your system asks for reduced motion.
+      </p>
+      <p class="t-label sg-motion-status" aria-live="polite">
+        Reduced motion: <span data-motion-status class="sg-motion-status__value">checking</span>
+      </p>
+    </div>
+
+    <div class="sg-joint" data-joint>
+      <div class="sg-joint__track">
+        <div class="sg-joint__mortise" aria-hidden="true">
+          <span class="t-label">Mortise</span>
+        </div>
+        <div class="sg-joint__tenon" data-joint-tenon aria-hidden="true">
+          <span class="t-label">Tenon</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn--secondary" data-joint-play>
+        Play the joint
+        <svg class="btn__arrow" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+      </button>
+    </div>
+
+    <ul role="list" class="sg-reveals">
+      <li data-reveal class="sg-reveal"><span class="t-label">Reveal</span> Slides 16px up and fades in once.</li>
+      <li data-reveal class="sg-reveal"><span class="t-label">Ease</span> power3.out and expo.out, 0.4 to 0.9s.</li>
+      <li data-reveal class="sg-reveal"><span class="t-label">Reduced</span> End states only, native scroll.</li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<script>
+  import '../scripts/logo';
+  import { gsap, prefersReducedMotion } from '../scripts/motion';
+  import { MARKS, type Concept } from '../data/logo-marks';
+
+  /* Favicon pixel previews: rasterise each mark at 16px exactly as a browser tab would. */
+  document.querySelectorAll<HTMLCanvasElement>('canvas[data-pixel]').forEach((canvas) => {
+    const mark = MARKS[canvas.dataset.pixel as Concept];
+    const { fg = '#C8963E', bg = '#0E1116' } = canvas.dataset;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16"><path d="${mark.fixed}" fill="${fg}"/><path d="${mark.tenon}" fill="${fg}"/></svg>`;
+    const img = new Image();
+    img.onload = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, 16, 16);
+      ctx.drawImage(img, 0, 0, 16, 16);
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
+
+  /* Reduced motion readout */
+  const status = document.querySelector<HTMLElement>('[data-motion-status]');
+  const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const showStatus = () => {
+    if (status) status.textContent = query.matches ? 'on. End states only.' : 'off. Full motion.';
+  };
+  showStatus();
+  query.addEventListener('change', showStatus);
+
+  /* Joint demo: tenon slides along one axis, stops 1px short, presses home. */
+  const tenon = document.querySelector<HTMLElement>('[data-joint-tenon]');
+  const play = document.querySelector<HTMLButtonElement>('[data-joint-play]');
+  if (tenon && play) {
+    play.addEventListener('click', () => {
+      if (prefersReducedMotion()) return;
+      const track = tenon.parentElement!;
+      const travel = track.clientWidth * 0.45;
+      gsap.killTweensOf(tenon);
+      gsap
+        .timeline()
+        .set(tenon, { x: travel })
+        .to(tenon, { x: 1, duration: 0.6, ease: 'expo.out' })
+        .to(tenon, { x: 0, duration: 0.14, ease: 'power3.out' });
+    });
+  }
+</script>
+
+<style>
+  /* ---------- Intro ---------- */
+  .sg-intro {
+    display: grid;
+    gap: var(--space-5);
+    padding-block: var(--space-9) var(--space-6);
+  }
+  .sg-toc ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    border-top: 1px solid var(--rule);
+    margin-top: var(--space-5);
+  }
+  .sg-toc__link {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-3) var(--space-2) var(--space-3) 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--bone-dim);
+    transition: color var(--dur-1) var(--ease-out);
+  }
+  .sg-toc__link:hover {
+    color: var(--bone);
+  }
+  .sg-toc__num {
+    color: var(--brass);
+  }
+
+  /* ---------- Sections ---------- */
+  .sg-section {
+    display: grid;
+    gap: var(--space-7);
+    padding-block: var(--space-9);
+  }
+  .sg-head {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .sg-sub {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .sg-block {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+  }
+  .sg-block__title {
+    color: var(--bone-dim);
+  }
+  .sg-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  .sg-note {
+    margin-top: var(--space-3);
+  }
+
+  /* ---------- Logo concepts ---------- */
+  .sg-concept {
+    display: grid;
+    gap: var(--space-6);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--rule);
+  }
+  .sg-concept__info {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+  .sg-concept__info .btn {
+    justify-self: start;
+  }
+  .sg-concept__kicker {
+    color: var(--brass);
+  }
+
+  .sg-stage {
+    position: relative;
+    width: 100%;
+    max-width: 26rem;
+    aspect-ratio: 1;
+    border: 1px solid var(--rule);
+    background: var(--ink);
+  }
+  .sg-stage__grid,
+  .sg-stage__mark {
+    position: absolute;
+    inset: 12%;
+  }
+  .sg-stage__grid {
+    width: 76%;
+    height: 76%;
+    overflow: visible;
+  }
+  .sg-stage__grid line {
+    stroke: var(--rule);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.6;
+  }
+  .sg-stage__grid line.major {
+    stroke: var(--rule-strong);
+    opacity: 0.7;
+  }
+  .sg-stage__mark :global(svg) {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .sg-concept__details {
+    display: grid;
+    gap: var(--space-6);
+    align-content: start;
+  }
+  .sg-sizes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-6);
+  }
+  .sg-sizes li {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-2);
+  }
+  .sg-sizes .t-label {
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+  }
+  .sg-sizes--bone :global(.logo-mark) {
+    color: var(--bone);
+  }
+
+  .sg-pixels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .sg-pixel {
+    width: 128px;
+    height: 128px;
+    image-rendering: pixelated;
+    border: 1px solid var(--rule);
+  }
+
+  .sg-lockups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6) var(--space-7);
+  }
+  .sg-lockup {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .sg-lockup--lg {
+    gap: 0.75rem;
+  }
+  .sg-lockup--lg .wordmark {
+    font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+  }
+  .sg-lockup--sm {
+    gap: 0.5rem;
+  }
+  .sg-lockup--sm .wordmark {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 960px) {
+    .sg-concept {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--gutter);
+    }
+    .sg-concept__info {
+      grid-column: 1 / span 3;
+    }
+    .sg-stage {
+      grid-column: 4 / span 4;
+      align-self: start;
+    }
+    .sg-concept__details {
+      grid-column: 8 / span 5;
+    }
+  }
+
+  /* ---------- Color ---------- */
+  .sg-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: var(--space-6) var(--gutter);
+  }
+  .sg-swatch {
+    display: grid;
+    gap: var(--space-1);
+    align-content: start;
+  }
+  .sg-swatch__chip {
+    display: block;
+    height: 5.5rem;
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--rule);
+  }
+  .sg-swatch__ratio {
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+    margin-top: var(--space-1);
+  }
+  .sg-inverted {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-8) var(--pad-x);
+  }
+  .sg-inverted__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-block: 1px solid var(--rule);
+  }
+  .sg-inverted__price {
+    color: var(--brass);
+  }
+
+  /* ---------- Type ---------- */
+  .sg-type {
+    display: grid;
+  }
+  .sg-type__row {
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--rule);
+  }
+  .sg-type__row > dt {
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+    line-height: 1.7;
+  }
+  .sg-type__row > dd {
+    margin: 0;
+    min-width: 0;
+  }
+  .sg-timeline {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .sg-timeline .t-dim {
+    display: inline-block;
+    min-width: 6.5em;
+  }
+  .sg-figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-5) var(--gutter);
+  }
+  .sg-figures dd {
+    margin: 0;
+  }
+  .sg-figures__value {
+    font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--bone);
+  }
+  .sg-figures__value--data {
+    color: var(--data);
+  }
+  .sg-figures__value--alert {
+    color: var(--alert);
+  }
+  @media (min-width: 900px) {
+    .sg-type__row {
+      grid-template-columns: 14rem 1fr;
+      gap: var(--gutter);
+    }
+  }
+
+  /* ---------- Buttons ---------- */
+  .sg-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-7) var(--gutter);
+  }
+  .sg-focus {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  /* ---------- Labels ---------- */
+  .sg-labels {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    border-top: 1px solid var(--rule);
+  }
+  .sg-labels li {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---------- Rules ---------- */
+  .sg-rules {
+    display: grid;
+    gap: var(--space-7);
+  }
+  .sg-hairline {
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ---------- Grid ---------- */
+  .sg-grid {
+    row-gap: var(--space-3);
+  }
+  .sg-grid__col,
+  .sg-grid__span {
+    display: flex;
+    align-items: flex-end;
+    min-height: 8rem;
+    padding: var(--space-2);
+    border: 1px solid var(--rule);
+    color: var(--bone-dim);
+    font-size: var(--fs-micro);
+  }
+  .sg-grid--split .sg-grid__span {
+    min-height: 5rem;
+  }
+  .sg-grid__span--5 {
+    grid-column: 1 / -1;
+    border-color: var(--brass-soft);
+  }
+  .sg-grid__span--7 {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 720px) {
+    .sg-grid__span--5 {
+      grid-column: span 5;
+    }
+    .sg-grid__span--7 {
+      grid-column: span 7;
+    }
+  }
+  @media (max-width: 599px) {
+    .sg-grid__col {
+      min-height: 5rem;
+      padding: 2px;
+    }
+  }
+
+  /* ---------- Motion ---------- */
+  .sg-motion-status__value {
+    color: var(--brass);
+  }
+  .sg-joint {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+  .sg-joint__track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 7rem;
+    border-block: 1px solid var(--rule);
+  }
+  .sg-joint__mortise,
+  .sg-joint__tenon {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    padding-inline: var(--space-4);
+    border: 1px solid var(--rule-strong);
+    color: var(--bone-dim);
+  }
+  .sg-joint__mortise {
+    position: relative;
+    width: 40%;
+    border-right-color: transparent;
+  }
+  /* The slot: a notch cut into the mortise's right edge */
+  .sg-joint__mortise::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translateY(-50%);
+    border: 1px solid var(--rule-strong);
+    border-right: 0;
+    background: var(--ink);
+  }
+  .sg-joint__tenon {
+    position: relative;
+    width: 35%;
+    margin-left: 1.5rem;
+    border-color: var(--brass);
+    color: var(--brass);
+  }
+  /* The tongue: sits inside the slot when the joint is closed */
+  .sg-joint__tenon::before {
+    content: '';
+    position: absolute;
+    left: calc(-1.5rem - 1px);
+    top: 50%;
+    width: 1.5rem;
+    height: calc(1.5rem - 6px);
+    transform: translateY(-50%);
+    border: 1px solid var(--brass);
+    border-right: 0;
+  }
+
+  .sg-reveals {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .sg-reveal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    align-items: baseline;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+    color: var(--bone-dim);
+  }
+  .sg-reveal .t-label {
+    color: var(--brass);
+    min-width: 6rem;
+  }
+</style>

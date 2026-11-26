@@ -24,11 +24,11 @@ export const MARKS: Record<Concept, MarkGeometry> = {
     axis: 'y',
     from: 12,
   },
-  // B: two offset blocks. The left one carries a notch, the right one a tongue.
-  // Together they make a square T. Travels left.
+  // B: two offset blocks, a stout square T. The left block carries a notch in its stem,
+  // the right block a tongue. The seam sits 1 unit left of center. Travels left.
   b: {
-    fixed: 'M2 4H14V16H10V26H14V28H8V14H2Z',
-    tenon: 'M16 4H30V14H24V28H16V24H12V18H16Z',
+    fixed: 'M2 2H14V14H10V24H14V30H6V12H2Z',
+    tenon: 'M16 2H30V12H26V30H16V22H12V16H16Z',
     axis: 'x',
     from: 10,
   },
