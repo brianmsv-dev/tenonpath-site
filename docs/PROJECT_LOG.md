@@ -3,7 +3,7 @@
 The running record. Newest entries at the top of each section. Anyone (Brian, the orchestrator, Claude Code) updates this at the end of a work session.
 
 ## Current phase
-**Phase 3: Homepage sections**: in progress.
+**Phase 3: Homepage sections**: built, waiting at the review gate.
 
 ## Phases
 ### Phase 1: Foundation
@@ -23,8 +23,8 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - **Review gate:** Brian approves the hero. Done 2026-11-26 with changes (see Decisions).
 
 ### Phase 3: Homepage sections
-- [ ] Sections 02 to 10 per SITE_SPEC and COPY (demo section uses a placeholder frame until phase 4)
-- [ ] Contact form UI (submission wired in phase 5)
+- [x] Sections 02 to 10 per SITE_SPEC and COPY (demo section uses a placeholder frame until phase 4)
+- [x] Contact form UI (submission wired in phase 5)
 - **Review gate**
 
 ### Phase 4: Demo dashboard
@@ -42,6 +42,13 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Claude Code, phase 3): 02 Problem. "A thin brass line strikes through the whole list" is built as one brass line through each row, drawn in quick succession after the rows slide in, then "Or: open one dashboard." appears in brass. Plays once on enter.
+- 2026-11-26 (Claude Code, phase 3): 05 Process. SITE_SPEC says the brass line draws "as the user scrolls"; BRAND says scrub only the hero. SITE_SPEC wins (authority order), so the line is scroll-scrubbed but not pinned. Each tick locks when the line reaches it. Horizontal from 900px, vertical below.
+- 2026-11-26 (Claude Code, phase 3): 04 Demo uses COPY.md's split (body, then the note "Fictional portfolio. Real build quality.") rather than SITE_SPEC's one-line note; the body already carries "connected to your own systems". The frame is 16:9 with dimension lines, brass corner marks and a build marker inside ("Placeholder / interactive demo arrives in phase 4") that phase 4 removes. "Open the full demo" links to /demo, which 404s until phase 4.
+- 2026-11-26 (Claude Code, phase 3): 06 and 09 have no single headline in COPY. 06 uses its two column headlines as h2s; 09 uses its section label "09 / QUESTIONS" as the h2. FAQ is native <details>, so it works with the keyboard and without JS; FAQPage schema is generated from the same data (src/data/faq.ts).
+- 2026-11-26 (Claude Code, phase 3): 07 Pricing prints prices without the trailing full stops used in COPY ("From $2,500"), since they are set as figures; "per month" is set smaller after $200. Words unchanged.
+- 2026-11-26 (Claude Code, phase 3): 10 Contact. All fields required except "How did you hear about us? (optional)", as COPY implies. Field error messages are new wording (plain, short), the form error is COPY's. Hidden honeypot field. Until phase 5 there is no backend: if PUBLIC_FORM_ENDPOINT is empty, Send opens the visitor's email app with the message filled in to hello@tenonpath.com and says so; the "Received" state only shows after a server accepts the message. Preview the states with /?form=success#contact and /?form=error#contact.
+- 2026-11-26 (Claude Code, phase 3): Optional "stack" line in 08 About left out (optional in SITE_SPEC, and no approved copy).
 - 2026-11-26 (Brian, phase 2 review): Layout fills the screen. Side padding 20px on mobile, 32 to 40px on desktop (was 48 to 80px); max content width raised, only very wide screens center. Set globally in tokens and in SITE_SPEC's Grid line. Claude Code set the max to 1840px rather than 1760px: the container is max width plus 2 x 40px padding, so 1840px is what lets a 1920px screen fill edge to edge with only very wide screens (2560px) centering. Lower it if you prefer 1760px.
 - 2026-11-26 (Brian, phase 2 review): Joinery drawing scaled up about 25 to 30% on desktop to fill the right 7 columns, vertically centered with the headline block; snippet text readable at 1440px (mono, dim). Checked at 1280, 1440, 1920 and 2560px.
 - 2026-11-26 (Brian, phase 2 review): Source blocks stay visible but dimmed in the end state. Not folded away.
@@ -74,7 +81,8 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - 2026-11-26: Brian chose to start from our own design direction (drafting table at night) before gathering outside inspiration, to stay original.
 
 ## Open questions (for Brian)
-- [ ] Header, footer and hero link to anchors and routes that do not exist yet (#demo, #contact, #services, /demo, /real-estate, /privacy and so on). They come alive in phases 3 to 5. Fine while the site is not deployed.
+- [ ] Footer and demo section link to routes that do not exist yet (/demo, /real-estate, /privacy). They arrive in phases 4 and 5. All homepage anchors (#demo, #services, #process, #pricing, #contact) now work.
+- [ ] Phase 3 review: field error wording, which form fields are required, and the problem strike-through treatment.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
 
 ## Account and infrastructure notes
@@ -91,6 +99,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Invoice template
 
 ## Session notes
+- 2026-11-26 (Claude Code): Phase 2 review applied (wider layout, larger hero drawing, play-once end-state guarantees, decisions logged). Phase 3 built: sections 02 to 10, demo placeholder frame, contact form UI. All JS about 54 KB gzipped. Checked in headless Chrome at 360, 768, 1280, 1440, 1920 and 2560px, motion on and off: no horizontal scroll, one h1, no console errors. Interaction checks passed: problem timeline completes, process ticks lock 1 to 4 with scroll, FAQ toggles, empty submit shows 6 errors and focuses Name, bad email flagged, email-app fallback, success and error previews. Hero ends on 94.2% / $412,860 / $18,240 / 37 with the chart drawn in all 9 scenarios (normal, fast scroll past, hidden tab, loaded below the hero, reduced motion, scrub, jump). Not yet checked on real phones or Safari; Lighthouse is phase 5. Stopped at the phase 3 review gate.
 - 2026-11-26 (Claude Code): Phase 1 review applied (refined Concept A, B and C dropped, log cleaned). Phase 2 built: hero, joinery animation, header logo with slide-in, favicon set. Homepage JS about 53 KB gzipped. Checked in headless Chrome at 360, 768, 1024, 1440 and 2560px with motion on and off: no horizontal scroll, one h1 per page, no console errors; scrubbed sequence checked frame by frame (0/5 to 5/5, figures counting, chart drawing). Not yet checked on real phones or Safari. Stopped at the phase 2 review gate.
 - 2026-11-26 (Claude Code): Phase 1 built. Astro 7.4 static, GSAP 3.15, Lenis 1.3 (all in the Stack list, no other dependencies). Homepage JS is about 51 KB gzipped (budget 120 KB). Checked in headless Chrome at 360, 768, 1440 and 2560px, with motion on and off: no horizontal scroll, no console errors, mobile menu traps focus, closes on Escape and returns focus. Lighthouse not run yet (full audit is phase 5). Run locally with `npm install`, `npm run dev`, then open http://localhost:4321/styleguide. Stopped at the phase 1 review gate.
 - 2026-11-26 (orchestrator): Created CLAUDE.md, BRAND.md, SITE_SPEC.md, COPY.md, this log and company docs v1. Next: Brian opens Claude Code in VS Code and starts Phase 1.
