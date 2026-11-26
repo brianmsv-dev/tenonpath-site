@@ -68,6 +68,13 @@ async function load(file, encoding) {
 }
 
 createServer(async (req, res) => {
+  // One canonical host: send www.tenonpath.com to tenonpath.com, keeping the path.
+  const host = (req.headers.host || '').toLowerCase();
+  if (host.startsWith('www.')) {
+    res.writeHead(301, { Location: `https://${host.slice(4)}${req.url || '/'}` }).end();
+    return;
+  }
+
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.writeHead(405, { Allow: 'GET, HEAD' }).end();
     return;
