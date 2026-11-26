@@ -1,0 +1,107 @@
+---
+/*
+  /privacy. Copy: docs/COPY.md > /privacy, word for word. "[Formspree]" and "[GoDaddy]" are
+  filled as written (Formspree, GoDaddy).
+
+  LAST_UPDATED must be the launch date (the day the site first goes live). It is set to the date
+  this page was built for review; change it on launch day if launch is later.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const LAST_UPDATED = '2026-11-26'; // TODO at launch: set to the actual launch date
+const lastUpdated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(
+  new Date(LAST_UPDATED + 'T00:00:00Z'),
+);
+---
+
+<BaseLayout title="Privacy | Tenonpath">
+  <article class="container privacy">
+    <header class="privacy__head">
+      <h1 class="t-display">Privacy</h1>
+      <p class="t-label privacy__date">Last updated: <time datetime={LAST_UPDATED}>{lastUpdated}</time></p>
+      <p class="t-lead">
+        This page explains what information Tenonpath collects through this website and what we do with it. We keep it
+        short because we collect very little.
+      </p>
+    </header>
+
+    <section>
+      <h2 class="t-h4">What we collect</h2>
+      <p>
+        When you use the contact form, we collect what you type into it: your name, email address, and anything else you
+        choose to share, such as your company, the systems you use, what you want to see, your budget range and how you
+        heard about us. If you email us directly, we receive your email address and your message.
+      </p>
+      <p>
+        We do not use advertising cookies or tracking pixels. The live demo's "Make it yours" controls run only in your
+        browser. Nothing you type there is stored or sent to us.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="t-h4">How we use it</h2>
+      <p>
+        Only to reply to you, discuss a possible project and keep a record of our conversation. We do not sell, rent or
+        share your information for marketing.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="t-h4">Who processes it</h2>
+      <p>
+        Form submissions are delivered to our inbox through our form provider Formspree, and our email is hosted by
+        GoDaddy. The site is hosted on Railway. These providers process data on our behalf to run those services.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="t-h4">How long we keep it</h2>
+      <p>
+        We keep enquiries for up to 24 months, or longer if we start working together, so we have a record of the
+        project. You can ask us to delete your information at any time.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="t-h4">Your choices</h2>
+      <p>
+        You can ask to see, correct or delete the information we hold about you by emailing{' '}
+        <a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="t-h4">Contact</h2>
+      <p>Tenonpath, Nairobi, Kenya. <a class="link" href="mailto:hello@tenonpath.com">hello@tenonpath.com</a></p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .privacy {
+    display: grid;
+    gap: var(--space-7);
+    max-width: calc(46rem + 2 * var(--pad-x));
+    margin-inline: 0;
+    padding-block: var(--space-9);
+  }
+  .privacy__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .privacy__date {
+    color: var(--bone-dim);
+  }
+  .privacy section {
+    display: grid;
+    gap: var(--space-3);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rule);
+  }
+  .privacy section p {
+    color: var(--bone-dim);
+  }
+  .privacy section .link {
+    color: var(--bone);
+  }
+</style>

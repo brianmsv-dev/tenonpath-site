@@ -1,8 +1,8 @@
 // sitemap.xml: public pages only (not /styleguide, /demo/embed or the 404).
-// Add /real-estate/ and /privacy/ here when those pages exist.
+// Every public page. Keep in sync when pages are added.
 import type { APIRoute } from 'astro';
 
-const PAGES = ['/', '/demo/'];
+const PAGES = ['/', '/real-estate/', '/demo/', '/privacy/'];
 
 export const GET: APIRoute = ({ site }) => {
   const base = site ?? new URL('https://tenonpath.com');
