@@ -1,9 +1,14 @@
 ---
 // Leases: expirations and critical dates in the next 180 days. Sortable by date, type, tenant
 // and property (header buttons; rows carry their sort keys as data-*).
+// cap (embed): first rows plus "Showing N of M" and a link to /demo. Sorting re-applies the cap.
 import { criticalDates, fmt } from '../../lib/demo';
 
-const rows = [...criticalDates].sort((a, b) => a.time - b.time);
+interface Props {
+  cap?: number;
+}
+const { cap } = Astro.props;
+const rows = criticalDates;
 const expiring = rows.filter((r) => r.type === 'Lease expiration').length;
 const soon = rows.filter((r) => r.days <= 30).length;
 ---
@@ -14,7 +19,7 @@ const soon = rows.filter((r) => r.days <= 30).length;
     <span class="demo-meta">{rows.length} dates, {expiring} expirations, {soon} within 30 days</span>
   </div>
   <div class="dt-wrap">
-    <table class="dt" data-sortable>
+    <table class="dt" data-sortable data-cap={cap}>
       <thead>
         <tr>
           <th scope="col" aria-sort="ascending"><button type="button" class="sort" data-sort-key="date">Date</button></th>
@@ -27,10 +32,10 @@ const soon = rows.filter((r) => r.days <= 30).length;
       </thead>
       <tbody>
         {
-          rows.map((r) => (
-            <tr data-date={r.time} data-type={r.type} data-tenant={r.tenant} data-property={r.property}>
-              <td class="num">{fmt.date(r.time)}</td>
-              <td class:list={['num', r.days <= 30 && 'is-alert']} data-label="Days away">
+          rows.map((r, i) => (
+            <tr data-date={r.time} data-type={r.type} data-tenant={r.tenant} data-property={r.property} hidden={cap !== undefined && i >= cap}>
+              <td>{fmt.date(r.time)}</td>
+              <td class:list={[r.days <= 30 && 'is-alert']} data-label="Days away">
                 {r.days === 0 ? 'Today' : `${r.days}`}
               </td>
               <td data-label="Type">{r.type}</td>
@@ -48,4 +53,14 @@ const soon = rows.filter((r) => r.days <= 30).length;
       </tbody>
     </table>
   </div>
+  {
+    cap !== undefined && rows.length > cap && (
+      <p class="demo-more">
+        <span>
+          Showing {cap} of {rows.length}.
+        </span>
+        <a href="/demo#leases">Open the full demo</a>
+      </p>
+    )
+  }
 </section>

@@ -1,22 +1,51 @@
 /*
-  Demo dashboard behaviour (docs/SITE_SPEC.md > /demo). Pure DOM, no framework.
+  Demo behaviour (docs/SITE_SPEC.md > /demo). Pure DOM, no framework.
+  - "Make it yours": company name (live, max 40 chars), theme, accent. Applied in the browser
+    only. Nothing is stored (no cookies, no localStorage) and nothing is sent anywhere.
   - Tabs: WAI-ARIA tab pattern (arrow keys, Home, End). On /demo the view is kept in the URL
     hash so it can be shared (/demo#collections).
-  - Collections: property filter hides rows and recomputes the aging buckets and counts.
+  - Collections: property filter hides rows and recomputes aging buckets, counts and totals.
   - Leases: sortable columns with aria-sort.
+  - Row caps (embed): tables with data-cap show only their first N matching rows.
   initDemo() is called by /demo directly and by the homepage after the embed is fetched.
 */
 const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const usd = (cents: number) => usd0.format(cents / 100);
 
 export function initDemo(root: HTMLElement) {
   if (root.dataset.ready) return;
   root.dataset.ready = 'true';
-  const useHash = root.dataset.variant === 'full';
-  initTabs(root, useHash);
+  initMakeItYours(root);
+  initTabs(root, root.dataset.variant === 'full');
   initFilter(root);
   initSort(root);
 }
 
+/* ---------- Make it yours ---------- */
+function initMakeItYours(root: HTMLElement) {
+  const product = root.querySelector<HTMLElement>('[data-demo-product]');
+  if (!product) return;
+  const fallback = root.dataset.defaultName || '';
+
+  const name = root.querySelector<HTMLInputElement>('[data-myo-name]');
+  name?.addEventListener('input', () => {
+    const value = name.value.slice(0, 40).trim() || fallback;
+    root.querySelectorAll<HTMLElement>('[data-company-name]').forEach((el) => (el.textContent = value));
+  });
+
+  root.querySelectorAll<HTMLInputElement>('[data-myo-theme]').forEach((input) =>
+    input.addEventListener('change', () => {
+      if (input.checked) product.dataset.theme = input.value;
+    }),
+  );
+  root.querySelectorAll<HTMLInputElement>('[data-myo-accent]').forEach((input) =>
+    input.addEventListener('change', () => {
+      if (input.checked) product.dataset.accent = input.value;
+    }),
+  );
+}
+
+/* ---------- Tabs ---------- */
 function initTabs(root: HTMLElement, useHash: boolean) {
   const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
   const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
@@ -54,6 +83,17 @@ function initTabs(root: HTMLElement, useHash: boolean) {
   }
 }
 
+/* ---------- Row caps ---------- */
+/** Show only the first `cap` rows that match; update the "Showing N of M" line if there is one. */
+function applyCap(table: HTMLTableElement, matches: HTMLTableRowElement[], moreText?: HTMLElement | null) {
+  const cap = Number(table.dataset.cap) || Infinity;
+  matches.forEach((tr, i) => (tr.hidden = i >= cap));
+  if (moreText) {
+    moreText.textContent = matches.length > cap ? `Showing ${cap} of ${matches.length}.` : `Showing all ${matches.length}.`;
+  }
+}
+
+/* ---------- Collections filter ---------- */
 function initFilter(root: HTMLElement) {
   const select = root.querySelector<HTMLSelectElement>('[data-filter-property]');
   if (!select) return;
@@ -63,52 +103,51 @@ function initFilter(root: HTMLElement) {
 
   const apply = () => {
     const id = select.value;
-    const show = (tr: HTMLElement) => !id || tr.dataset.property === id;
+    const matches = (tr: HTMLElement) => !id || tr.dataset.property === id;
 
     const sums: Record<string, number> = { d0_30: 0, d31_60: 0, d61_90: 0, d90p: 0 };
-    let balanceRows = 0;
-    balances?.querySelectorAll<HTMLTableRowElement>('tbody tr[data-property]').forEach((tr) => {
-      const on = show(tr);
+    const balanceRows = [...(balances?.querySelectorAll<HTMLTableRowElement>('tbody tr[data-property]') ?? [])];
+    let balanceCount = 0;
+    balanceRows.forEach((tr) => {
+      const on = matches(tr);
       tr.hidden = !on;
       if (!on) return;
-      balanceRows++;
+      balanceCount++;
       buckets.forEach((b) => (sums[b] += Number(tr.dataset[b as keyof DOMStringMap]) || 0));
     });
     const total = buckets.reduce((s, b) => s + sums[b], 0);
     buckets.forEach((b) => {
       const el = root.querySelector<HTMLElement>(`[data-sum="${b}"]`);
       if (el) {
-        el.textContent = usd0.format(sums[b]);
+        el.textContent = usd(sums[b]);
         el.classList.toggle('is-alert', sums[b] > 0);
       }
     });
     const totalEl = root.querySelector<HTMLElement>('[data-sum="total"]');
     if (totalEl) {
-      totalEl.textContent = usd0.format(total);
+      totalEl.textContent = usd(total);
       totalEl.classList.toggle('is-alert', total > 0);
     }
-    balances?.querySelector<HTMLElement>('[data-empty]')?.toggleAttribute('hidden', balanceRows > 0);
+    balances?.querySelector<HTMLElement>('[data-empty]')?.toggleAttribute('hidden', balanceCount > 0);
     const balCount = root.querySelector<HTMLElement>('[data-count="balances"]');
-    if (balCount) balCount.textContent = `${balanceRows} ${balanceRows === 1 ? 'tenant' : 'tenants'}`;
+    if (balCount) balCount.textContent = `${balanceCount} ${balanceCount === 1 ? 'tenant' : 'tenants'}`;
 
-    let paidRows = 0;
-    let paidSum = 0;
-    paid?.querySelectorAll<HTMLTableRowElement>('tbody tr[data-property]').forEach((tr) => {
-      const on = show(tr);
-      tr.hidden = !on;
-      if (on) {
-        paidRows++;
-        paidSum += Number(tr.dataset.amount) || 0;
-      }
-    });
-    paid?.querySelector<HTMLElement>('[data-empty]')?.toggleAttribute('hidden', paidRows > 0);
-    const paidCount = root.querySelector<HTMLElement>('[data-count="paid"]');
-    if (paidCount) paidCount.textContent = `${paidRows} ${paidRows === 1 ? 'payment' : 'payments'}, ${usd0.format(paidSum)}`;
+    if (paid) {
+      const rows = [...paid.querySelectorAll<HTMLTableRowElement>('tbody tr[data-property]')];
+      const on = rows.filter(matches);
+      rows.forEach((tr) => (tr.hidden = !matches(tr)));
+      applyCap(paid, on, root.querySelector<HTMLElement>('[data-more="paid"] [data-more-text]'));
+      const paidSum = on.reduce((s, tr) => s + (Number(tr.dataset.amount) || 0), 0);
+      paid.querySelector<HTMLElement>('[data-empty]')?.toggleAttribute('hidden', on.length > 0);
+      const paidCount = root.querySelector<HTMLElement>('[data-count="paid"]');
+      if (paidCount) paidCount.textContent = `${on.length} ${on.length === 1 ? 'payment' : 'payments'}, ${usd(paidSum)}`;
+    }
   };
 
   select.addEventListener('change', apply);
 }
 
+/* ---------- Sorting ---------- */
 function initSort(root: HTMLElement) {
   root.querySelectorAll<HTMLTableElement>('table[data-sortable]').forEach((table) => {
     const body = table.tBodies[0];
@@ -127,11 +166,11 @@ function initSort(root: HTMLElement) {
           const x = a.dataset[key] ?? '';
           const y = b.dataset[key] ?? '';
           const c = numeric ? Number(x) - Number(y) : x.localeCompare(y);
-          // Ties keep date order so groups read chronologically
-          const tie = Number(a.dataset.date) - Number(b.dataset.date);
+          const tie = Number(a.dataset.date) - Number(b.dataset.date); // ties read chronologically
           return (dir === 'ascending' ? c : -c) || tie;
         });
         body.append(...rows);
+        if (table.dataset.cap) applyCap(table, rows);
       });
     });
   });

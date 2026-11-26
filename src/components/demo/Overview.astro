@@ -1,86 +1,108 @@
 ---
-// Overview: key figures, collections by week, properties table.
-import { keyFigures, weekly, propertyRows, fmt } from '../../lib/demo';
+/*
+  Overview: key figures, collected this month vs last month, properties table.
+  photos (only on /demo): a thumbnail per property. Photos are read from
+  src/assets/demo/photos/property-1.jpg ... property-8.jpg (jpg, jpeg, png or webp) and resized
+  and converted to WebP at build by Astro's image pipeline. Until a photo exists, a line icon for
+  the asset type is shown instead.
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PropertyIcon from './PropertyIcon.astro';
+import {
+  keyFigures,
+  propertyRows,
+  cumulativeThisMonth,
+  cumulativeLastMonth,
+  lastMonthAtSameDay,
+  AS_OF,
+  AS_OF_DAY,
+  THIS_MONTH,
+  LAST_MONTH,
+  LAST_MONTH_DAYS,
+  fmt,
+} from '../../lib/demo';
 
 interface Props {
-  compact?: boolean;
+  photos?: boolean;
 }
-const { compact = false } = Astro.props;
+const { photos = false } = Astro.props;
 
-// Line chart: an SVG stretched to the box (preserveAspectRatio none, non-scaling stroke) with
-// HTML labels and points positioned in percent, so text and dots keep their size at any width.
-const max = Math.ceil(Math.max(...weekly.map((w) => w.amount)) / 100000) * 100000;
-const xp = (i: number) => (100 * i) / (weekly.length - 1);
-const yp = (v: number) => 100 * (1 - v / max);
-const line = weekly.map((w, i) => `${i ? 'L' : 'M'}${(xp(i) * 10).toFixed(1)} ${(yp(w.amount) * 10).toFixed(1)}`).join('');
+const photoFiles = import.meta.glob<{ default: ImageMetadata }>('../../assets/demo/photos/property-*.{jpg,jpeg,png,webp}', { eager: true });
+const photoFor = (index: number) => {
+  const key = Object.keys(photoFiles).find((k) => new RegExp(`/property-${index}\\.(jpe?g|png|webp)$`, 'i').test(k));
+  return key ? photoFiles[key].default : null;
+};
+
+// Chart geometry in percent of the plot box. x runs over day 1 .. 31 (the longest month).
+const DAYS = 31;
+const max = Math.ceil(Math.max(...cumulativeLastMonth, ...cumulativeThisMonth) / 10000000) * 10000000; // cents, $100k steps
+const xp = (day: number) => (100 * (day - 1)) / (DAYS - 1);
+const yp = (cents: number) => 100 * (1 - cents / max);
+const path = (series: number[]) => series.map((v, i) => `${i ? 'L' : 'M'}${(xp(i + 1) * 10).toFixed(1)} ${(yp(v) * 10).toFixed(1)}`).join('');
 const ticks = [0, 0.25, 0.5, 0.75, 1].map((p) => max * p);
-const last = weekly[weekly.length - 1];
-const showX = (i: number) => i % 2 === (weekly.length - 1) % 2;
+const now = cumulativeThisMonth[cumulativeThisMonth.length - 1];
+const monthShort = THIS_MONTH.slice(0, 3);
+const xLabels = [1, 8, 15, AS_OF_DAY, 22, 29].filter((d, i, a) => a.indexOf(d) === i && (d === AS_OF_DAY || Math.abs(d - AS_OF_DAY) > 3)).sort((p, q) => p - q);
+const diff = now - lastMonthAtSameDay;
 ---
 
 <dl class="demo-figures">
   <div class="demo-figure"><dt>Occupancy</dt><dd>{fmt.pct(keyFigures.occupancy)}</dd></div>
   <div class="demo-figure"><dt>Collected this month</dt><dd>{fmt.usd(keyFigures.collected)}</dd></div>
   <div class="demo-figure"><dt>Past due</dt><dd class="is-alert">{fmt.usd(keyFigures.pastDue)}</dd></div>
-  <div class="demo-figure"><dt>Open tasks</dt><dd>{keyFigures.openTasks}</dd></div>
+  <div class="demo-figure">
+    <dt>Open tasks</dt>
+    <dd>
+      {keyFigures.openTasks} <span class="demo-figure__sub is-alert">{keyFigures.overdueTasks} overdue</span>
+    </dd>
+  </div>
 </dl>
 
 <figure class="demo-block">
   <div class="demo-block__head">
-    <h3 class="demo-block__title">Collections by week</h3>
-    <span class="demo-meta">Last 12 weeks</span>
+    <h3 class="demo-block__title">Collected this month vs last month</h3>
+    <p class="demo-legend">
+      <span><i></i>{THIS_MONTH}</span>
+      <span><i class="is-last"></i>{LAST_MONTH}</span>
+    </p>
   </div>
-  <div class="demo-chartbox" role="img" aria-label={`Weekly collections over the last 12 weeks. Latest week ${fmt.usd(last.amount)}.`}>
+  <div
+    class="demo-chartbox"
+    role="img"
+    aria-label={`Cumulative collections by day of month. ${THIS_MONTH} to day ${AS_OF_DAY}: ${fmt.usd(now)}. ${LAST_MONTH} by the same day: ${fmt.usd(lastMonthAtSameDay)}; full month ${fmt.usd(cumulativeLastMonth[cumulativeLastMonth.length - 1])}.`}
+  >
     <div class="demo-chartbox__plot">
       {ticks.map((v) => <span class="demo-chartbox__grid" style={`top:${yp(v)}%`} />)}
       {
         ticks.map((v) => (
           <span class="demo-chartbox__y" style={`top:${yp(v)}%`}>
-            {v === 0 ? '$0' : `$${v / 1000}k`}
+            {v === 0 ? '$0' : `$${v / 100000}k`}
           </span>
         ))
       }
+      <span class="demo-chartbox__asof" style={`left:${xp(AS_OF_DAY)}%`} />
       <svg class="demo-chartbox__svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-        <path class="line" d={line} />
+        <path class="last" d={path(cumulativeLastMonth.slice(0, LAST_MONTH_DAYS))} />
+        <path class="this" d={path(cumulativeThisMonth)} />
       </svg>
-      {
-        weekly.map((w, i) => (
-          <span
-            class="demo-chartbox__pt"
-            style={`left:${xp(i)}%;top:${yp(w.amount)}%`}
-            title={`Week ending ${fmt.short(w.time)}: ${fmt.usd(w.amount)}`}
-          />
-        ))
-      }
+      <span class="demo-chartbox__dot" style={`left:${xp(AS_OF_DAY)}%;top:${yp(now)}%`} />
+      <span class="demo-chartbox__tag" style={`left:${xp(AS_OF_DAY)}%;top:${yp(now)}%`}>{fmt.usd(now)}</span>
     </div>
     <div class="demo-chartbox__x">
       {
-        weekly.map((w, i) =>
-          showX(i) ? (
-            <span style={`left:${xp(i)}%`} class:list={[i === weekly.length - 1 && 'is-last']}>
-              {fmt.short(w.time)}
-            </span>
-          ) : null,
-        )
+        xLabels.map((d) => (
+          <span
+            style={`left:${xp(d)}%`}
+            class:list={[d === 1 && 'is-first', d === AS_OF_DAY && 'is-asof', d !== 1 && d !== AS_OF_DAY && 'is-minor']}
+          >
+            {d === AS_OF_DAY ? fmt.short(AS_OF) : `${monthShort} ${d}`}
+          </span>
+        ))
       }
     </div>
   </div>
-  <table class="visually-hidden">
-    <caption>Collections by week</caption>
-    <thead>
-      <tr><th>Week ending</th><th>Collected</th></tr>
-    </thead>
-    <tbody>
-      {
-        weekly.map((w) => (
-          <tr>
-            <td>{fmt.date(w.time)}</td>
-            <td>{fmt.usd(w.amount)}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+  <p class="demo-meta">{`${fmt.usd(Math.abs(diff))} ${diff >= 0 ? 'ahead of' : 'behind'} ${LAST_MONTH} at the same day of the month.`}</p>
 </figure>
 
 <section class="demo-block" aria-label="Properties">
@@ -93,7 +115,7 @@ const showX = (i: number) => i % 2 === (weekly.length - 1) % 2;
       <thead>
         <tr>
           <th scope="col">Property</th>
-          {!compact && <th scope="col">Type</th>}
+          <th scope="col">Type</th>
           <th scope="col">SF</th>
           <th scope="col">Occupancy</th>
           <th scope="col">Collected MTD</th>
@@ -103,32 +125,39 @@ const showX = (i: number) => i % 2 === (weekly.length - 1) % 2;
       </thead>
       <tbody>
         {
-          propertyRows.map((p) => (
-            <tr>
-              <td>
-                {p.name}
-                <span class="sub">
-                  {p.city}, {p.state}
-                </span>
-              </td>
-              {!compact && <td data-label="Type">{p.type}</td>}
-              <td class="num" data-label="SF">
-                {fmt.num(p.sf)}
-              </td>
-              <td class="num" data-label="Occupancy">
-                {fmt.pct(p.occupancy)}
-              </td>
-              <td class="num" data-label="Collected MTD">
-                {fmt.usd(p.collected)}
-              </td>
-              <td class:list={['num', p.pastDue > 0 && 'is-alert']} data-label="Past due">
-                {fmt.usdOrDash(p.pastDue)}
-              </td>
-              <td class="num" data-label="Open tasks">
-                {p.openTasks}
-              </td>
-            </tr>
-          ))
+          propertyRows.map((p, i) => {
+            const photo = photos ? photoFor(i + 1) : null;
+            return (
+              <tr>
+                <td>
+                  <div class="lead">
+                    {photos && (
+                      <span class="thumb">
+                        {photo ? <Image src={photo} alt="" width={128} height={88} format="webp" quality={70} loading="lazy" /> : <PropertyIcon type={p.type} />}
+                      </span>
+                    )}
+                    <span>
+                      {p.name}
+                      <span class="sub">
+                        {p.city}, {p.state}
+                      </span>
+                    </span>
+                  </div>
+                </td>
+                <td data-label="Type">{p.type}</td>
+                <td data-label="SF">{fmt.num(p.sf)}</td>
+                <td data-label="Occupancy">{fmt.pct(p.occupancy)}</td>
+                <td data-label="Collected MTD">{fmt.usd(p.collected)}</td>
+                <td class:list={[p.pastDue > 0 && 'is-alert']} data-label="Past due">
+                  {fmt.usdOrDash(p.pastDue)}
+                </td>
+                <td data-label="Open tasks">
+                  {p.openTasks}
+                  {p.overdueTasks > 0 && <span class="sub is-alert">{p.overdueTasks} overdue</span>}
+                </td>
+              </tr>
+            );
+          })
         }
       </tbody>
     </table>

@@ -1,0 +1,52 @@
+---
+// Hand-drawn line icon per asset type, shown until a property photo exists. 40x28 grid.
+interface Props {
+  type: string;
+}
+const { type } = Astro.props;
+---
+
+<svg viewBox="0 0 40 28" aria-hidden="true" focusable="false">
+  {
+    type === 'Industrial' && (
+      <>
+        <path d="M3 25V11L20 5L37 11V25" />
+        <path d="M3 25H37" />
+        <rect x="7" y="15" width="7" height="10" />
+        <rect x="17" y="15" width="7" height="10" />
+        <rect x="27" y="15" width="7" height="10" />
+      </>
+    )
+  }
+  {
+    type === 'Flex' && (
+      <>
+        <path d="M3 25V9H37V25" />
+        <path d="M3 25H37" />
+        <rect x="6" y="13" width="10" height="7" />
+        <path d="M19 25V15H24V25" />
+        <rect x="27" y="14" width="7" height="11" />
+      </>
+    )
+  }
+  {
+    type === 'Retail' && (
+      <>
+        <path d="M3 25V12H37V25" />
+        <path d="M3 25H37" />
+        <path d="M2 12L5 7H35L38 12" />
+        <path d="M7 25V17H13V25M17 25V17H23V25M27 25V17H33V25" />
+      </>
+    )
+  }
+  {
+    type === 'Office' && (
+      <>
+        <rect x="11" y="3" width="18" height="22" />
+        <path d="M3 25H37" />
+        <path d="M15 7H17M19 7H21M23 7H25M15 11H17M19 11H21M23 11H25M15 15H17M19 15H21M23 15H25" />
+        <path d="M18 25V20H22V25" />
+      </>
+    )
+  }
+</svg>

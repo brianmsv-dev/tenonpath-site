@@ -1,17 +1,22 @@
 ---
 /*
-  The demo dashboard: tab bar + panels. Rendered at build time; src/scripts/demo.ts adds tabs,
-  the property filter and sorting. Without JS the first view (Overview) still shows in full.
-  variant "full" (/demo): Overview, Collections, Leases, Tasks, Pipeline.
-  variant "embed" (homepage section 04): Overview, Collections, Leases, sized for the frame.
+  The demo: "Make it yours" controls (our studio chrome, Tenonpath brand) above the client
+  dashboard (.demo, its own neutral product theme). Rendered at build time; src/scripts/demo.ts
+  adds tabs, theming, the live company name, the property filter, sorting and row caps.
+  Without JS the first view (Overview) still shows in full.
+
+  variant "full"  (/demo): all controls, property photos, full tables.
+  variant "embed" (homepage section 04): company name + theme, all five tabs, long tables capped
+  at 8 rows with a link to /demo. No photos.
 */
 import '../../styles/demo.css';
+import MakeItYours from './MakeItYours.astro';
 import Overview from './Overview.astro';
 import Collections from './Collections.astro';
 import Leases from './Leases.astro';
 import Tasks from './Tasks.astro';
 import Pipeline from './Pipeline.astro';
-import { AS_OF, fmt } from '../../lib/demo';
+import { AS_OF, NAME, fmt } from '../../lib/demo';
 
 interface Props {
   variant?: 'full' | 'embed';
@@ -19,22 +24,32 @@ interface Props {
 const { variant = 'full' } = Astro.props;
 const embed = variant === 'embed';
 const id = embed ? 'demo-embed' : 'demo';
+const cap = embed ? 8 : undefined;
 
 const views = [
   { key: 'overview', label: 'Overview' },
   { key: 'collections', label: 'Collections' },
   { key: 'leases', label: 'Leases' },
-  ...(embed
-    ? []
-    : [
-        { key: 'tasks', label: 'Tasks' },
-        { key: 'pipeline', label: 'Pipeline' },
-      ]),
+  { key: 'tasks', label: 'Tasks' },
+  { key: 'pipeline', label: 'Pipeline' },
 ];
 ---
 
-<div class:list={['demo', `demo--${variant}`]} data-demo data-variant={variant}>
-  <div class="demo__bar">
+<div class:list={['demo-shell', `demo-shell--${variant}`]} data-demo data-variant={variant} data-default-name={NAME}>
+  <MakeItYours variant={variant} idPrefix={id} defaultName={NAME} />
+
+  <div class="demo" data-theme="light" data-demo-product>
+    <header class="demo__header">
+      <div class="demo__brand">
+        <span class="demo__brand-bar" aria-hidden="true"></span>
+        <div>
+          <p class="demo__company" data-company-name>{NAME}</p>
+          <p class="demo__product">Portfolio dashboard</p>
+        </div>
+      </div>
+      <p class="demo__asof">As of {fmt.date(AS_OF)}</p>
+    </header>
+
     <div class="demo__tabs" role="tablist" aria-label="Dashboard views">
       {
         views.map((v, i) => (
@@ -53,27 +68,26 @@ const views = [
         ))
       }
     </div>
-    <p class="demo__asof">As of {fmt.date(AS_OF)}</p>
-  </div>
 
-  {
-    views.map((v, i) => (
-      <section
-        class="demo__panel"
-        role="tabpanel"
-        id={`${id}-panel-${v.key}`}
-        aria-labelledby={`${id}-tab-${v.key}`}
-        tabindex="0"
-        data-panel={v.key}
-        hidden={i !== 0}
-      >
-        <h2 class="visually-hidden">{v.label}</h2>
-        {v.key === 'overview' && <Overview compact={embed} />}
-        {v.key === 'collections' && <Collections idPrefix={id} />}
-        {v.key === 'leases' && <Leases />}
-        {v.key === 'tasks' && <Tasks />}
-        {v.key === 'pipeline' && <Pipeline />}
-      </section>
-    ))
-  }
+    {
+      views.map((v, i) => (
+        <section
+          class="demo__panel"
+          role="tabpanel"
+          id={`${id}-panel-${v.key}`}
+          aria-labelledby={`${id}-tab-${v.key}`}
+          tabindex="0"
+          data-panel={v.key}
+          hidden={i !== 0}
+        >
+          <h2 class="visually-hidden">{v.label}</h2>
+          {v.key === 'overview' && <Overview photos={!embed} />}
+          {v.key === 'collections' && <Collections idPrefix={id} cap={cap} />}
+          {v.key === 'leases' && <Leases cap={cap} />}
+          {v.key === 'tasks' && <Tasks cap={cap} />}
+          {v.key === 'pipeline' && <Pipeline />}
+        </section>
+      ))
+    }
+  </div>
 </div>

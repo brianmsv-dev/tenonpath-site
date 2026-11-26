@@ -1,0 +1,76 @@
+---
+/*
+  "Make it yours" (docs/COPY.md > /demo). Our studio's chrome, in the Tenonpath brand, sitting
+  above the client dashboard. Changes are applied in the browser only: nothing is stored or sent.
+  full:  Company name, Theme, Accent.
+  embed: Company name and Theme (simplified for the homepage).
+*/
+interface Props {
+  variant: 'full' | 'embed';
+  idPrefix: string;
+  defaultName: string;
+}
+const { variant, idPrefix, defaultName } = Astro.props;
+
+const themes = [
+  ['light', 'Light'],
+  ['classic', 'Classic'],
+  ['dark', 'Dark'],
+];
+// Swatches show the light-theme value of each accent; Dark uses lighter tints of the same hues.
+const accents = [
+  ['blue', 'Blue', '#1f5fbf'],
+  ['navy', 'Navy', '#1e3a5f'],
+  ['green', 'Green', '#1d7348'],
+  ['burgundy', 'Burgundy', '#8e2c3a'],
+  ['amber', 'Amber', '#8f5300'],
+];
+---
+
+<div class="myo" data-myo>
+  <p class="myo__title">Make it yours</p>
+  <div class="myo__controls">
+    <div class="myo__field">
+      <label class="myo__label" for={`${idPrefix}-company`}>Company name</label>
+      <input
+        class="myo__input"
+        id={`${idPrefix}-company`}
+        type="text"
+        maxlength="40"
+        autocomplete="off"
+        spellcheck="false"
+        value={defaultName}
+        data-myo-name
+      />
+    </div>
+    <fieldset class="myo__field">
+      <legend>Theme</legend>
+      <div class="myo__segments">
+        {
+          themes.map(([value, label], i) => (
+            <label>
+              <input type="radio" name={`${idPrefix}-theme`} value={value} checked={i === 0} data-myo-theme />
+              {label}
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+    {
+      variant === 'full' && (
+        <fieldset class="myo__field">
+          <legend>Accent</legend>
+          <div class="myo__swatches">
+            {accents.map(([value, label, hex]) => (
+              <label title={label}>
+                <input type="radio" name={`${idPrefix}-accent`} value={value} aria-label={label} data-myo-accent />
+                <span style={`--swatch:${hex}`} aria-hidden="true" />
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )
+    }
+  </div>
+  <p class="myo__line">Every dashboard is built to your reports, your systems and your brand.</p>
+</div>

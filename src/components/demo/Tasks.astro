@@ -1,11 +1,24 @@
 ---
-// Tasks: items synced from a task board, grouped by property, sorted by status.
-// Plain text statuses (no pills); "Stuck" is set in the alert colour, "Done" dimmed.
-import { tasksByProperty, taskCounts, keyFigures, fmt } from '../../lib/demo';
+/*
+  Tasks: items synced from a task board. Plain text statuses (no pills); "Stuck" in the alert
+  colour, "Done" dimmed. Open tasks past their due date show the date in the alert colour and
+  count in "Overdue".
+  full:  grouped by property, sorted by status.
+  embed: one table of open tasks by due date, capped, with a link to /demo.
+*/
+import { tasksByProperty, openTasksByDue, taskCounts, keyFigures, fmt } from '../../lib/demo';
+
+interface Props {
+  cap?: number;
+}
+const { cap } = Astro.props;
+const embed = cap !== undefined;
+const shown = embed ? openTasksByDue.slice(0, cap) : [];
 ---
 
 <p class="demo-status-line">
   <span><b>{keyFigures.openTasks}</b> open</span>
+  <span class="is-alert">Overdue <b>{keyFigures.overdueTasks}</b></span>
   {
     taskCounts.map((s) => (
       <span>
@@ -15,43 +28,93 @@ import { tasksByProperty, taskCounts, keyFigures, fmt } from '../../lib/demo';
   }
 </p>
 
-<div class="demo-tasks">
-  {
-    tasksByProperty.map(({ property, open, tasks }) => (
-      <section class="demo-block" aria-label={property.name}>
-        <div class="demo-block__head">
-          <h3 class="demo-block__title">{property.name}</h3>
-          <span class="demo-meta">{open} open</span>
-        </div>
-        <div class="dt-wrap">
-          <table class="dt">
-            <thead>
+{
+  embed ? (
+    <section class="demo-block" aria-label="Open tasks">
+      <div class="demo-block__head">
+        <h3 class="demo-block__title">Open tasks by due date</h3>
+        <span class="demo-meta">{keyFigures.openTasks} open</span>
+      </div>
+      <div class="dt-wrap">
+        <table class="dt">
+          <thead>
+            <tr>
+              <th scope="col">Task</th>
+              <th scope="col">Status</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shown.map((t) => (
               <tr>
-                <th scope="col">Task</th>
-                <th scope="col">Status</th>
-                <th scope="col">Owner</th>
-                <th scope="col">Due</th>
+                <td>
+                  {t.title}
+                  <span class="sub">{t.propertyName}</span>
+                </td>
+                <td class:list={[t.status === 'Stuck' && 'is-alert']} data-label="Status">
+                  {t.status}
+                </td>
+                <td class="is-dim" data-label="Owner">
+                  {t.owner}
+                </td>
+                <td class:list={[t.overdue && 'is-alert']} data-label="Due">
+                  {fmt.short(t.time)}
+                  {t.overdue && <span class="visually-hidden"> (overdue)</span>}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {tasks.map((t) => (
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="demo-more">
+        <span>
+          Showing {shown.length} of {keyFigures.openTasks} open tasks.
+        </span>
+        <a href="/demo#tasks">Open the full demo</a>
+      </p>
+    </section>
+  ) : (
+    <div class="demo-tasks">
+      {tasksByProperty.map(({ property, open, overdue, tasks }) => (
+        <section class="demo-block" aria-label={property.name}>
+          <div class="demo-block__head">
+            <h3 class="demo-block__title">{property.name}</h3>
+            <span class="demo-meta">
+              {open} open{overdue > 0 && <span class="is-alert">, {overdue} overdue</span>}
+            </span>
+          </div>
+          <div class="dt-wrap">
+            <table class="dt">
+              <thead>
                 <tr>
-                  <td class:list={[t.status === 'Done' && 'is-dim']}>{t.title}</td>
-                  <td class:list={[t.status === 'Stuck' && 'is-alert', t.status === 'Done' && 'is-dim']} data-label="Status">
-                    {t.status}
-                  </td>
-                  <td class="is-dim" data-label="Owner">
-                    {t.owner}
-                  </td>
-                  <td class="num" data-label="Due">
-                    {fmt.short(t.time)}
-                  </td>
+                  <th scope="col">Task</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Due</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    ))
-  }
-</div>
+              </thead>
+              <tbody>
+                {tasks.map((t) => (
+                  <tr>
+                    <td class:list={[!t.open && 'is-dim']}>{t.title}</td>
+                    <td class:list={[t.status === 'Stuck' && 'is-alert', !t.open && 'is-dim']} data-label="Status">
+                      {t.status}
+                    </td>
+                    <td class="is-dim" data-label="Owner">
+                      {t.owner}
+                    </td>
+                    <td class:list={[t.overdue && 'is-alert', !t.open && 'is-dim']} data-label="Due">
+                      {fmt.short(t.time)}
+                      {t.overdue && <span class="visually-hidden"> (overdue)</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))}
+    </div>
+  )
+}

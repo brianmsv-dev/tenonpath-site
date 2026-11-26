@@ -1,31 +1,29 @@
 ---
-// Collections: aging buckets, tenants with a balance, who paid this month. Filter by property.
-// Rows carry their numbers as data-* so the filter can recompute totals in the browser.
-import { properties, receivables, agingTotals, paymentsThisMonth, keyFigures, fmt } from '../../lib/demo';
+/*
+  Collections: aging buckets, tenants with a balance, who paid this month. Filter by property.
+  Rows carry their amounts (cents) as data-* so the filter can recompute totals in the browser.
+  cap (embed): long tables show their first rows plus "Showing N of M" and a link to /demo.
+  Totals always count every matching row, shown or not.
+*/
+import { properties, receivables, agingTotals, paymentsThisMonth, keyFigures, BUCKETS, fmt } from '../../lib/demo';
 
 interface Props {
   idPrefix: string;
+  cap?: number;
 }
-const { idPrefix } = Astro.props;
-const buckets = [
-  ['d0_30', '0 to 30'],
-  ['d31_60', '31 to 60'],
-  ['d61_90', '61 to 90'],
-  ['d90p', '90+'],
-] as const;
+const { idPrefix, cap } = Astro.props;
 const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
+const capped = (i: number) => cap !== undefined && i >= cap;
 ---
 
-<div class="demo-block__head">
-  <div class="demo-control">
-    <label for={`${idPrefix}-property`}>Property</label>
-    <span class="demo-select">
-      <select id={`${idPrefix}-property`} data-filter-property>
-        <option value="">All properties</option>
-        {properties.map((p) => <option value={p.id}>{p.name}</option>)}
-      </select>
-    </span>
-  </div>
+<div class="demo-control">
+  <label for={`${idPrefix}-property`}>Property</label>
+  <span class="demo-select">
+    <select id={`${idPrefix}-property`} data-filter-property>
+      <option value="">All properties</option>
+      {properties.map((p) => <option value={p.id}>{p.name}</option>)}
+    </select>
+  </span>
 </div>
 
 <section class="demo-block" aria-label="Past due by age">
@@ -35,7 +33,7 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
   </div>
   <dl class="demo-aging">
     {
-      buckets.map(([k, label]) => (
+      BUCKETS.map(([k, label]) => (
         <div>
           <dt>{label}</dt>
           <dd class:list={[agingTotals[k] > 0 && 'is-alert']} data-sum={k}>
@@ -62,7 +60,7 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
         <thead>
           <tr>
             <th scope="col">Tenant</th>
-            {buckets.map(([, label]) => <th scope="col">{label}</th>)}
+            {BUCKETS.map(([, label]) => <th scope="col">{label}</th>)}
             <th scope="col">Total</th>
           </tr>
         </thead>
@@ -77,12 +75,12 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
                   </span>
                   {t.collectionNote && <span class="sub">{t.collectionNote}</span>}
                 </td>
-                {buckets.map(([k, label]) => (
-                  <td class:list={['num', t.aging[k] > 0 && 'is-alert']} data-label={label}>
+                {BUCKETS.map(([k, label]) => (
+                  <td class:list={[t.aging[k] > 0 && 'is-alert']} data-label={label}>
                     {fmt.usdOrDash(t.aging[k])}
                   </td>
                 ))}
-                <td class="num is-alert" data-label="Total">
+                <td class="is-alert" data-label="Total">
                   {fmt.usd(t.balance)}
                 </td>
               </tr>
@@ -104,7 +102,7 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
       </span>
     </div>
     <div class="dt-wrap">
-      <table class="dt" data-table="paid">
+      <table class="dt" data-table="paid" data-cap={cap}>
         <thead>
           <tr>
             <th scope="col">Tenant</th>
@@ -114,20 +112,16 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
         </thead>
         <tbody>
           {
-            paid.map((p) => (
-              <tr data-property={p.tenant.propertyId} data-amount={p.amount}>
+            paid.map((p, i) => (
+              <tr data-property={p.tenant.propertyId} data-amount={p.amount} hidden={capped(i)}>
                 <td>
                   {p.tenant.name}
                   <span class="sub">
                     {p.tenant.propertyName}, {p.method}
                   </span>
                 </td>
-                <td class="num" data-label="Date">
-                  {fmt.short(p.time)}
-                </td>
-                <td class="num" data-label="Amount">
-                  {fmt.usdCents(p.amount)}
-                </td>
+                <td data-label="Date">{fmt.short(p.time)}</td>
+                <td data-label="Amount">{fmt.usd(p.amount)}</td>
               </tr>
             ))
           }
@@ -137,5 +131,15 @@ const paid = [...paymentsThisMonth].sort((a, b) => b.time - a.time);
         </tbody>
       </table>
     </div>
+    {
+      cap !== undefined && paid.length > cap && (
+        <p class="demo-more" data-more="paid">
+          <span data-more-text>
+            Showing {cap} of {paid.length}.
+          </span>
+          <a href="/demo#collections">Open the full demo</a>
+        </p>
+      )
+    }
   </section>
 </div>
