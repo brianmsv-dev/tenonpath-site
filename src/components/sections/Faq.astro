@@ -1,18 +1,9 @@
 ---
-// 09 FAQ. Copy: docs/COPY.md > 09 FAQ (headline here, questions via src/data/faq.ts). Native <details> accordion, so it
-// works without JS and with the keyboard. FAQPage schema is generated from the same data.
+// 09 FAQ. Copy: docs/COPY.md > 09 FAQ (headline here, questions via src/data/faq.ts).
+// The question list and its FAQPage schema come from the shared Accordion component.
 import SectionHead from './SectionHead.astro';
+import Accordion from '../Accordion.astro';
 import { FAQ } from '../../data/faq';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
 ---
 
 <section class="home-section faq" id="faq" aria-labelledby="faq-title">
@@ -21,20 +12,9 @@ const schema = {
       <SectionHead number="09" label="QUESTIONS" title="Before you ask." titleId="faq-title" />
     </div>
     <div class="faq__list" data-reveal>
-      {
-        FAQ.map(({ q, a }) => (
-          <details class="qa">
-            <summary class="qa__q">
-              <span class="t-h4">{q}</span>
-              <span class="qa__mark" aria-hidden="true" />
-            </summary>
-            <p class="qa__a t-dim">{a}</p>
-          </details>
-        ))
-      }
+      <Accordion items={FAQ} />
     </div>
   </div>
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </section>
 
 <style>
@@ -44,63 +24,7 @@ const schema = {
   }
   .faq__list {
     margin-top: var(--space-6);
-    border-top: 1px solid var(--rule);
   }
-  .qa {
-    border-bottom: 1px solid var(--rule);
-  }
-  .qa__q {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-5);
-    padding-block: var(--space-5);
-    cursor: pointer;
-    list-style: none;
-  }
-  .qa__q::-webkit-details-marker {
-    display: none;
-  }
-  .qa__q:hover .t-h4 {
-    color: var(--bone);
-  }
-  .qa__q .t-h4 {
-    color: var(--bone);
-  }
-  /* The marker: a horizontal hairline with a vertical one that slides out of it when open */
-  .qa__mark {
-    position: relative;
-    flex: none;
-    width: 15px;
-    height: 15px;
-  }
-  .qa__mark::before,
-  .qa__mark::after {
-    content: '';
-    position: absolute;
-    background: var(--brass);
-  }
-  .qa__mark::before {
-    left: 0;
-    right: 0;
-    top: 7px;
-    height: 1px;
-  }
-  .qa__mark::after {
-    top: 0;
-    bottom: 0;
-    left: 7px;
-    width: 1px;
-    transition: transform var(--dur-1) var(--ease-out);
-  }
-  .qa[open] .qa__mark::after {
-    transform: scaleY(0);
-  }
-  .qa__a {
-    max-width: 62ch;
-    padding-bottom: var(--space-6);
-  }
-
   @media (min-width: 1024px) {
     .faq__head {
       grid-column: 1 / span 4;

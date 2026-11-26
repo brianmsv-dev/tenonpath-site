@@ -1,0 +1,85 @@
+---
+// Question list: native <details> (works with the keyboard and without JS) plus FAQPage schema
+// generated from the same items. Used by the homepage FAQ and /real-estate.
+interface Props {
+  items: { q: string; a: string }[];
+}
+const { items } = Astro.props;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+
+<div class="qa-list">
+  {
+    items.map(({ q, a }) => (
+      <details class="qa">
+        <summary class="qa__q">
+          <span class="t-h4">{q}</span>
+          <span class="qa__mark" aria-hidden="true" />
+        </summary>
+        <p class="qa__a t-dim">{a}</p>
+      </details>
+    ))
+  }
+</div>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .qa-list {
+    border-top: 1px solid var(--rule);
+  }
+  .qa {
+    border-bottom: 1px solid var(--rule);
+  }
+  .qa__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    cursor: pointer;
+    list-style: none;
+  }
+  .qa__q::-webkit-details-marker {
+    display: none;
+  }
+  .qa__q .t-h4 {
+    color: var(--bone);
+  }
+  /* The marker: a horizontal hairline with a vertical one that slides out of it when open */
+  .qa__mark {
+    position: relative;
+    flex: none;
+    width: 15px;
+    height: 15px;
+  }
+  .qa__mark::before,
+  .qa__mark::after {
+    content: '';
+    position: absolute;
+    background: var(--brass);
+  }
+  .qa__mark::before {
+    left: 0;
+    right: 0;
+    top: 7px;
+    height: 1px;
+  }
+  .qa__mark::after {
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    width: 1px;
+    transition: transform var(--dur-1) var(--ease-out);
+  }
+  .qa[open] .qa__mark::after {
+    transform: scaleY(0);
+  }
+  .qa__a {
+    max-width: 62ch;
+    padding-bottom: var(--space-6);
+  }
+</style>
