@@ -57,13 +57,15 @@ export function unlockScroll() {
 function initReveals() {
   const mm = gsap.matchMedia();
 
+  // Opacity only (never visibility: hidden), so content that has not been revealed yet is still
+  // in the accessibility tree and reachable by screen readers and keyboard.
   mm.add(MOTION_OK, () => {
     gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
       gsap.fromTo(
         el,
-        { autoAlpha: 0, y: 16 },
+        { opacity: 0, y: 16 },
         {
-          autoAlpha: 1,
+          opacity: 1,
           y: 0,
           duration: 0.7,
           ease: 'power3.out',
@@ -81,8 +83,8 @@ function initReveals() {
         scrollTrigger: { trigger: el, start: 'top 92%', once: true },
       });
       tl.fromTo(lines, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'expo.out' });
-      if (ends.length) tl.fromTo(ends, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: 'power3.out' }, '-=0.35');
-      if (label) tl.fromTo(label, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: 'power3.out' }, 0.1);
+      if (ends.length) tl.fromTo(ends, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power3.out' }, '-=0.35');
+      if (label) tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power3.out' }, 0.1);
     });
   });
 

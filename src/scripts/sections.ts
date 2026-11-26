@@ -21,9 +21,9 @@ mm.add(MOTION_OK, () => {
     // Unstruck start: full-brightness text, no line. Colours are the bone / bone-dim tokens.
     gsap.set(texts, { backgroundSize: '0% 1.5px', color: '#ede8df' });
     const tl = gsap.timeline({ scrollTrigger: { trigger: week, start: 'top 70%', once: true } });
-    tl.fromTo(rows, { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.5, stagger: 0.14, ease: 'power3.out' })
+    tl.fromTo(rows, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.14, ease: 'power3.out' })
       .to(texts, { backgroundSize: '100% 1.5px', color: '#a9a39a', duration: 0.45, stagger: 0.09, ease: 'power3.out' }, '+=0.25')
-      .fromTo(answer, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, '+=0.1');
+      .fromTo(answer, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, '+=0.1');
   }
 });
 
