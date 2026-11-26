@@ -14,7 +14,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [x] Lenis smooth scroll + GSAP ScrollTrigger wired up, with reduced-motion fallback
 - [x] A `/styleguide` page (not linked, `noindex`) showing colors, type, buttons, rules, section labels, so Brian can judge the look
 - [x] Three logo concepts (A, B, C from BRAND.md) as SVG on the styleguide page, each animated
-- **Review gate:** Brian picks a logo and approves or tweaks colors and type
+- **Review gate:** Brian picks a logo and approves or tweaks colors and type. Done 2026-11-26: Concept A, refined.
 
 ### Phase 2: Hero
 - [ ] Hero layout and copy
@@ -42,6 +42,7 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - [ ] Email signature logo (PNG + SVG)
 
 ## Decisions
+- 2026-11-26 (Brian, phase 1 review): Logo is Concept A (slot and stem), refined lighter: bar 10 units (was 12), stem 12 wide (was 16), tongue 4 wide. Concepts B and C dropped. The four added color tokens and the type scale are approved.
 - 2026-11-26 (Claude Code, phase 1, for review): Added four tokens because parts of the brand palette fail WCAG AA. `--rule-strong` #5D6674 (borders that must be seen, 3.26:1 on ink), `--brass-press` #B5852F (primary button hover fill; ink on brass-soft is only 3.77:1), `--inv-text-dim` #5C5A55 and `--inv-accent` #7A5A24 (brass and bone-dim fail on the bone section). BRAND.md colors are otherwise unchanged.
 - 2026-11-26 (Claude Code): Logo marks drawn on a 32 unit grid with every edge on an even coordinate and a 2 unit gap at each joint, so the 16px favicon lands on whole pixels with a 1px joint line.
 - 2026-11-26 (Claude Code): Logo animation uses the Web Animations API, not GSAP, so the header logo will cost no extra JS. 620ms: expo.out slide stopping 1 screen pixel short, then a power3.out press home (the "1px settle").
@@ -61,12 +62,8 @@ The running record. Newest entries at the top of each section. Anyone (Brian, th
 - 2026-11-26: Brian chose to start from our own design direction (drafting table at night) before gathering outside inspiration, to stay original.
 
 ## Open questions (for Brian)
-- [ ] **Logo pick:** A (slot and stem), B (offset blocks) or C (cut and return). See /styleguide. Tweaks welcome (bar weight, gap size, animation direction).
-- [ ] **Approve the four added color tokens** (see Decisions) and the type scale on /styleguide.
-- [ ] Concept B brief says "two offset blocks... form a square T". I read it as two halves split by a vertical seam, with a tongue on one and a notch on the other. If you meant something else, describe it and I will redraw it.
 - [ ] Header and footer link to routes and anchors that do not exist yet (/#demo, /#services, /demo, /real-estate, /privacy and so on). They come alive in phases 3 to 5. Fine while the site is not deployed.
 - [ ] Move DNS from GoDaddy to Cloudflare (recommended before launch, see orchestrator notes) or keep GoDaddy.
-- [ ] Logo pick after phase 1.
 
 ## Account and infrastructure notes
 - Domain: tenonpath.com, registered at GoDaddy. DNS currently at GoDaddy.
