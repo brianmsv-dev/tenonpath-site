@@ -1,0 +1,101 @@
+---
+// 02 Problem. Copy: docs/COPY.md > 02 Problem. Motion: src/scripts/sections.ts (problem).
+// Markup is the end state: every line struck through in brass, the answer line showing.
+import SectionHead from './SectionHead.astro';
+
+const week = [
+  ['MON 08:10', 'Export the rent roll'],
+  ['MON 08:40', 'Paste it into the master spreadsheet'],
+  ['MON 09:30', 'Check the task board for what moved'],
+  ['MON 11:15', "Search the inbox for the broker's update"],
+  ['TUE 14:00', 'Investor asks for collections. Rebuild the numbers'],
+  ['WED 10:00', 'Find out the spreadsheet broke on Monday'],
+];
+---
+
+<section class="home-section problem" id="problem" aria-labelledby="problem-title">
+  <div class="container grid-12">
+    <div class="problem__head">
+      <SectionHead number="02" label="THE PROBLEM" title="Five systems. One analyst. Every Monday." titleId="problem-title">
+        <p class="t-lead measure-text">
+          The data is all there. It is just in five places. So someone exports, pastes, reconciles and rebuilds the same
+          numbers every week, and the answer to "what's our occupancy?" still takes an hour.
+        </p>
+        </SectionHead>
+    </div>
+
+    <div class="problem__week" data-week>
+      <ol role="list" class="week">
+        {
+          week.map(([when, what]) => (
+            <li class="week__row" data-week-row>
+              <span class="week__when t-mono">{when}</span>
+              <span class="week__what">{what}</span>
+              <span class="week__strike" aria-hidden="true" data-week-strike />
+            </li>
+          ))
+        }
+      </ol>
+      <p class="week__answer" data-week-answer>Or: open one dashboard.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem__head,
+  .problem__week {
+    grid-column: 1 / -1;
+  }
+  .problem__week {
+    margin-top: var(--space-8);
+  }
+
+  .week {
+    border-top: 1px solid var(--rule);
+  }
+  .week__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    color: var(--bone-dim);
+  }
+  .week__when {
+    font-size: var(--fs-small);
+    color: var(--bone-dim);
+  }
+  .week__what {
+    color: var(--bone);
+  }
+  /* The strike: one brass hairline through the row, drawn left to right */
+  .week__strike {
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* through the middle of the first text line, even when the row wraps */
+    top: calc(var(--space-4) + 0.8em);
+    height: 1.5px; /* 1px blurs to grey on rows that land between pixels */
+    background: var(--brass);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+  .week__answer {
+    margin-top: var(--space-6);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    color: var(--brass);
+  }
+
+  @media (min-width: 1024px) {
+    .problem__head {
+      grid-column: 1 / span 5;
+    }
+    .problem__week {
+      grid-column: 7 / span 6;
+      margin-top: 0;
+    }
+  }
+</style>
