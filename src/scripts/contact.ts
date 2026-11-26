@@ -8,7 +8,7 @@
 import { playLogo } from './logo';
 
 const TO = 'hello@tenonpath.com';
-const REQUIRED = ['name', 'email', 'company', 'systems', 'wants', 'budget'] as const;
+const REQUIRED = ['name', 'email', 'systems'] as const;
 const LABELS: Record<string, string> = {
   name: 'Name',
   email: 'Email',

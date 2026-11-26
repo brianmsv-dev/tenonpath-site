@@ -1,6 +1,7 @@
 ---
 /*
   10 Contact. Copy: docs/COPY.md > 10 Contact. Behaviour: src/scripts/contact.ts.
+  Required: Name, Email, "What systems do you use today?". Everything else is optional.
   Phase 3 is UI only. Submission:
   - PUBLIC_FORM_ENDPOINT set (phase 5): POST as JSON, then the success or error state.
   - not set (now): Send opens the visitor's email app with the message filled in, addressed to
@@ -38,8 +39,7 @@ const budgets = ['Under $2,500', '$2,500 to $6,000', '$6,000 to $15,000', 'Not s
           </div>
           <div class="field field--wide">
             <label for="f-company">Company</label>
-            <input id="f-company" name="company" type="text" autocomplete="organization" required aria-describedby="f-company-err" />
-            <p class="field__error" id="f-company-err" data-error-for="company" hidden>Please add your company name.</p>
+            <input id="f-company" name="company" type="text" autocomplete="organization" />
           </div>
           <div class="field field--wide">
             <label for="f-systems">What systems do you use today?</label>
@@ -48,18 +48,16 @@ const budgets = ['Under $2,500', '$2,500 to $6,000', '$6,000 to $15,000', 'Not s
           </div>
           <div class="field field--wide">
             <label for="f-wants">What do you want to see in one place?</label>
-            <textarea id="f-wants" name="wants" rows="3" required aria-describedby="f-wants-err"></textarea>
-            <p class="field__error" id="f-wants-err" data-error-for="wants" hidden>Please tell us what you want to see.</p>
+            <textarea id="f-wants" name="wants" rows="3"></textarea>
           </div>
           <div class="field">
             <label for="f-budget">Budget range</label>
             <div class="select">
-              <select id="f-budget" name="budget" required aria-describedby="f-budget-err">
-                <option value="" selected disabled></option>
+              <select id="f-budget" name="budget">
+                <option value="" selected></option>
                 {budgets.map((b) => <option value={b}>{b}</option>)}
               </select>
             </div>
-            <p class="field__error" id="f-budget-err" data-error-for="budget" hidden>Please pick a budget range.</p>
           </div>
           <div class="field">
             <label for="f-source">How did you hear about us? (optional)</label>
